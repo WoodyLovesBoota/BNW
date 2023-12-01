@@ -13,9 +13,9 @@ const Home = () => {
     <Wrapper>
       <BackgroundPhoto />
       <Cover>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((row) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((row) => (
           <Row>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((tile) =>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((tile) =>
               row === currentTile[0] && tile === currentTile[1] ? (
                 <Glass
                   variants={tileVar}
@@ -32,6 +32,20 @@ const Home = () => {
                 />
               ) : (row === currentTile[0] + 1 || row === currentTile[0] - 1) &&
                 (tile === currentTile[1] || tile === currentTile[1] + 1 || tile === currentTile[1] - 1) ? (
+                <Glass
+                  variants={tileVar}
+                  animate="animate"
+                  initial="initial"
+                  onMouseEnter={() => onMouseEnter(row, tile)}
+                />
+              ) : (row === currentTile[0] + 2 || row === currentTile[0] - 2) && tile === currentTile[1] ? (
+                <Glass
+                  variants={tileVar}
+                  animate="animate"
+                  initial="initial"
+                  onMouseEnter={() => onMouseEnter(row, tile)}
+                />
+              ) : row === currentTile[0] && (tile === currentTile[1] + 2 || tile === currentTile[1] - 2) ? (
                 <Glass
                   variants={tileVar}
                   animate="animate"
@@ -81,25 +95,21 @@ const Cover = styled.div`
 
 const Row = styled.div`
   width: 100%;
-  height: 12.5%;
+  height: 10%;
   display: flex;
 `;
 
 const Tile = styled(motion.div)<{ id: number[] }>`
-  width: 10%;
+  width: 6.25%;
   height: 100%;
   background-color: black;
   border: 0.5px solid gray;
 `;
 
 const Glass = styled(motion.div)`
-  width: 10%;
+  width: 6.25%;
   height: 100%;
-  border: 0.5px solid gray;
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: translateY(-5px);
-  }
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 const tileVar = {
