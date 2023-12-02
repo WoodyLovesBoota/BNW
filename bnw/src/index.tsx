@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { RecoilRoot } from "recoil";
+import "./assets/fonts/font.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -12,20 +13,22 @@ const GlobalStyle = createGlobalStyle`
   a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp,
   small, strike, strong, sub, sup, tt, var,
-  b, u, i, center, button, input,
+  b, u, i, center, input, textarea,
   dl, dt, dd, menu, ol, ul, li,
   fieldset, form, label, legend,
   table, caption, tbody, tfoot, thead, tr, th, td,
   article, aside, canvas, details, embed,
   figure, figcaption, footer, header, hgroup,
   main, menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
+  time, mark, audio, video,button {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 16px;
-    font: inherit;
     vertical-align: baseline;
+    font-family: "Noto sans KR", sans-serif;
+    font-weight: 300;
+    line-height: 1.2;
 
     @media screen and (max-width: 1799px) {
       font-size: 14px;

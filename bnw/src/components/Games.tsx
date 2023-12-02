@@ -82,6 +82,7 @@ const Wrapper = styled.div`
 const Board = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 `;
@@ -100,7 +101,7 @@ const GameBox = styled(motion.div)`
   padding: 40px 50px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(18, 18, 18, 0.2);
+    background-color: rgba(45, 45, 45, 0.15);
   }
 `;
 

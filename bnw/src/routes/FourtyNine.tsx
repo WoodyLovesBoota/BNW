@@ -24,15 +24,13 @@ const FourtyNine = () => {
 
   const onStartClick = () => {
     setIsStart(true);
-    setInterval(() => {
-      setTime((prev) => prev + 1);
-    }, 10);
   };
 
   const onRestartClick = () => {
-    setIsStart(false);
     setCurrent(1);
+    setIsStart(false);
     setTime(0);
+    window.location.reload();
   };
 
   const onHomeClick = () => {
@@ -51,11 +49,22 @@ const FourtyNine = () => {
 
   useEffect(() => {
     if (current === 50) {
+      setIsStart(false);
       setRes(time);
       setCurrent((prev) => prev + 1);
       setTotalRes((prev) => [...prev, time].sort((a, b) => a - b));
     }
   }, [current]);
+
+  useEffect(() => {
+    if (isStart) {
+      setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 10);
+    } else {
+      setTime(0);
+    }
+  }, [isStart]);
 
   return (
     <Wrapper>
@@ -126,13 +135,13 @@ const FourtyNine = () => {
             .<ResultMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResultMilSec>{" "}
           </ResultTime>
           <Buttons>
-            <ResButton onClick={onRestartClick} variants={buttonVar} animate="animate" whileHover={"click"}>
+            <ResButton onClick={onRestartClick}>
               <Icon>
                 <FontAwesomeIcon icon={faArrowRotateRight} />
               </Icon>
               Restart
             </ResButton>
-            <ResButton onClick={onHomeClick} variants={buttonVar} animate="animate" whileHover={"click"}>
+            <ResButton onClick={onHomeClick}>
               <Icon>
                 <FontAwesomeIcon icon={faHouse} />
               </Icon>
@@ -221,6 +230,11 @@ const Button = styled.button`
   margin-bottom: 20px;
   cursor: pointer;
   margin-left: 15px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.5);
   }
@@ -253,7 +267,7 @@ const Cell = styled(motion.div)`
 const Cover = styled(motion.div)`
   width: 90px;
   height: 100%;
-  background-color: rgba(170, 170, 170, 0.1);
+  background-color: #202020;
   margin-right: 5px;
   border-radius: 10px;
 `;
@@ -338,7 +352,12 @@ const ResButton = styled(motion.button)`
   font-size: 18px;
   border-radius: 15px;
   margin-right: 20px;
+  font-weight: 500;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
 `;
 
 const Rank = styled.h2`
@@ -360,12 +379,13 @@ const SecondRes = styled.h2`
 `;
 
 const MilSecRes = styled.h2`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   margin: 0 15px;
 `;
 
 const buttonVar = {
+  initial: { scale: 0 },
   animate: { scale: 1 },
   click: { scale: 0.8 },
 };
