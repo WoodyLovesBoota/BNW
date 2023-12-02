@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { RecoilRoot } from "recoil";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -11,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp,
   small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
+  b, u, i, center, button, input,
   dl, dt, dd, menu, ol, ul, li,
   fieldset, form, label, legend,
   table, caption, tbody, tfoot, thead, tr, th, td,
@@ -88,6 +89,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
     width: 5px;
     height: 5px; 
+    display: none;
   }
 
   &::-webkit-scrollbar-track {
@@ -96,12 +98,14 @@ const GlobalStyle = createGlobalStyle`
 
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
+    background-color: transparent;
+
   }
 `;
 
 root.render(
-  <>
+  <RecoilRoot>
     <GlobalStyle />
     <App />
-  </>
+  </RecoilRoot>
 );
