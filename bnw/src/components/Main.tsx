@@ -11,7 +11,7 @@ const Main = () => {
 
   return (
     <Wrapper>
-      <BackgroundPhoto />
+      <BackgroundPhoto variants={backgroundVar} animate="animate" initial="initial" />
       <Cover>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((row) => (
           <Row>
@@ -80,9 +80,10 @@ const Wrapper = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
+  background-color: #141414;
 `;
 
-const BackgroundPhoto = styled.div`
+const BackgroundPhoto = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: url("https://www.adobe.com/content/dam/cc/us/en/creativecloud/design/discover/is-black-a-color/desktop/is-black-a-color_P4a_690x450.jpg.img.jpg");
@@ -114,11 +115,23 @@ const Tile = styled(motion.div)<{ id: number[] }>`
 const Glass = styled(motion.div)`
   width: 4%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+`;
+
+const SemiGlass = styled(motion.div)`
+  width: 4%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
   border: 0.5px solid rgba(255, 255, 255, 0.1);
 `;
 
 const tileVar = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3 } },
+};
+
+const backgroundVar = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { delay: 0.3 } },
 };

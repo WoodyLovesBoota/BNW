@@ -12,6 +12,10 @@ const Games = () => {
     setCurrentTile([row, column]);
   };
 
+  const onMatchClick = () => {
+    navigate("/match");
+  };
+
   const onFourtyNineClick = () => {
     navigate("/49");
   };
@@ -84,10 +88,41 @@ const Games = () => {
           <Title>Omok</Title>
           <Description>5개의 돌을 이어서 놓으세요.</Description>
         </GameBox>
-        <GameBox>
-          <Icon></Icon>
-          <Title></Title>
-          <Description></Description>
+        <GameBox onClick={onMatchClick}>
+          <Icon>
+            <AnimatePresence>
+              <NumberRow>
+                <MatchBox
+                  key={count + 7}
+                  variants={matchColorVar}
+                  initial="boxInitial"
+                  animate="boxAnimate"
+                  exit={"boxExit"}
+                >
+                  <MatchNum key={count + 200} variants={matchVar} initial="initial" animate="animate" exit={"exit"}>
+                    3
+                  </MatchNum>
+                </MatchBox>
+                <MatchBox></MatchBox>
+              </NumberRow>
+              <NumberRow>
+                <MatchBox></MatchBox>
+                <MatchBox
+                  key={count + 6}
+                  variants={matchColorVar}
+                  initial="boxInitial"
+                  animate="boxAnimate"
+                  exit={"boxExit"}
+                >
+                  <MatchNum key={count + 4} variants={matchSecVar} initial="initial" animate="animate" exit={"exit"}>
+                    3
+                  </MatchNum>
+                </MatchBox>
+              </NumberRow>
+            </AnimatePresence>
+          </Icon>
+          <Title>Card</Title>
+          <Description>같은 모양의 카드를 찾아주세요.</Description>
         </GameBox>
         <GameBox>
           <Icon></Icon>
@@ -222,6 +257,23 @@ const Black = styled(motion.div)`
   z-index: 2;
 `;
 
+const MatchBox = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+`;
+
+const MatchNum = styled(motion.h2)`
+  font-weight: 500;
+  font-size: 16px;
+`;
+
 const number1Var = {
   initial: { opacity: 1 },
   animate: { opacity: 0, transition: { duration: 0.3, delay: 0.5 } },
@@ -256,4 +308,22 @@ const whiteVar = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3, delay: 1.5 } },
   exit: { opacity: 0, transition: { duration: 0.3, delay: 2 } },
+};
+
+const matchVar = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, delay: 0.5 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
+};
+
+const matchSecVar = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, delay: 1 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
+};
+
+const matchColorVar = {
+  boxInitial: { backgroundColor: "#202020" },
+  boxAnimate: { backgroundColor: "#ffffff55", transition: { duration: 0.2, delay: 1.5 } },
+  boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
 };
