@@ -16,6 +16,10 @@ const Games = () => {
     navigate("/49");
   };
 
+  const onOmokClick = () => {
+    navigate("/omok");
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount(count + 1);
@@ -50,10 +54,35 @@ const Games = () => {
           <Title>49</Title>
           <Description>1부터 49까지 가능한 빠르게 클릭해주세요.</Description>
         </GameBox>
-        <GameBox>
-          <Icon></Icon>
-          <Title></Title>
-          <Description></Description>
+        <GameBox onClick={onOmokClick}>
+          <Icon>
+            <AnimatePresence mode="wait">
+              <BoardRow>
+                <BoardCell>
+                  <Vertical />
+                  <Horizen />
+                  <White key={count + 100} variants={whiteVar} initial="initial" animate="animate" exit={"exit"} />
+                </BoardCell>
+                <BoardCell>
+                  <Vertical />
+                  <Horizen />
+                </BoardCell>
+              </BoardRow>
+              <BoardRow>
+                <BoardCell>
+                  <Vertical />
+                  <Horizen />
+                </BoardCell>
+                <BoardCell>
+                  <Vertical />
+                  <Horizen />
+                  <Black key={count + 5} variants={blackVar} initial="initial" animate="animate" exit={"exit"} />
+                </BoardCell>
+              </BoardRow>
+            </AnimatePresence>
+          </Icon>
+          <Title>Omok</Title>
+          <Description>5개의 돌을 이어서 놓으세요.</Description>
         </GameBox>
         <GameBox>
           <Icon></Icon>
@@ -96,7 +125,6 @@ const GameBox = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   color: white;
   padding: 40px 50px;
   cursor: pointer;
@@ -107,6 +135,11 @@ const GameBox = styled(motion.div)`
 
 const Icon = styled(motion.div)`
   margin-bottom: 15px;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const NumberRow = styled(motion.div)`
@@ -140,6 +173,55 @@ const Description = styled.h2`
   text-align: center;
 `;
 
+const BoardRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BoardCell = styled.div`
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Vertical = styled.div`
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+`;
+
+const Horizen = styled.div`
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+`;
+
+const White = styled(motion.div)`
+  background-color: #87cefa;
+  width: 27px;
+  height: 27px;
+  border-radius: 15px;
+  z-index: 2;
+`;
+
+const Black = styled(motion.div)`
+  background-color: #f7aea6;
+  width: 27px;
+  height: 27px;
+  border-radius: 15px;
+  z-index: 2;
+`;
+
 const number1Var = {
   initial: { opacity: 1 },
   animate: { opacity: 0, transition: { duration: 0.3, delay: 0.5 } },
@@ -162,4 +244,16 @@ const number4Var = {
   initial: { opacity: 1 },
   animate: { opacity: 0, transition: { duration: 0.3, delay: 2 } },
   exit: { opacity: 1, transition: { duration: 0.3, delay: 2 } },
+};
+
+const blackVar = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3, delay: 0.5 } },
+  exit: { opacity: 0, transition: { duration: 0.3, delay: 2 } },
+};
+
+const whiteVar = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3, delay: 1.5 } },
+  exit: { opacity: 0, transition: { duration: 0.3, delay: 2 } },
 };

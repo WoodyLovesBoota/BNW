@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { styled, keyframes } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRotateRight, faLeftLong, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Omok = () => {
   const [white, setWhite] = useState<{ row: number; col: number }[]>([]);
@@ -7,6 +10,7 @@ const Omok = () => {
   const [isWhite, setIsWhite] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
   const [winner, setWinner] = useState(0);
+  const navigate = useNavigate();
 
   const checkRow = (arr: { row: number; col: number }[]) => {
     for (let i = 0; i < arr.length - 4; i++) {
@@ -96,6 +100,31 @@ const Omok = () => {
     }
   };
 
+  const onHomeClick = () => {
+    setWhite([]);
+    setBlack([]);
+    setIsFinish(false);
+    setWinner(0);
+    navigate("/");
+  };
+
+  const onRestartClick = () => {
+    setWhite([]);
+    setBlack([]);
+    setIsFinish(false);
+    setWinner(0);
+  };
+
+  const onGoBackClick = () => {
+    if (!isWhite) {
+      setWhite((prev) => [...prev.slice(0, prev.length - 1)]);
+      setIsWhite(true);
+    } else {
+      setBlack((prev) => [...prev.slice(0, prev.length - 1)]);
+      setIsWhite(false);
+    }
+  };
+
   useEffect(() => {
     let copyWhite = [...white];
     let copyColWhite = [...white];
@@ -160,7 +189,10 @@ const Omok = () => {
     <Wrapper>
       {isFinish ? (
         <Result>
-          <ResultTitle>{winner === 1 ? "WHITE WIN" : "BLACK WIN"}</ResultTitle>
+          <ResultTitle>{winner === 1 ? "BLUE WIN" : "RED WIN"}</ResultTitle>
+          <ResultIcon onClick={onRestartClick}>
+            <FontAwesomeIcon icon={faArrowRotateRight} />
+          </ResultIcon>
         </Result>
       ) : null}
       <Board>
@@ -192,6 +224,17 @@ const Omok = () => {
           </Row>
         ))}
       </Board>
+      <Icons>
+        <Icon onClick={onHomeClick}>
+          <FontAwesomeIcon icon={faHouse} />
+        </Icon>
+        <Icon onClick={onRestartClick}>
+          <FontAwesomeIcon icon={faArrowRotateRight} />
+        </Icon>
+        <Icon onClick={onGoBackClick}>
+          <FontAwesomeIcon icon={faLeftLong} />
+        </Icon>
+      </Icons>
     </Wrapper>
   );
 };
@@ -199,7 +242,6 @@ export default Omok;
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 3%;
   background-color: #141414;
@@ -208,7 +250,7 @@ const Wrapper = styled.div`
 `;
 
 const Board = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -250,7 +292,7 @@ const Horizen = styled.div`
 `;
 
 const White = styled.div`
-  background-color: #934fc1;
+  background-color: #87cefa;
   width: 30px;
   height: 30px;
   border-radius: 15px;
@@ -258,17 +300,60 @@ const White = styled.div`
 `;
 
 const Black = styled.div`
-  background-color: #42d888;
+  background-color: #f7aea6;
   width: 30px;
   height: 30px;
   border-radius: 15px;
   z-index: 2;
 `;
 
-const Result = styled.div``;
+const Result = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+`;
 
 const ResultTitle = styled.h2`
   color: white;
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: 2px;
+  padding-bottom: 30px;
 `;
 
-const Cover = styled.div``;
+const rotationAni = keyframes`
+  0% {transform: rotate(0deg)};
+  100% {transform: rotate(360deg)};
+`;
+
+const ResultIcon = styled.span`
+  color: white;
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  animation: ${rotationAni} 3s linear infinite;
+`;
+
+const Icons = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+`;
+
+const Icon = styled.span`
+  color: white;
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 20px;
+  cursor: pointer;
+`;
