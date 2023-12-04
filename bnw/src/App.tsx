@@ -3,12 +3,14 @@ import Home from "./routes/Home";
 import Omok from "./routes/Omok";
 import FourtyNine from "./routes/FourtyNine";
 import Match from "./routes/Match";
+import MineTracker from "./routes/MineTracker";
 
 const App = () => {
   return (
     <>
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
+          <Route path="/mine" element={<MineTracker />}></Route>
           <Route path="/match" element={<Match />}></Route>
           <Route path="/49" element={<FourtyNine />}></Route>
           <Route path="/omok" element={<Omok />}></Route>

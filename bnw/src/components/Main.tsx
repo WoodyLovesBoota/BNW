@@ -13,9 +13,9 @@ const Main = () => {
     <Wrapper>
       <BackgroundPhoto variants={backgroundVar} animate="animate" initial="initial" />
       <Cover>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((row) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((row) => (
           <Row>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25].map((tile) =>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((tile) =>
               row === currentTile[0] && tile === currentTile[1] ? (
                 <Glass
                   variants={tileVar}
@@ -24,34 +24,15 @@ const Main = () => {
                   onMouseEnter={() => onMouseEnter(row, tile)}
                 />
               ) : row === currentTile[0] && (tile === currentTile[1] + 1 || tile === currentTile[1] - 1) ? (
-                <Glass
+                <SemiGlass
                   variants={tileVar}
                   animate="animate"
                   initial="initial"
                   onMouseEnter={() => onMouseEnter(row, tile)}
                 />
               ) : (row === currentTile[0] + 1 || row === currentTile[0] - 1) &&
-                (tile === currentTile[1] ||
-                  tile === currentTile[1] + 1 ||
-                  tile === currentTile[1] - 1 ||
-                  tile === currentTile[1] - 2 ||
-                  tile === currentTile[1] + 2) ? (
-                <Glass
-                  variants={tileVar}
-                  animate="animate"
-                  initial="initial"
-                  onMouseEnter={() => onMouseEnter(row, tile)}
-                />
-              ) : (row === currentTile[0] + 2 || row === currentTile[0] - 2) &&
-                (tile === currentTile[1] || tile === currentTile[1] - 1 || tile === currentTile[1] + 1) ? (
-                <Glass
-                  variants={tileVar}
-                  animate="animate"
-                  initial="initial"
-                  onMouseEnter={() => onMouseEnter(row, tile)}
-                />
-              ) : row === currentTile[0] && (tile === currentTile[1] + 2 || tile === currentTile[1] - 2) ? (
-                <Glass
+                (tile === currentTile[1] || tile === currentTile[1] + 1 || tile === currentTile[1] - 1) ? (
+                <SemiGlass
                   variants={tileVar}
                   animate="animate"
                   initial="initial"
@@ -101,28 +82,29 @@ const Cover = styled.div`
 
 const Row = styled.div`
   width: 100%;
-  height: 5%;
+  height: 8.4%;
   display: flex;
 `;
 
 const Tile = styled(motion.div)<{ id: number[] }>`
-  width: 4%;
+  width: 6.25%;
   height: 100%;
   background-color: #141414;
   border: 0.5px solid rgba(71, 71, 71, 0.2);
 `;
 
 const Glass = styled(motion.div)`
-  width: 4%;
+  width: 6.25%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
+  /* background-color: rgba(0, 0, 0, 0); */
+  background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   border: 0.5px solid rgba(255, 255, 255, 0.1);
 `;
 
 const SemiGlass = styled(motion.div)`
-  width: 4%;
+  width: 6.25%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
   border: 0.5px solid rgba(255, 255, 255, 0.1);
 `;
 

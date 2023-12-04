@@ -2,7 +2,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { styled, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateRight, faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  IconDefinition,
+  faArrowRotateRight,
+  faHouse,
+  faStar,
+  faMoon,
+  faHeart,
+  faPaw,
+  faSun,
+  faSnowflake,
+  faMusic,
+  faClover,
+  faDiamond,
+  faRocket,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Match = () => {
@@ -11,6 +25,7 @@ const Match = () => {
   const [selected, setSelected] = useState<number[][]>([]);
   const [isFinish, setIsFinish] = useState(false);
   const navigate = useNavigate();
+  const [pattern, setPattern] = useState<IconDefinition[]>([]);
 
   const onCardClick = (row: number, col: number) => {
     setSelected((prev) => [...prev, [row, col]]);
@@ -29,6 +44,11 @@ const Match = () => {
     setOpened([]);
     window.location.reload();
   };
+
+  useEffect(() => {
+    let target = [faStar, faMoon, faHeart, faPaw, faSun, faSnowflake, faMusic, faClover, faDiamond, faRocket];
+    setPattern(target);
+  }, []);
 
   useEffect(() => {
     if (opened.length === 20) {
@@ -90,7 +110,8 @@ const Match = () => {
                     whileHover="hover"
                     exit={"exit"}
                   >
-                    {arr[row * 5 + col]}
+                    {/* {arr[row * 5 + col]} */}
+                    <FontAwesomeIcon icon={pattern[arr[row * 5 + col] - 1]} />
                   </SelectedCell>
                 ) : opened.some((e) => e[0] === row && e[1] === col) ? (
                   <Cell
@@ -101,7 +122,7 @@ const Match = () => {
                     whileHover="hover"
                     exit={"exit"}
                   >
-                    {arr[row * 5 + col]}
+                    <FontAwesomeIcon icon={pattern[arr[row * 5 + col] - 1]} />
                   </Cell>
                 ) : (
                   <Cover
@@ -154,7 +175,7 @@ const SelectedCell = styled(motion.div)`
   align-items: center;
   width: 100px;
   height: 100%;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   background-color: rgba(94, 94, 94, 0.2);
   color: white;
@@ -169,7 +190,7 @@ const Cell = styled(motion.div)`
   align-items: center;
   width: 100px;
   height: 100%;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   background-color: rgba(170, 170, 170, 0.2);
   color: white;
