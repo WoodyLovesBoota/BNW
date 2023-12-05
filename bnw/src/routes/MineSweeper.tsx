@@ -303,7 +303,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5%;
+  padding: 3%;
   height: 100vh;
   background-color: #141414;
   color: white;
@@ -317,14 +317,14 @@ const Board = styled.div``;
 
 const Row = styled.div`
   width: 100%;
-  height: 35px;
+  height: 1.875rem;
   display: flex;
 `;
 
 const Box = styled(motion.div)`
-  width: 35px;
+  width: 1.875rem;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
   color: white;
   display: flex;
   justify-content: center;
@@ -333,9 +333,9 @@ const Box = styled(motion.div)`
 `;
 
 const Flag = styled(motion.div)`
-  width: 35px;
+  width: 1.875rem;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
   color: white;
   display: flex;
   justify-content: center;
@@ -345,9 +345,9 @@ const Flag = styled(motion.div)`
 `;
 
 const Cover = styled(motion.div)`
-  width: 35px;
+  width: 1.875rem;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
   background-color: #535353;
   cursor: default;
   &:hover {
@@ -372,9 +372,9 @@ const Result = styled.div`
 const ResultTitle = styled.h2`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  padding-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  padding-bottom: 1.875rem;
 `;
 
 const rotationAni = keyframes`
@@ -385,9 +385,9 @@ const rotationAni = keyframes`
 const ResultIcon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  margin-bottom: 1.875rem;
   cursor: pointer;
   animation: ${rotationAni} 3s linear infinite;
 `;
@@ -396,7 +396,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   width: 100%;
 `;
 
@@ -409,8 +409,8 @@ const Icons = styled.div`
 const Icon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 24px;
-  margin-right: 20px;
+  font-size: 1.5rem;
+  margin-right: 1.25rem;
   cursor: pointer;
 `;
 
@@ -424,11 +424,11 @@ const Button = styled.button`
   color: black;
   border: none;
   width: 20%;
-  padding: 15px 20px;
-  font-size: 14px;
-  border-radius: 15px;
+  padding: 0.9375rem 1.25rem;
+  font-size: 0.875rem;
+  border-radius: 0.9375rem;
   cursor: pointer;
-  margin-left: 15px;
+  margin-left: 0.9375rem;
   font-weight: 500;
   display: flex;
   justify-content: center;

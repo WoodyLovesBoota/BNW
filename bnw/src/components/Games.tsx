@@ -166,6 +166,8 @@ const Wrapper = styled.div`
   height: 100vh;
   background-color: #141414;
   padding: 8%;
+  display: flex;
+  align-items: center;
 `;
 
 const Board = styled.div`
@@ -174,19 +176,24 @@ const Board = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 899px) {
+    display: grid;
+    grid-template-columns: repeat(2, 19.75rem);
+    height: 50%;
+  }
 `;
 
 const GameBox = styled(motion.div)`
   background-color: #202020;
-  width: 300px;
-  height: 300px;
-  margin: 0 5px;
-  border-radius: 10px;
+  width: 18.75rem;
+  height: 18.75rem;
+  margin: 0 0.3125rem;
+  border-radius: 0.625rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
-  padding: 40px 50px;
+  padding: 2.5rem 3.125rem;
   cursor: pointer;
   &:hover {
     background-color: rgba(45, 45, 45, 0.15);
@@ -194,7 +201,7 @@ const GameBox = styled(motion.div)`
 `;
 
 const Icon = styled(motion.div)`
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
   height: 60%;
   display: flex;
   flex-direction: column;
@@ -211,23 +218,23 @@ const NumberBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   color: rgba(255, 255, 255, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  margin: 5px;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
+  border: 0.125rem solid rgba(255, 255, 255, 0.6);
+  margin: 0.3125rem;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 0.625rem;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
 const Title = styled.h2`
   font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 1.125rem;
+  margin-bottom: 1.25rem;
 `;
 
 const Description = styled.h2`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.6);
   text-align: center;
@@ -240,8 +247,8 @@ const BoardRow = styled.div`
 `;
 
 const BoardCell = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   position: relative;
   display: flex;
   justify-content: center;
@@ -268,17 +275,17 @@ const Horizen = styled.div`
 
 const White = styled(motion.div)`
   background-color: #87cefa;
-  width: 27px;
-  height: 27px;
-  border-radius: 15px;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  border-radius: 0.9375rem;
   z-index: 2;
 `;
 
 const Black = styled(motion.div)`
   background-color: #f7aea6;
-  width: 27px;
-  height: 27px;
-  border-radius: 15px;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  border-radius: 0.9375rem;
   z-index: 2;
 `;
 
@@ -287,23 +294,23 @@ const MatchBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   color: rgba(255, 255, 255, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  margin: 5px;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
+  border: 0.125rem solid rgba(255, 255, 255, 0.6);
+  margin: 0.3125rem;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 0.625rem;
 `;
 
 const MatchNum = styled(motion.h2)`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
 const MineRow = styled(motion.div)`
   display: flex;
-  border-left: 2px solid rgba(255, 255, 255, 0.6);
+  border-left: 0.125rem solid rgba(255, 255, 255, 0.6);
   &:last-child {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 0.125rem solid rgba(255, 255, 255, 0.6);
   }
 `;
 
@@ -312,11 +319,11 @@ const MineBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   color: rgba(255, 255, 255, 0.6);
-  border-top: 2px solid rgba(255, 255, 255, 0.6);
-  border-right: 2px solid rgba(255, 255, 255, 0.6);
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
+  border-top: 0.125rem solid rgba(255, 255, 255, 0.6);
+  border-right: 0.125rem solid rgba(255, 255, 255, 0.6);
+  width: 3.125rem;
+  height: 3.125rem;
+  font-size: 1.125rem;
   font-weight: 500;
 `;
 

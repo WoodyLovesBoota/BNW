@@ -66,6 +66,10 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #141414;
+
+  @media screen and (max-width: 599px) {
+    height: 50vh;
+  }
 `;
 
 const BackgroundPhoto = styled(motion.div)`

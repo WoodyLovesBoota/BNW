@@ -242,19 +242,28 @@ export default Omok;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 3%;
+  justify-content: space-between;
+  padding: 5% 8%;
   background-color: #141414;
   width: 100vw;
   height: 100vh;
+  @media screen and (max-width: 899px) {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    width: 1500px;
+    padding: 5%;
+    overflow-x: scroll;
+  }
 `;
 
 const Board = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  @media screen and (max-width: 899px) {
+    align-items: flex-start;
+  }
 `;
 
 const Row = styled.div`
@@ -262,11 +271,14 @@ const Row = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  @media screen and (max-width: 899px) {
+    justify-content: flex-start;
+  }
 `;
 
 const Cell = styled.div<{ loc: number[] }>`
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   position: relative;
   display: flex;
   justify-content: center;
@@ -275,7 +287,7 @@ const Cell = styled.div<{ loc: number[] }>`
 
 const Vertical = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
-  width: 1px;
+  width: 0.0625rem;
   height: 100%;
   position: absolute;
   left: 50%;
@@ -285,7 +297,7 @@ const Vertical = styled.div`
 const Horizen = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
   width: 100%;
-  height: 1px;
+  height: 0.0625rem;
   position: absolute;
   top: 50%;
   z-index: 1;
@@ -293,17 +305,17 @@ const Horizen = styled.div`
 
 const White = styled.div`
   background-color: #87cefa;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.9375rem;
   z-index: 2;
 `;
 
 const Black = styled.div`
   background-color: #f7aea6;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.9375rem;
   z-index: 2;
 `;
 
@@ -324,9 +336,9 @@ const Result = styled.div`
 const ResultTitle = styled.h2`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  padding-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  padding-bottom: 1.875rem;
 `;
 
 const rotationAni = keyframes`
@@ -337,9 +349,9 @@ const rotationAni = keyframes`
 const ResultIcon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  margin-bottom: 1.875rem;
   cursor: pointer;
   animation: ${rotationAni} 3s linear infinite;
 `;
@@ -347,13 +359,22 @@ const ResultIcon = styled.span`
 const Icons = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  align-items: center;
+  margin-top: 3.125rem;
+  @media screen and (max-width: 899px) {
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
 `;
 
 const Icon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
   cursor: pointer;
+  @media screen and (max-width: 899px) {
+    margin-right: 1.25rem;
+  }
 `;

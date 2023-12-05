@@ -110,7 +110,6 @@ const Match = () => {
                     whileHover="hover"
                     exit={"exit"}
                   >
-                    {/* {arr[row * 5 + col]} */}
                     <FontAwesomeIcon icon={pattern[arr[row * 5 + col] - 1]} />
                   </SelectedCell>
                 ) : opened.some((e) => e[0] === row && e[1] === col) ? (
@@ -165,22 +164,22 @@ const Board = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  height: 160px;
-  margin-bottom: 15px;
+  height: 10rem;
+  margin-bottom: 0.9375rem;
 `;
 
 const SelectedCell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 6.25rem;
   height: 100%;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   background-color: rgba(94, 94, 94, 0.2);
   color: white;
-  margin-right: 15px;
-  border-radius: 10px;
+  margin-right: 0.9375rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 `;
 
@@ -188,23 +187,23 @@ const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 6.25rem;
   height: 100%;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   background-color: rgba(170, 170, 170, 0.2);
   color: white;
-  margin-right: 15px;
-  border-radius: 10px;
+  margin-right: 0.9375rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 `;
 
 const Cover = styled(motion.div)`
-  width: 100px;
+  width: 6.25rem;
   height: 100%;
   background-color: #202020;
-  margin-right: 15px;
-  border-radius: 10px;
+  margin-right: 0.9375rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 `;
 
@@ -225,9 +224,9 @@ const Result = styled.div`
 const ResultTitle = styled.h2`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  padding-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  padding-bottom: 1.875rem;
 `;
 
 const rotationAni = keyframes`
@@ -238,25 +237,25 @@ const rotationAni = keyframes`
 const ResultIcon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 0.125rem;
+  margin-bottom: 1.875rem;
   cursor: pointer;
   animation: ${rotationAni} 3s linear infinite;
 `;
 
 const Icons = styled.div`
   display: flex;
-  width: 550px;
+  width: 34.375rem;
   justify-content: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
 `;
 
 const Icon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 24px;
-  margin-right: 20px;
+  font-size: 1.5rem;
+  margin-right: 1.25rem;
   cursor: pointer;
 `;
 
