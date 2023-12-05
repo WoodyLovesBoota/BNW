@@ -39,6 +39,109 @@ const Games = () => {
 
   return (
     <Wrapper>
+      <Header>
+        <AnimatePresence mode="wait">
+          <HeaderTitle
+            key={String(count + 101) + "header"}
+            variants={header1Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            B
+          </HeaderTitle>
+          <HeaderTitle
+            key={String(count + 105) + "header"}
+            variants={header2Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            L
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 109) + "header"}
+            variants={header3Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            A
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 113) + "header"}
+            variants={header4Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            C
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 117) + "header"}
+            variants={header5Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            K
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 121) + "header"}
+            variants={header6Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            N
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 125) + "header"}
+            variants={header7Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            W
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 129) + "header"}
+            variants={header8Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            H
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 133) + "header"}
+            variants={header9Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            I
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 137) + "header"}
+            variants={header10Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            T
+          </HeaderTitle>{" "}
+          <HeaderTitle
+            key={String(count + 141) + "header"}
+            variants={header11Var}
+            initial="initial"
+            animate="animate"
+            exit={"exit"}
+          >
+            E
+          </HeaderTitle>
+        </AnimatePresence>
+      </Header>
       <Board>
         <GameBox onClick={onFourtyNineClick}>
           <Icon>
@@ -154,6 +257,49 @@ const Games = () => {
           <Title>Mine Sweeper</Title>
           <Description>숨겨진 지뢰를 모두 찾아내어 승리하세요.</Description>
         </GameBox>
+        <GameBox onClick={onMatchClick}>
+          <Icon>
+            <AnimatePresence>
+              <NumberRow key={"numberrow"}>
+                <MatchBox
+                  key={count + 7}
+                  variants={wordColorVar}
+                  initial="boxInitial"
+                  animate="boxAnimate"
+                  exit={"boxExit"}
+                >
+                  <MatchNum key={count + 200} variants={word1Var} initial="initial" animate="animate" exit={"exit"}>
+                    B
+                  </MatchNum>
+                </MatchBox>
+                <MatchBox
+                  key={count + 16}
+                  variants={wordGColorVar}
+                  initial="boxInitial"
+                  animate="boxAnimate"
+                  exit={"boxExit"}
+                >
+                  <MatchNum key={count + 214} variants={word2Var} initial="initial" animate="animate" exit={"exit"}>
+                    N
+                  </MatchNum>
+                </MatchBox>
+                <MatchBox
+                  key={count + 26}
+                  variants={wordColorVar}
+                  initial="boxInitial"
+                  animate="boxAnimate"
+                  exit={"boxExit"}
+                >
+                  <MatchNum key={count + 234} variants={word3Var} initial="initial" animate="animate" exit={"exit"}>
+                    W
+                  </MatchNum>
+                </MatchBox>
+              </NumberRow>
+            </AnimatePresence>
+          </Icon>
+          <Title>Wordle</Title>
+          <Description>단어를 맞춰주세요.</Description>
+        </GameBox>
       </Board>
     </Wrapper>
   );
@@ -163,19 +309,33 @@ export default Games;
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
   background-color: #141414;
   padding: 8%;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 `;
 
-const Board = styled.div`
+const Header = styled.div`
   display: flex;
+  margin-top: 6.25rem;
+`;
+
+const HeaderTitle = styled(motion.h2)`
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0.625rem;
+`;
+
+const Board = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 19.75rem);
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: 6.25rem;
   @media screen and (max-width: 899px) {
     display: grid;
     grid-template-columns: repeat(2, 19.75rem);
@@ -187,7 +347,7 @@ const GameBox = styled(motion.div)`
   background-color: #202020;
   width: 18.75rem;
   height: 18.75rem;
-  margin: 0 0.3125rem;
+  margin: 0.5rem 0.3125rem;
   border-radius: 0.625rem;
   display: flex;
   flex-direction: column;
@@ -386,5 +546,89 @@ const matchSecVar = {
 const matchColorVar = {
   boxInitial: { backgroundColor: "#202020" },
   boxAnimate: { backgroundColor: "#ffffff55", transition: { duration: 0.2, delay: 1.5 } },
+  boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
+};
+
+const header1Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.2 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.2 } },
+};
+
+const header2Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.3 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.3 } },
+};
+
+const header3Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.4 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.4 } },
+};
+const header4Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.5 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.5 } },
+};
+const header5Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.6 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.6 } },
+};
+const header6Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.7 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.7 } },
+};
+const header7Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.8 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.8 } },
+};
+const header8Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 0.9 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 0.9 } },
+};
+const header9Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 1 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 1 } },
+};
+const header10Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 1.1 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 1.1 } },
+};
+const header11Var = {
+  initial: { y: 0 },
+  animate: { y: -20, transition: { duration: 0.1, delay: 1.2 } },
+  exit: { y: 0, transition: { duration: 0.1, delay: 1.2 } },
+};
+const word1Var = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, delay: 0.5 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
+};
+
+const word2Var = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, delay: 1 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
+};
+const word3Var = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, delay: 1.5 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
+};
+const wordColorVar = {
+  boxInitial: { backgroundColor: "#202020" },
+  boxAnimate: { backgroundColor: "#F7C04A", transition: { duration: 0.2, delay: 2 } },
+  boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
+};
+const wordGColorVar = {
+  boxInitial: { backgroundColor: "#202020" },
+  boxAnimate: { backgroundColor: "#539165", transition: { duration: 0.2, delay: 2 } },
   boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
 };
