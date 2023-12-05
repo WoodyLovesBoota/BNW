@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { faArrowRotateRight, faHouse, faCertificate, faFlag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Games = () => {
   const [currentTile, setCurrentTile] = useState([0, 0]);
@@ -24,6 +26,10 @@ const Games = () => {
     navigate("/omok");
   };
 
+  const onMineClick = () => {
+    navigate("/mine");
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount(count + 1);
@@ -37,7 +43,7 @@ const Games = () => {
         <GameBox onClick={onFourtyNineClick}>
           <Icon>
             <AnimatePresence mode="wait">
-              <NumberRow>
+              <NumberRow key={"Row" + count}>
                 <NumberBox key={count + 100} variants={number3Var} animate="animate" exit={"exit"}>
                   3
                 </NumberBox>
@@ -45,7 +51,7 @@ const Games = () => {
                   2
                 </NumberBox>
               </NumberRow>
-              <NumberRow>
+              <NumberRow key={"Row" + count + 10}>
                 <NumberBox key={count} variants={number1Var} initial="initial" animate="animate" exit={"exit"}>
                   1
                 </NumberBox>
@@ -61,7 +67,7 @@ const Games = () => {
         <GameBox onClick={onOmokClick}>
           <Icon>
             <AnimatePresence mode="wait">
-              <BoardRow>
+              <BoardRow key={"Row" + count + 11}>
                 <BoardCell>
                   <Vertical />
                   <Horizen />
@@ -72,7 +78,7 @@ const Games = () => {
                   <Horizen />
                 </BoardCell>
               </BoardRow>
-              <BoardRow>
+              <BoardRow key={"Row" + count + 12}>
                 <BoardCell>
                   <Vertical />
                   <Horizen />
@@ -91,7 +97,7 @@ const Games = () => {
         <GameBox onClick={onMatchClick}>
           <Icon>
             <AnimatePresence>
-              <NumberRow>
+              <NumberRow key={"numberrow"}>
                 <MatchBox
                   key={count + 7}
                   variants={matchColorVar}
@@ -105,7 +111,7 @@ const Games = () => {
                 </MatchBox>
                 <MatchBox></MatchBox>
               </NumberRow>
-              <NumberRow>
+              <NumberRow key={"numberrow1"}>
                 <MatchBox></MatchBox>
                 <MatchBox
                   key={count + 6}
@@ -124,10 +130,29 @@ const Games = () => {
           <Title>Card</Title>
           <Description>같은 모양의 카드를 찾아주세요.</Description>
         </GameBox>
-        <GameBox>
-          <Icon></Icon>
-          <Title></Title>
-          <Description></Description>
+        <GameBox onClick={onMineClick}>
+          <Icon>
+            <AnimatePresence>
+              <MineRow key={"numberrow2"}>
+                <MineBox>1</MineBox>
+                <MineBox>
+                  <Bomb key={count + 100} variants={whiteVar} initial="initial" animate="animate" exit={"exit"}>
+                    <FontAwesomeIcon icon={faCertificate} />
+                  </Bomb>
+                </MineBox>
+              </MineRow>
+              <MineRow key={"numberrow3"}>
+                <MineBox>
+                  <FlagIcon key={count + 100} variants={blackVar} initial="initial" animate="animate" exit={"exit"}>
+                    <FontAwesomeIcon icon={faFlag} />
+                  </FlagIcon>
+                </MineBox>
+                <MineBox></MineBox>
+              </MineRow>
+            </AnimatePresence>
+          </Icon>
+          <Title>Mine Sweeper</Title>
+          <Description>숨겨진 지뢰를 모두 찾아내어 승리하세요.</Description>
         </GameBox>
       </Board>
     </Wrapper>
@@ -272,6 +297,35 @@ const MatchBox = styled(motion.div)`
 const MatchNum = styled(motion.h2)`
   font-weight: 500;
   font-size: 16px;
+`;
+
+const MineRow = styled(motion.div)`
+  display: flex;
+  border-left: 2px solid rgba(255, 255, 255, 0.6);
+  &:last-child {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  }
+`;
+
+const MineBox = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 2px solid rgba(255, 255, 255, 0.6);
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const Bomb = styled(motion.span)`
+  color: #ed5744;
+`;
+
+const FlagIcon = styled(motion.span)`
+  color: #4a6bd6;
 `;
 
 const number1Var = {

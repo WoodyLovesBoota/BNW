@@ -14,10 +14,11 @@ const Main = () => {
       <BackgroundPhoto variants={backgroundVar} animate="animate" initial="initial" />
       <Cover>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((row) => (
-          <Row>
+          <Row key={String(row) + " " + "Row"}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((tile) =>
               row === currentTile[0] && tile === currentTile[1] ? (
                 <Glass
+                  key={String(row) + " " + String(tile) + "Glass"}
                   variants={tileVar}
                   animate="animate"
                   initial="initial"
@@ -25,6 +26,7 @@ const Main = () => {
                 />
               ) : row === currentTile[0] && (tile === currentTile[1] + 1 || tile === currentTile[1] - 1) ? (
                 <SemiGlass
+                  key={String(row) + " " + String(tile) + "SemiGlass"}
                   variants={tileVar}
                   animate="animate"
                   initial="initial"
@@ -33,6 +35,7 @@ const Main = () => {
               ) : (row === currentTile[0] + 1 || row === currentTile[0] - 1) &&
                 (tile === currentTile[1] || tile === currentTile[1] + 1 || tile === currentTile[1] - 1) ? (
                 <SemiGlass
+                  key={String(row) + " " + String(tile) + "SemiGlass2"}
                   variants={tileVar}
                   animate="animate"
                   initial="initial"
@@ -40,6 +43,7 @@ const Main = () => {
                 />
               ) : (
                 <Tile
+                  key={String(row) + " " + String(tile) + "Tile"}
                   id={[row, tile]}
                   variants={tileVar}
                   animate="animate"
@@ -96,7 +100,6 @@ const Tile = styled(motion.div)<{ id: number[] }>`
 const Glass = styled(motion.div)`
   width: 6.25%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0); */
   background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   border: 0.5px solid rgba(255, 255, 255, 0.1);
 `;
