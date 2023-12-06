@@ -6,8 +6,8 @@ import { faArrowRotateRight, faHouse, faCertificate, faFlag } from "@fortawesome
 import { useNavigate } from "react-router-dom";
 
 const MineSweeper = () => {
-  const [row, setRow] = useState(16);
-  const [col, setCol] = useState(30);
+  const [row, setRow] = useState(9);
+  const [col, setCol] = useState(9);
   const [mine, setMine] = useState(10);
 
   const [rowFrame, setRowFrame] = useState<number[]>([]);
