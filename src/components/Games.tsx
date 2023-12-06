@@ -30,6 +30,10 @@ const Games = () => {
     navigate("/mine");
   };
 
+  const onWordleClick = () => {
+    navigate("/wordle");
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount(count + 1);
@@ -257,7 +261,7 @@ const Games = () => {
           <Title>Mine Sweeper</Title>
           <Description>숨겨진 지뢰를 모두 찾아내어 승리하세요.</Description>
         </GameBox>
-        <GameBox onClick={onMatchClick}>
+        <GameBox onClick={onWordleClick}>
           <Icon>
             <AnimatePresence>
               <NumberRow key={"numberrow"}>
