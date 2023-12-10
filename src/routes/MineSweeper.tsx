@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { styled, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateRight, faHouse, faCertificate, faFlag } from "@fortawesome/free-solid-svg-icons";
@@ -70,6 +70,7 @@ const MineSweeper = () => {
     setFlag([]);
     setIsRestart((prev) => !prev);
   };
+
   const onInterClick = () => {
     setRow(16);
     setCol(16);
@@ -80,6 +81,7 @@ const MineSweeper = () => {
     setFlag([]);
     setIsRestart((prev) => !prev);
   };
+
   const onAdvClick = () => {
     setRow(16);
     setCol(30);
@@ -97,6 +99,7 @@ const MineSweeper = () => {
     setOpened([]);
     setFlag([]);
     setIsRestart((prev) => !prev);
+    navigate("/mine");
   };
 
   const onHomeClick = () => {
@@ -117,10 +120,10 @@ const MineSweeper = () => {
     } else {
       findBlank(row, col, [[0, 0]]);
     }
-    if (opened.length === row * col - mine) {
-      setIsFinish(true);
-      setIsWin(true);
-    }
+    // if (opened.length === row * col - mine) {
+    //   setIsFinish(true);
+    //   setIsWin(true);
+    // }
   };
 
   const onCoverRightClick = (row: number, col: number, event: MouseEvent<HTMLDivElement>) => {
