@@ -61,9 +61,9 @@ const Face = () => {
       <Games>
         <Header>
           <HeaderTitle>
-            MINI GAMES
+            MINI GAME
             <br />
-            BY YANG
+            <span>BY YANG</span>
           </HeaderTitle>
           <HeaderSubtitle>양태욱이 만든 다양한 종류의 미니게임이 당신을 기다리고 있어요.</HeaderSubtitle>
         </Header>
@@ -259,7 +259,7 @@ const Face = () => {
             initial="start"
             animate="end"
             exit="exit"
-            d="M361.686 1496.92L602.235 1015.65L315.478 1135.16L551.989 893.893L-34.0172 727.926L628.568 676.629L487.028 118.878L919.994 351.663L1420.91 -352.713L1299.23 289.422L2090.1 -68.4037L1497.02 631.995L2020.92 646.655L1443.12 819.08L1800.98 1116.02L1155 829.458L1260.53 1219.35L1071.44 1002.47L898.592 1637.02L831.029 1101.91L361.686 1496.92Z"
+            d="M361.686 1496.92L602.235 1015.65L315.478 1135.16L551.989 893.893L-34.0172 727.926L628.568 676.629L487.028 118.878L919.994 351.663L1420.91 -352.713L1299.23 289.422L2090.1 -68.4037L1497.02 631.995L2020.92 646.655L1443.12 819.08L1800.98 1116.02L1155 829.458L1260.53 1219.35L1071.44 1002.47L898.592 1637.02L831.029 1101.91L361.686 1496.92Z 110.765 1387.53L432.472 956.265L129.125 1023.29L404.503 827.549L-143.016 560.77L518.223 627.21L477.336 53.2344L862.425 358.776L1479.79 -246.143L1246.69 364.438L2088.29 151.801L1380.92 736.54L1894.01 843.428L1294.85 911.177L1594.69 1266.61L1009.42 870.545L1044.49 1272.94L896.641 1026.1L614.52 1620.18L642.452 1081.55L110.765 1387.53Z"
             stroke="#D9FF00"
             stroke-width="5"
             fill={"transparent"}
@@ -277,7 +277,7 @@ const Wrapper = styled.div`
 `;
 
 const IconSVG = styled(motion.svg)`
-  position: fixed;
+  position: absolute;
   top: -100px;
 `;
 
@@ -287,34 +287,57 @@ const Games = styled.div`
   padding: 270px 156px;
   position: absolute;
   z-index: 2;
+  @media screen and (max-width: 1520px) {
+    padding: 160px 80px;
+  }
+
+  @media screen and (max-width: 950px) {
+    padding: 130px 30px;
+  }
 `;
 
 const Header = styled.div``;
 
 const HeaderTitle = styled.h2`
   font-family: "Upheaval TT (BRK)";
-  font-size: 100px;
-  line-height: 100px;
+  font-size: 6.25rem;
+  line-height: 0.8;
+  & span {
+    font-family: "Upheaval TT (BRK)";
+    font-size: 6.25rem;
+  }
+  @media screen and (max-width: 900px) {
+    line-height: 0.6;
+    & span {
+      font-size: 3.125rem;
+    }
+  }
 `;
 
 const HeaderSubtitle = styled.h2`
-  margin-top: 72px;
-  font-size: 24px;
+  margin-top: 4.5rem;
+  font-size: 21px;
+  @media screen and (max-width: 900px) {
+    font-size: 16px;
+  }
 `;
 
 const Board = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(377px, 1fr));
   width: 100%;
   height: 100%;
-  margin-top: 120px;
+  margin-top: 7.5rem;
   grid-gap: 40px;
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(auto-fill, minmax(327px, 1fr));
+  }
 `;
 
 const GameBox = styled(motion.div)`
   background-color: white;
-  width: 377px;
+  width: 100%;
   height: 534px;
   border-radius: 8px;
   display: flex;
@@ -323,6 +346,9 @@ const GameBox = styled(motion.div)`
   padding: 8px;
   &:hover {
     background-color: rgba(45, 45, 45, 0.15);
+  }
+  @media screen and (max-width: 900px) {
+    height: 500px;
   }
 `;
 
@@ -336,6 +362,9 @@ const Icon = styled(motion.div)`
   align-items: center;
   justify-content: center;
   padding: 68px;
+  @media screen and (max-width: 900px) {
+    height: 327px;
+  }
 `;
 
 const NumberRow = styled(motion.div)`

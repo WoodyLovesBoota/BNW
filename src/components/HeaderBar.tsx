@@ -59,6 +59,9 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 30px;
   z-index: 1;
+  @media screen and (max-width: 900px) {
+    height: 20px;
+  }
 `;
 
 const Bar = styled.div`
@@ -88,4 +91,7 @@ const Block = styled.h2`
   color: black;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+  }
 `;

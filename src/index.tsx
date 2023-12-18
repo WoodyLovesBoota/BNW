@@ -33,19 +33,14 @@ const GlobalStyle = createGlobalStyle`
     word-break: keep-all;
     cursor: url("/cursor.png") 20 20, auto;
 
-    @media screen and (max-width: 1799px) {
+    @media screen and (max-width: 1400px) {
       font-size: 14px;
     }
-    @media screen and (max-width: 1199px) {
+
+    @media screen and (max-width: 900px) {
       font-size: 12px;
     }
-    @media screen and (max-width: 899px) {
-      font-size: 10px;
-    }
 
-    @media screen and (max-width: 599px) {
-      font-size: 8px;
-    }
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,

@@ -21,7 +21,7 @@ const Sheep = () => {
       <SheepBox variants={sheepVar} initial="initial" animate="animate">
         <Lottie
           animationData={animationData}
-          style={{ width: 200, height: 200, transform: "rotate(180deg)" }}
+          style={{ width: "12.5rem", height: "12.5rem", transform: "rotate(180deg)" }}
           loop
           play
           speed={8}
@@ -30,7 +30,7 @@ const Sheep = () => {
       <SheepBox variants={sheep2Var} initial="initial" animate="animate">
         <Lottie
           animationData={animationData}
-          style={{ width: 200, height: 200, transform: "rotate(180deg)" }}
+          style={{ width: "12.5rem", height: "12.5rem", transform: "rotate(180deg)" }}
           loop
           play
           speed={8}
@@ -39,7 +39,7 @@ const Sheep = () => {
       <SheepBox variants={sheep3Var} initial="initial" animate="animate">
         <Lottie
           animationData={animationData}
-          style={{ width: 200, height: 200, transform: "rotate(180deg)" }}
+          style={{ width: "12.5rem", height: "12.5rem", transform: "rotate(180deg)" }}
           loop
           play
           speed={8}
@@ -48,7 +48,7 @@ const Sheep = () => {
       <SheepBox variants={sheep4Var} initial="initial" animate="animate">
         <Lottie
           animationData={animationData}
-          style={{ width: 200, height: 200, transform: "rotate(180deg)" }}
+          style={{ width: "12.5rem", height: "12.5rem", transform: "rotate(180deg)" }}
           loop
           play
           speed={8}
@@ -57,7 +57,7 @@ const Sheep = () => {
       <SheepBox variants={sheep5Var} initial="initial" animate="animate">
         <Lottie
           animationData={animationData}
-          style={{ width: 200, height: 200, transform: "rotate(180deg)" }}
+          style={{ width: "12.5rem", height: "12.5rem", transform: "rotate(180deg)" }}
           loop
           play
           speed={8}
