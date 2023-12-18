@@ -26,9 +26,12 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     font-size: 16px;
     vertical-align: baseline;
-    font-family: "Noto sans KR", sans-serif;
+    font-family: Galmuri14, "Noto sans KR", sans-serif;
     font-weight: 300;
     line-height: 1.2;
+    color: #262626;
+    word-break: keep-all;
+    cursor: url("/cursor.png") 20 20, auto;
 
     @media screen and (max-width: 1799px) {
       font-size: 14px;
@@ -81,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     font-family: 'Source Sans Pro', sans-serif;
     line-height: 1.2;
-    background-color: #141414;
+    background-color: #d2d2d2;
 
   }
 

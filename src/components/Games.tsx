@@ -10,10 +10,6 @@ const Games = () => {
   const [count, setCount] = useState(1);
   const navigate = useNavigate();
 
-  const onMouseEnter = (row: number, column: number) => {
-    setCurrentTile([row, column]);
-  };
-
   const onMatchClick = () => {
     navigate("/match");
   };
@@ -35,134 +31,45 @@ const Games = () => {
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer3 = setInterval(() => {
       setCount(count + 1);
     }, 3000);
-    return () => clearInterval(timer);
+    return () => clearInterval(timer3);
   });
 
   return (
     <Wrapper>
       <Header>
-        <AnimatePresence mode="wait">
-          <HeaderTitle
-            key={String(count + 101) + "header"}
-            variants={header1Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            B
-          </HeaderTitle>
-          <HeaderTitle
-            key={String(count + 105) + "header"}
-            variants={header2Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            L
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 109) + "header"}
-            variants={header3Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            A
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 113) + "header"}
-            variants={header4Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            C
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 117) + "header"}
-            variants={header5Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            K
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 121) + "header"}
-            variants={header6Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            N
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 125) + "header"}
-            variants={header7Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            W
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 129) + "header"}
-            variants={header8Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            H
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 133) + "header"}
-            variants={header9Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            I
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 137) + "header"}
-            variants={header10Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            T
-          </HeaderTitle>{" "}
-          <HeaderTitle
-            key={String(count + 141) + "header"}
-            variants={header11Var}
-            initial="initial"
-            animate="animate"
-            exit={"exit"}
-          >
-            E
-          </HeaderTitle>
-        </AnimatePresence>
+        <HeaderTitle>
+          MINI GAMES
+          <br />
+          BY YANG
+        </HeaderTitle>
+        <HeaderSubtitle>양태욱이 만든 다양한 종류의 미니게임이 당신을 기다리고있어요.</HeaderSubtitle>
       </Header>
       <Board>
         <GameBox onClick={onFourtyNineClick}>
           <Icon>
             <AnimatePresence mode="wait">
               <NumberRow key={"Row" + count}>
-                <NumberBox key={count + 100} variants={number3Var} animate="animate" exit={"exit"}>
+                <NumberBox key={"four" + count + 100} variants={number3Var} animate="animate" exit={"exit"}>
                   3
                 </NumberBox>
-                <NumberBox key={count + 200} variants={number2Var} animate="animate" exit={"exit"}>
+                <NumberBox key={"four" + count + 200} variants={number2Var} animate="animate" exit={"exit"}>
                   2
                 </NumberBox>
               </NumberRow>
               <NumberRow key={"Row" + count + 10}>
-                <NumberBox key={count} variants={number1Var} initial="initial" animate="animate" exit={"exit"}>
+                <NumberBox key={"four" + count} variants={number1Var} initial="initial" animate="animate" exit={"exit"}>
                   1
                 </NumberBox>
-                <NumberBox key={count + 4} variants={number4Var} initial="initial" animate="animate" exit={"exit"}>
+                <NumberBox
+                  key={"four" + count + 4}
+                  variants={number4Var}
+                  initial="initial"
+                  animate="animate"
+                  exit={"exit"}
+                >
                   4
                 </NumberBox>
               </NumberRow>
@@ -313,64 +220,60 @@ export default Games;
 
 const Wrapper = styled.div`
   width: 100vw;
-  background-color: #141414;
-  padding: 8%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  background-color: transparent;
+  padding: 270px 156px;
+  position: absolute;
+  z-index: 2;
 `;
 
-const Header = styled.div`
-  display: flex;
-  margin-top: 6.25rem;
+const Header = styled.div``;
+
+const HeaderTitle = styled.h2`
+  font-family: "Upheaval TT (BRK)";
+  font-size: 100px;
+  line-height: 100px;
 `;
 
-const HeaderTitle = styled(motion.h2)`
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin: 0 0.625rem;
+const HeaderSubtitle = styled.h2`
+  margin-top: 72px;
+  font-size: 24px;
 `;
 
 const Board = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 19.75rem);
   justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   height: 100%;
-  margin-top: 6.25rem;
-  @media screen and (max-width: 899px) {
-    display: grid;
-    grid-template-columns: repeat(2, 19.75rem);
-    height: 50%;
-  }
+  margin-top: 120px;
+  grid-gap: 40px;
 `;
 
 const GameBox = styled(motion.div)`
-  background-color: #202020;
-  width: 18.75rem;
-  height: 18.75rem;
-  margin: 0.5rem 0.3125rem;
-  border-radius: 0.625rem;
+  background-color: white;
+  width: 377px;
+  height: 534px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
-  padding: 2.5rem 3.125rem;
-  cursor: pointer;
+  padding: 8px;
   &:hover {
     background-color: rgba(45, 45, 45, 0.15);
   }
 `;
 
 const Icon = styled(motion.div)`
-  margin-bottom: 0.9375rem;
-  height: 60%;
+  height: 372px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #d9ff00;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 68px;
 `;
 
 const NumberRow = styled(motion.div)`
@@ -381,14 +284,14 @@ const NumberBox = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(255, 255, 255, 0.6);
-  border: 0.125rem solid rgba(255, 255, 255, 0.6);
-  margin: 0.3125rem;
-  width: 3.125rem;
-  height: 3.125rem;
-  border-radius: 0.625rem;
+  color: #141414;
+  border: 2px solid #141414;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 16px;
 `;
 
 const Title = styled.h2`
@@ -553,63 +456,6 @@ const matchColorVar = {
   boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
 };
 
-const header1Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.2 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.2 } },
-};
-
-const header2Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.3 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.3 } },
-};
-
-const header3Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.4 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.4 } },
-};
-const header4Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.5 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.5 } },
-};
-const header5Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.6 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.6 } },
-};
-const header6Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.7 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.7 } },
-};
-const header7Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.8 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.8 } },
-};
-const header8Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 0.9 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 0.9 } },
-};
-const header9Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 1 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 1 } },
-};
-const header10Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 1.1 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 1.1 } },
-};
-const header11Var = {
-  initial: { y: 0 },
-  animate: { y: -20, transition: { duration: 0.1, delay: 1.2 } },
-  exit: { y: 0, transition: { duration: 0.1, delay: 1.2 } },
-};
 const word1Var = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.2, delay: 0.5 } },
