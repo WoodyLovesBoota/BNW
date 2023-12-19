@@ -18,6 +18,8 @@ import {
   faRocket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "../assets/home.svg";
+import { ReactComponent as RestartIcon } from "../assets/restart.svg";
 
 const Match = () => {
   const [arr, setArr] = useState<number[]>([]);
@@ -93,10 +95,15 @@ const Match = () => {
     <Wrapper>
       {isFinish ? (
         <Result>
-          <ResultTitle>Win</ResultTitle>
-          <ResultIcon onClick={onRestartClick}>
-            <FontAwesomeIcon icon={faArrowRotateRight} />
-          </ResultIcon>
+          <ResultTitle>You Win :)</ResultTitle>
+          <ResultButtons>
+            <ResButton onClick={onRestartClick}>
+              <RestartIcon width={"32px"} />
+            </ResButton>
+            <ResButtonHome onClick={onHomeClick}>
+              <HomeIcon width={"32px"} />
+            </ResButtonHome>
+          </ResultButtons>
         </Result>
       ) : null}
       <Icons>
@@ -186,7 +193,6 @@ const Icon = styled.h2`
   z-index: 2;
   &:hover {
     background-color: #e5e5e5;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
   &:active {
     background-color: #00000011;
@@ -259,11 +265,12 @@ const Result = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const ResultTitle = styled.h2`
@@ -274,19 +281,29 @@ const ResultTitle = styled.h2`
   padding-bottom: 30px;
 `;
 
-const rotationAni = keyframes`
-  0% {transform: rotate(0deg)};
-  100% {transform: rotate(360deg)};
+const ResultButtons = styled.div`
+  display: flex;
+  margin-top: 36px;
 `;
 
-const ResultIcon = styled.span`
-  color: white;
-  font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
+const rotationAni = keyframes`
+  0% {transform: rotate(0deg)};
+  100% {transform: rotate(-360deg)};
+`;
+
+const ResButton = styled(motion.button)`
+  border: none;
   cursor: pointer;
+  background-color: transparent;
   animation: ${rotationAni} 3s linear infinite;
+  margin: 0 10px;
+`;
+
+const ResButtonHome = styled(motion.button)`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0 10px;
 `;
 
 const cardVar = {

@@ -20,12 +20,12 @@ const Keyboard = () => {
             key={element}
             bgcolor={
               historyGreenSet.includes(element.toLowerCase())
-                ? "green"
+                ? "#D9FF00"
                 : historyYellowSet.includes(element.toLowerCase())
-                ? "yellow"
+                ? "#FF7B7B"
                 : historyGraySet.includes(element.toLowerCase())
-                ? "gray"
-                : "#c4cbdd"
+                ? "#999999"
+                : "#ffffff"
             }
           >
             {element}
@@ -38,12 +38,12 @@ const Keyboard = () => {
             key={element}
             bgcolor={
               historyGreenSet.includes(element.toLowerCase())
-                ? "green"
+                ? "#D9FF00"
                 : historyYellowSet.includes(element.toLowerCase())
-                ? "yellow"
+                ? "#FF7B7B"
                 : historyGraySet.includes(element.toLowerCase())
-                ? "gray"
-                : "#c4cbdd"
+                ? "#999999"
+                : "#ffffff"
             }
           >
             {element}
@@ -56,12 +56,12 @@ const Keyboard = () => {
             key={element}
             bgcolor={
               historyGreenSet.includes(element.toLowerCase())
-                ? "green"
+                ? "#D9FF00"
                 : historyYellowSet.includes(element.toLowerCase())
-                ? "yellow"
+                ? "#FF7B7B"
                 : historyGraySet.includes(element.toLowerCase())
-                ? "gray"
-                : "#c4cbdd"
+                ? "#999999"
+                : "#ffffff"
             }
           >
             {element}
@@ -75,14 +75,14 @@ const Keyboard = () => {
 export default Keyboard;
 
 const Container = styled.div`
-  margin-top: 3.125rem;
+  margin-top: 60px;
 `;
 
 const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 31.25rem;
+  width: 900px;
 `;
 
 const Cell = styled.div<IColor>`
@@ -91,13 +91,13 @@ const Cell = styled.div<IColor>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.125rem;
-  height: 3.125rem;
-  border-radius: 0.625rem;
-  font-size: 1.125rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 16px;
   color: #12121b;
-  font-weight: 500;
-  margin: 0.125rem;
+  font-weight: 400;
+  margin: 4px;
   cursor: pointer;
 `;
 

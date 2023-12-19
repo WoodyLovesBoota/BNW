@@ -74,12 +74,12 @@ const Word = ({ id }: { id: number }) => {
             text={trial[index]}
             bgcolor={
               green.includes(index)
-                ? "#539165"
+                ? "#D9FF00"
                 : yellow.includes(index)
-                ? "#F7C04A"
+                ? "#FF7B7B"
                 : gray.includes(index)
-                ? "#2b2b2b"
-                : "#535353"
+                ? "#999999"
+                : "#ffffff"
             }
           />
         ))}
@@ -117,6 +117,7 @@ const Input = styled.input`
   border: transparent;
   color: transparent;
   outline: none;
+  position: fixed;
 `;
 
 interface IForm {

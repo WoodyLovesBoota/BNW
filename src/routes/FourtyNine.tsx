@@ -100,12 +100,21 @@ const FourtyNine = () => {
               <MilSec>{time % 100 < 10 ? "0" + (time % 100) : time % 100}</MilSec>{" "}
             </Timer>
           ) : (
-            <Timer>
-              <Minute>{"00"}</Minute>
-              <Slash>:</Slash>
-              <Second>{"00"}</Second> <Divider>.</Divider>
-              <MilSec>{"00"}</MilSec>{" "}
-            </Timer>
+            <ResTimer>
+              <ResMinute>
+                {Math.floor(Math.floor(res / 100) / 60) < 10
+                  ? "0" + Math.floor(Math.floor(res / 100) / 60)
+                  : Math.floor(Math.floor(res / 100) / 60)}
+              </ResMinute>
+              <ResSlash>:</ResSlash>
+              <ResSecond>
+                {Math.floor(res / 100) % 60 < 10
+                  ? "0" + (Math.floor(res / 100) % 60)
+                  : Math.floor(res / 100) % 60}
+              </ResSecond>{" "}
+              <ResDivider>.</ResDivider>
+              <ResMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResMilSec>{" "}
+            </ResTimer>
           )}
         </Header>
         <Board>
@@ -141,21 +150,7 @@ const FourtyNine = () => {
         {!isStart &&
           (current > 25 ? (
             <Result variants={resultVar} initial="initial" animate="animate">
-              <ResultTitle>Your Record is</ResultTitle>
-              <ResultTime>
-                <ResultMinute>
-                  {Math.floor(Math.floor(res / 100) / 60) < 10
-                    ? "0" + Math.floor(Math.floor(res / 100) / 60)
-                    : Math.floor(Math.floor(res / 100) / 60)}
-                </ResultMinute>
-                :
-                <ResultSecond>
-                  {Math.floor(res / 100) % 60 < 10
-                    ? "0" + (Math.floor(res / 100) % 60)
-                    : Math.floor(res / 100) % 60}
-                </ResultSecond>{" "}
-                .<ResultMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResultMilSec>{" "}
-              </ResultTime>
+              <ResultTitle>You Win :)</ResultTitle>
               <ResultButtons>
                 <ResButton onClick={onRestartClick}>
                   <Icon>
@@ -186,12 +181,13 @@ const Wrapper = styled.div<{ isStart: boolean }>`
 `;
 
 const Shadow = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 `;
 
 const Container = styled.div`
@@ -253,6 +249,55 @@ const Divider = styled.h2`
   font-family: "Upheaval TT (BRK)";
 `;
 
+const ResTimer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  font-size: 48px;
+  font-weight: 500;
+  font-family: "Upheaval TT (BRK)";
+  margin-bottom: 40px;
+  color: #d9ff00;
+  z-index: 5;
+`;
+
+const ResMinute = styled.h2`
+  font-size: 64px;
+  font-weight: 500;
+  margin-right: 15px;
+  font-family: "Upheaval TT (BRK)";
+  color: #d9ff00;
+`;
+
+const ResSecond = styled.h2`
+  font-size: 64px;
+  font-weight: 500;
+  margin: 0 15px;
+  font-family: "Upheaval TT (BRK)";
+  color: #d9ff00;
+`;
+
+const ResMilSec = styled.h2`
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0 15px;
+  font-family: "Upheaval TT (BRK)";
+  color: #d9ff00;
+`;
+
+const ResSlash = styled.h2`
+  font-size: 64px;
+  font-weight: 500;
+  font-family: "Upheaval TT (BRK)";
+  color: #d9ff00;
+`;
+
+const ResDivider = styled.h2`
+  font-size: 64px;
+  font-weight: 800;
+  font-family: "Upheaval TT (BRK)";
+  color: #d9ff00;
+`;
+
 const Button = styled.button`
   font-family: "Upheaval TT (BRK)";
   background-color: white;
@@ -270,7 +315,6 @@ const Button = styled.button`
   z-index: 2;
   &:hover {
     background-color: #e5e5e5;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
   &:active {
     background-color: #00000011;
@@ -362,7 +406,7 @@ const Result = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -376,40 +420,15 @@ const ResultTitle = styled.h2`
   color: white;
 `;
 
-const ResultTime = styled.div`
-  display: flex;
-  align-items: flex-end;
-  font-size: 36px;
-  font-weight: 500;
-`;
-
 const ResultButtons = styled.div`
   display: flex;
-  margin-top: 68px;
+  margin-top: 56px;
 `;
 
 const Icon = styled(motion.span)`
   font-size: 32px;
   color: white;
   margin: 0 12px;
-`;
-
-const ResultMinute = styled.h2`
-  font-size: 72px;
-  font-weight: 500;
-  margin: 0 30px;
-`;
-
-const ResultSecond = styled.h2`
-  font-size: 72px;
-  font-weight: 500;
-  margin: 0 30px;
-`;
-
-const ResultMilSec = styled.h2`
-  font-size: 36px;
-  font-weight: 500;
-  margin: 0 30px;
 `;
 
 const rotationAni = keyframes`

@@ -457,6 +457,7 @@ const Description = styled.h2`
   font-weight: 400;
   padding: 0 26px;
   padding-bottom: 20px;
+  line-height: 1.5;
 `;
 
 const BoardRow = styled.div`

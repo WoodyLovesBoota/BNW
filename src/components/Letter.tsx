@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 const Letter = ({ bgcolor, text }: IColor) => {
   return (
-    <Wrapper variants={alphaVar} initial="initial" animate="animate" bgcolor={bgcolor} text={text}>
+    <Wrapper bgcolor={bgcolor} text={text}>
       <Alpha>{text}</Alpha>
     </Wrapper>
   );
@@ -12,13 +12,14 @@ const Letter = ({ bgcolor, text }: IColor) => {
 export default Letter;
 
 const Wrapper = styled(motion.div)<IColor>`
-  width: 70px;
-  height: 70px;
-  border-radius: 18px;
-  margin: 5px 3px;
+  width: 54px;
+  height: 68px;
+  border-radius: 8px;
+  margin: 8px 4px;
   border: none;
-  text-align: center;
-  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-transform: uppercase;
   transition: background-color 1s ease-in-out;
   caret-color: transparent;
@@ -29,15 +30,10 @@ const Wrapper = styled(motion.div)<IColor>`
 `;
 
 const Alpha = styled(motion.h2)`
-  font-size: 56px;
-  font-weight: 600;
-  color: white;
+  font-size: 32px;
+  font-weight: 400;
+  color: #4d4d4d;
 `;
-
-const alphaVar = {
-  initial: { scale: 1.1 },
-  animate: { scale: 1 },
-};
 
 interface IColor {
   bgcolor: string;

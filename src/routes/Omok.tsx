@@ -290,7 +290,6 @@ const Icon = styled.h2`
   margin: 0 10px;
   &:hover {
     background-color: #e5e5e5;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
   &:active {
     background-color: #00000011;
