@@ -1,17 +1,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { fourtynineResState } from "../atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateRight, faHouse, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "../assets/home.svg";
+import { ReactComponent as RestartIcon } from "../assets/restart.svg";
 
 const FourtyNine = () => {
   const [arr, setArr] = useState<number[]>([]);
   const [current, setCurrent] = useState(1);
   const [isStart, setIsStart] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
   const [time, setTime] = useState(0);
   const [res, setRes] = useState(0);
   const [totalRes, setTotalRes] = useRecoilState(fourtynineResState);
@@ -158,37 +159,15 @@ const FourtyNine = () => {
               <ResultButtons>
                 <ResButton onClick={onRestartClick}>
                   <Icon>
-                    <FontAwesomeIcon icon={faRotateLeft} />
+                    <RestartIcon width={"32px"} />
                   </Icon>
                 </ResButton>
-                <ResButton onClick={onHomeClick}>
+                <ResButtonHome onClick={onHomeClick}>
                   <Icon>
-                    <FontAwesomeIcon icon={faHouse} />
+                    <HomeIcon width={"32px"} />
                   </Icon>
-                </ResButton>
+                </ResButtonHome>
               </ResultButtons>
-              {/* <ResultList>
-              {totalRes.map(
-                (res, ind) =>
-                  ind < 5 && (
-                    <ResultItem>
-                      <Rank>{ind + 1}. </Rank>
-                      <MinuteRes>
-                        {Math.floor(Math.floor(res / 100) / 60) < 10
-                          ? "0" + Math.floor(Math.floor(res / 100) / 60)
-                          : Math.floor(Math.floor(res / 100) / 60)}
-                      </MinuteRes>
-                      :
-                      <SecondRes>
-                        {Math.floor(res / 100) % 60 < 10
-                          ? "0" + (Math.floor(res / 100) % 60)
-                          : Math.floor(res / 100) % 60}
-                      </SecondRes>{" "}
-                      .<MilSecRes>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</MilSecRes>{" "}
-                    </ResultItem>
-                  )
-              )}
-            </ResultList> */}
             </Result>
           ) : (
             <Shadow />
@@ -285,9 +264,10 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 81px;
+  padding: 8px 14px;
   height: 36px;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  z-index: 2;
   &:hover {
     background-color: #e5e5e5;
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
@@ -320,7 +300,6 @@ const Start = styled.button<{ isStart: boolean }>`
   }
   &:active {
     background-color: ${(props) => (props.isStart ? "#00000011" : "#d9ff00bb")};
-
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
@@ -433,50 +412,22 @@ const ResultMilSec = styled.h2`
   margin: 0 30px;
 `;
 
-const ResultList = styled.div`
-  margin-top: 50px;
-`;
-
-const ResultItem = styled.div`
-  color: white;
-  display: flex;
-  background-color: rgba(58, 58, 58, 0.5);
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  align-items: flex-end;
-  box-shadow: 0 0 15px 0 rgba(156, 156, 156, 0.3);
-  justify-content: center;
+const rotationAni = keyframes`
+  0% {transform: rotate(0deg)};
+  100% {transform: rotate(-360deg)};
 `;
 
 const ResButton = styled(motion.button)`
   border: none;
   cursor: pointer;
   background-color: transparent;
+  animation: ${rotationAni} 3s linear infinite;
 `;
 
-const Rank = styled.h2`
-  font-size: 20px;
-  font-weight: 500;
-  margin: 0 15px;
-`;
-
-const MinuteRes = styled.h2`
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0 15px;
-`;
-
-const SecondRes = styled.h2`
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0 15px;
-`;
-
-const MilSecRes = styled.h2`
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0 15px;
+const ResButtonHome = styled(motion.button)`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
 `;
 
 const buttonVar = {

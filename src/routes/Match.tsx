@@ -46,7 +46,18 @@ const Match = () => {
   };
 
   useEffect(() => {
-    let target = [faStar, faMoon, faHeart, faPaw, faSun, faSnowflake, faMusic, faClover, faDiamond, faRocket];
+    let target = [
+      faStar,
+      faMoon,
+      faHeart,
+      faPaw,
+      faSun,
+      faSnowflake,
+      faMusic,
+      faClover,
+      faDiamond,
+      faRocket,
+    ];
     setPattern(target);
   }, []);
 
@@ -62,11 +73,11 @@ const Match = () => {
         setTimeout(() => {
           setOpened((prev) => [...prev, selected[0], selected[1]]);
           setSelected([]);
-        }, 1000);
+        }, 400);
       } else {
         setTimeout(() => {
           setSelected([]);
-        }, 1000);
+        }, 600);
       }
     }
   }, [selected]);
@@ -89,12 +100,8 @@ const Match = () => {
         </Result>
       ) : null}
       <Icons>
-        <Icon onClick={onHomeClick}>
-          <FontAwesomeIcon icon={faHouse} />
-        </Icon>
-        <Icon onClick={onRestartClick}>
-          <FontAwesomeIcon icon={faArrowRotateRight} />
-        </Icon>
+        <Icon onClick={onHomeClick}>HOME</Icon>
+        <Icon onClick={onRestartClick}>RESTART</Icon>
       </Icons>
       <Board>
         {[0, 1, 2, 3].map((row) => (
@@ -151,60 +158,99 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 8%;
   height: 100vh;
-  background-color: #141414;
+  padding: 40px;
+`;
+
+const Icons = styled.div`
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 54px;
+`;
+
+const Icon = styled.h2`
+  font-family: "Upheaval TT (BRK)";
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 14px;
+  height: 36px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  &:hover {
+    background-color: #e5e5e5;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+  &:active {
+    background-color: #00000011;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
 `;
 
 const Board = styled.div`
   height: 100%;
+  width: 600px;
 `;
 
 const Row = styled.div`
   display: flex;
   align-items: center;
-  height: 10rem;
-  margin-bottom: 0.9375rem;
+  justify-content: space-between;
+  height: 165px;
+  margin-bottom: 15px;
 `;
 
 const SelectedCell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6.25rem;
+  width: 110px;
   height: 100%;
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: 600;
-  background-color: rgba(94, 94, 94, 0.2);
+  background: #d9d9d9;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
   color: white;
-  margin-right: 0.9375rem;
-  border-radius: 0.625rem;
+  border-radius: 10px;
   cursor: pointer;
+  color: #4d4d4d;
 `;
 
 const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6.25rem;
+  width: 110px;
   height: 100%;
-  font-size: 2rem;
-  font-weight: 600;
-  background-color: rgba(170, 170, 170, 0.2);
-  color: white;
-  margin-right: 0.9375rem;
-  border-radius: 0.625rem;
+  font-size: 32px;
+  font-weight: 500;
+  border-radius: 8px;
+  background: #bfbfbf;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
   cursor: pointer;
+  color: #4d4d4d;
 `;
 
 const Cover = styled(motion.div)`
-  width: 6.25rem;
+  width: 110px;
   height: 100%;
-  background-color: #202020;
-  margin-right: 0.9375rem;
-  border-radius: 0.625rem;
-  cursor: pointer;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #e6e6e6;
+  }
+  &:active {
+    background-color: #d9d9d9;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
+  }
 `;
 
 const Result = styled.div`
@@ -218,15 +264,14 @@ const Result = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8%;
 `;
 
 const ResultTitle = styled.h2`
   color: white;
   font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  padding-bottom: 1.875rem;
+  font-size: 32px;
+  letter-spacing: 2px;
+  padding-bottom: 30px;
 `;
 
 const rotationAni = keyframes`
@@ -237,33 +282,16 @@ const rotationAni = keyframes`
 const ResultIcon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  margin-bottom: 1.875rem;
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
   cursor: pointer;
   animation: ${rotationAni} 3s linear infinite;
 `;
 
-const Icons = styled.div`
-  display: flex;
-  width: 34.375rem;
-  justify-content: flex-end;
-  margin-bottom: 1.875rem;
-`;
-
-const Icon = styled.span`
-  color: white;
-  font-weight: 500;
-  font-size: 1.5rem;
-  margin-right: 1.25rem;
-  cursor: pointer;
-`;
-
 const cardVar = {
   initial: { scale: 0, opacity: 0 },
-  animate: { scale: 1, opacity: 1 },
-  selectAnimate: { scale: 1, opacity: 1 },
-
-  exit: { scale: 0, opacity: 0 },
-  hover: { scale: 1.05 },
+  animate: { scale: 1, opacity: 1, transition: { duration: 0.2 } },
+  selectAnimate: { scale: 1, opacity: 1, transition: { duration: 0.2 } },
+  exit: { scale: 0, opacity: 0, transition: { duration: 0.2 } },
 };

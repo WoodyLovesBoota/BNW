@@ -84,7 +84,6 @@ const Word = ({ id }: { id: number }) => {
           />
         ))}
       </Letters>
-      {history.green} {history.yellow} {history.gray}
       <form onSubmit={handleSubmit(onValid)}>
         <Input
           {...rest}

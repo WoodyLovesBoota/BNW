@@ -87,11 +87,11 @@ const Bar = styled.div`
 
 const Block = styled.h2`
   margin-right: 5px;
-  font-size: 12px;
+  font-size: 14px;
   color: black;
   display: flex;
   align-items: center;
   @media screen and (max-width: 796px) {
-    font-size: 10px;
+    font-size: 12px;
   }
 `;

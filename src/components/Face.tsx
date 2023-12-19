@@ -200,7 +200,7 @@ const Face = () => {
             <Icon>
               <AnimatePresence>
                 <MineRow key={"numberrow2"}>
-                  <MineBox>1</MineBox>
+                  <MineBox>2</MineBox>
                   <MineBox>
                     <Bomb
                       key={count + 100}
@@ -678,5 +678,5 @@ const path = {
 
 const hoverVar = {
   initial: { y: 0 },
-  hover: { y: -16 },
+  hover: { y: -16, boxShadow: "12px 16px 0 0 rgba(0,0,0,0.1)" },
 };

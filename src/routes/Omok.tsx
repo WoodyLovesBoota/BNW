@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { styled, keyframes } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateRight, faLeftLong, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "../assets/home.svg";
+import { ReactComponent as RestartIcon } from "../assets/restart.svg";
 
 const Omok = () => {
   const [white, setWhite] = useState<{ row: number; col: number }[]>([]);
@@ -88,12 +88,18 @@ const Omok = () => {
 
   const onBoxClick = (row: number, col: number) => {
     if (isWhite) {
-      if (!white.some((e) => e.row === row && e.col === col) && !black.some((e) => e.row === row && e.col === col)) {
+      if (
+        !white.some((e) => e.row === row && e.col === col) &&
+        !black.some((e) => e.row === row && e.col === col)
+      ) {
         setWhite((prev) => [...prev, { row: row, col: col }]);
         setIsWhite(false);
       }
     } else {
-      if (!white.some((e) => e.row === row && e.col === col) && !black.some((e) => e.row === row && e.col === col)) {
+      if (
+        !white.some((e) => e.row === row && e.col === col) &&
+        !black.some((e) => e.row === row && e.col === col)
+      ) {
         setBlack((prev) => [...prev, { row: row, col: col }]);
         setIsWhite(true);
       }
@@ -189,19 +195,34 @@ const Omok = () => {
     <Wrapper>
       {isFinish ? (
         <Result>
-          <ResultTitle>{winner === 1 ? "BLUE WIN" : "RED WIN"}</ResultTitle>
-          <ResultIcon onClick={onRestartClick}>
-            <FontAwesomeIcon icon={faArrowRotateRight} />
-          </ResultIcon>
+          <ResultTitle isBlue={winner === 1}>
+            {winner === 1 ? "Yellow Win :)" : "Blue Win :)"}
+          </ResultTitle>
+          <ResultIcons>
+            <ResultIcon onClick={onRestartClick}>
+              <RestartIcon width={"32px"} />
+            </ResultIcon>
+            <ResultIconHome onClick={onHomeClick}>
+              <HomeIcon width={"32px"} />
+            </ResultIconHome>
+          </ResultIcons>
         </Result>
       ) : null}
+      <Icons>
+        <Icon onClick={onHomeClick}>HOME</Icon>
+        <RightIcons>
+          <Icon onClick={onRestartClick}>RESTART</Icon>
+          <Icon onClick={onGoBackClick}>BACK</Icon>
+        </RightIcons>
+      </Icons>
       <Board>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22].map((row) => (
+        <CoverTop />
+        <CoverBottom />
+        <CoverLeft />
+        <CoverRight />
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((row) => (
           <Row key={row}>
-            {[
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-              30, 31, 32, 33, 34, 35,
-            ].map((cell) =>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((cell) =>
               white.some((e) => e.row === row && e.col === cell) ? (
                 <Cell key={cell} loc={[row, cell]} onClick={() => onBoxClick(row, cell)}>
                   <Vertical />
@@ -224,17 +245,6 @@ const Omok = () => {
           </Row>
         ))}
       </Board>
-      <Icons>
-        <Icon onClick={onHomeClick}>
-          <FontAwesomeIcon icon={faHouse} />
-        </Icon>
-        <Icon onClick={onRestartClick}>
-          <FontAwesomeIcon icon={faArrowRotateRight} />
-        </Icon>
-        <Icon onClick={onGoBackClick}>
-          <FontAwesomeIcon icon={faLeftLong} />
-        </Icon>
-      </Icons>
     </Wrapper>
   );
 };
@@ -242,28 +252,94 @@ export default Omok;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 5% 8%;
-  background-color: #141414;
+  flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100vh;
-  @media screen and (max-width: 899px) {
-    flex-direction: column-reverse;
-    justify-content: flex-end;
-    width: 1500px;
-    padding: 5%;
-    overflow-x: scroll;
+  padding: 46px 0;
+`;
+
+const Icons = styled.div`
+  display: flex;
+  align-items: center;
+  width: 585px;
+  margin-bottom: 45px;
+`;
+
+const RightIcons = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+`;
+
+const Icon = styled.h2`
+  font-family: "Upheaval TT (BRK)";
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 14px;
+  height: 36px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  margin: 0 10px;
+  &:hover {
+    background-color: #e5e5e5;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+  &:active {
+    background-color: #00000011;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
 
+const CoverTop = styled.div`
+  background-color: #d2d2d2;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 22px;
+  z-index: 2;
+`;
+
+const CoverBottom = styled.div`
+  background-color: #d2d2d2;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 19px;
+  z-index: 2;
+`;
+
+const CoverLeft = styled.div`
+  background-color: #d2d2d2;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 20px;
+  z-index: 2;
+`;
+
+const CoverRight = styled.div`
+  background-color: #d2d2d2;
+  position: absolute;
+  right: 0px;
+  width: 17px;
+  height: 100%;
+  z-index: 2;
+`;
+
 const Board = styled.div`
-  width: 90%;
+  width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  @media screen and (max-width: 899px) {
-    align-items: flex-start;
-  }
+  align-items: flex-start;
+  position: relative;
 `;
 
 const Row = styled.div`
@@ -271,14 +347,11 @@ const Row = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  @media screen and (max-width: 899px) {
-    justify-content: flex-start;
-  }
 `;
 
 const Cell = styled.div<{ loc: number[] }>`
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 43px;
+  height: 43px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -286,8 +359,8 @@ const Cell = styled.div<{ loc: number[] }>`
 `;
 
 const Vertical = styled.div`
-  background-color: rgba(255, 255, 255, 0.6);
-  width: 0.0625rem;
+  background-color: #e6e6e6;
+  width: 3px;
   height: 100%;
   position: absolute;
   left: 50%;
@@ -295,28 +368,32 @@ const Vertical = styled.div`
 `;
 
 const Horizen = styled.div`
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: #e6e6e6;
   width: 100%;
-  height: 0.0625rem;
+  height: 3px;
   position: absolute;
   top: 50%;
   z-index: 1;
 `;
 
 const White = styled.div`
-  background-color: #87cefa;
-  width: 1.875rem;
-  height: 1.875rem;
-  border-radius: 0.9375rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
   z-index: 2;
+  background: url("./stoneWhite.png");
+  background-position: center center;
+  background-size: cover;
 `;
 
 const Black = styled.div`
-  background-color: #f7aea6;
-  width: 1.875rem;
-  height: 1.875rem;
-  border-radius: 0.9375rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
   z-index: 2;
+  background: url("./stoneBlack.png");
+  background-position: center center;
+  background-size: cover;
 `;
 
 const Result = styled.div`
@@ -325,56 +402,44 @@ const Result = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5%;
+  justify-content: center;
 `;
 
-const ResultTitle = styled.h2`
-  color: white;
+const ResultTitle = styled.h2<{ isBlue: boolean }>`
+  color: ${(props) => (!props.isBlue ? "#00E0FF" : "#D9FF00")};
   font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  padding-bottom: 1.875rem;
+  font-size: 32px;
+  letter-spacing: 2px;
+  padding-bottom: 56px;
 `;
 
 const rotationAni = keyframes`
   0% {transform: rotate(0deg)};
-  100% {transform: rotate(360deg)};
+  100% {transform: rotate(-360deg)};
+`;
+
+const ResultIcons = styled.div`
+  display: flex;
 `;
 
 const ResultIcon = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  margin-bottom: 1.875rem;
+  font-size: 32px;
   cursor: pointer;
   animation: ${rotationAni} 3s linear infinite;
+  margin: 0 12px;
 `;
 
-const Icons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3.125rem;
-  @media screen and (max-width: 899px) {
-    flex-direction: row;
-    margin-bottom: 10px;
-    margin-top: 0;
-  }
-`;
-
-const Icon = styled.span`
+const ResultIconHome = styled.span`
   color: white;
   font-weight: 500;
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
+  font-size: 32px;
   cursor: pointer;
-  @media screen and (max-width: 899px) {
-    margin-right: 1.25rem;
-  }
+  margin: 0 12px;
 `;
