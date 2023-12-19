@@ -42,13 +42,13 @@ const FourtyNine = () => {
 
   useEffect(() => {
     let temp = [];
-    for (let i = 1; i < 50; i++) temp.push(i);
+    for (let i = 1; i < 26; i++) temp.push(i);
     temp.sort(() => Math.random() - 0.5);
     setArr(temp);
   }, []);
 
   useEffect(() => {
-    if (current === 50) {
+    if (current === 26) {
       setIsStart(false);
       setRes(time);
       setCurrent((prev) => prev + 1);
@@ -68,7 +68,7 @@ const FourtyNine = () => {
 
   return (
     <Wrapper>
-      {current < 50 ? (
+      {current < 26 ? (
         <>
           <Header>
             <Timer>
@@ -79,7 +79,9 @@ const FourtyNine = () => {
               </Minute>
               :
               <Second>
-                {Math.floor(time / 100) % 60 < 10 ? "0" + (Math.floor(time / 100) % 60) : Math.floor(time / 100) % 60}
+                {Math.floor(time / 100) % 60 < 10
+                  ? "0" + (Math.floor(time / 100) % 60)
+                  : Math.floor(time / 100) % 60}
               </Second>{" "}
               .<MilSec>{time % 100 < 10 ? "0" + (time % 100) : time % 100}</MilSec>{" "}
             </Timer>
@@ -89,12 +91,12 @@ const FourtyNine = () => {
             </Buttons>
           </Header>
           <Board>
-            {[0, 1, 2, 3, 4, 5, 6].map((row) => (
+            {[0, 1, 2, 3, 4].map((row) => (
               <Row key={row}>
                 <AnimatePresence>
-                  {[0, 1, 2, 3, 4, 5, 6].map((col) =>
+                  {[0, 1, 2, 3, 4].map((col) =>
                     isStart ? (
-                      arr[row * 7 + col] < current ? (
+                      arr[row * 5 + col] < current ? (
                         <Cover variants={coverVar} initial="initial" animate="animate" key={col} />
                       ) : (
                         <Cell
@@ -104,10 +106,10 @@ const FourtyNine = () => {
                           exit={"exit"}
                           key={col}
                           onClick={() => {
-                            onNumberClick(arr[row * 7 + col]);
+                            onNumberClick(arr[row * 5 + col]);
                           }}
                         >
-                          {arr[row * 7 + col]}
+                          {arr[row * 5 + col]}
                         </Cell>
                       )
                     ) : (
@@ -130,7 +132,9 @@ const FourtyNine = () => {
             </ResultMinute>
             :
             <ResultSecond>
-              {Math.floor(res / 100) % 60 < 10 ? "0" + (Math.floor(res / 100) % 60) : Math.floor(res / 100) % 60}
+              {Math.floor(res / 100) % 60 < 10
+                ? "0" + (Math.floor(res / 100) % 60)
+                : Math.floor(res / 100) % 60}
             </ResultSecond>{" "}
             .<ResultMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResultMilSec>{" "}
           </ResultTime>
@@ -186,7 +190,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-  width: 41.25rem;
+  width: 660px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -196,38 +200,38 @@ const Timer = styled.div`
   color: white;
   display: flex;
   align-items: flex-end;
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 500;
 `;
 
 const Minute = styled.h2`
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const Second = styled.h2`
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const MilSec = styled.h2`
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const Button = styled.button`
   background-color: white;
   color: black;
   border: none;
-  padding: 1.25rem 1.875rem;
-  font-size: 1rem;
-  border-radius: 0.9375rem;
-  margin-bottom: 1.25rem;
+  padding: 20px 30px;
+  font-size: 16px;
+  border-radius: 15px;
+  margin-bottom: 20px;
   cursor: pointer;
-  margin-left: 0.9375rem;
+  margin-left: 15px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -243,48 +247,48 @@ const Board = styled.div``;
 const Row = styled.div`
   display: flex;
   align-items: center;
-  height: 5.625rem;
-  margin-bottom: 0.3125rem;
+  height: 90px;
+  margin-bottom: 5px;
 `;
 
 const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5.625rem;
+  width: 90px;
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 600;
   background-color: rgba(170, 170, 170, 0.2);
   color: white;
-  margin-right: 0.3125rem;
-  border-radius: 0.625rem;
+  margin-right: 5px;
+  border-radius: 10px;
   cursor: pointer;
 `;
 
 const Cover = styled(motion.div)`
-  width: 5.625rem;
+  width: 90px;
   height: 100%;
   background-color: #202020;
-  margin-right: 0.3125rem;
-  border-radius: 0.625rem;
+  margin-right: 5px;
+  border-radius: 10px;
 `;
 
 const HardCover = styled(motion.div)`
-  width: 5.625rem;
+  width: 90px;
   height: 100%;
   background-color: #202020;
-  margin-right: 0.3125rem;
-  border-radius: 0.625rem;
+  margin-right: 5px;
+  border-radius: 10px;
 `;
 
 const Result = styled(motion.div)``;
 
 const ResultTitle = styled.h2`
-  font-size: 1.875rem;
+  font-size: 30px;
   color: white;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 40px;
   font-weight: 500;
 `;
 
@@ -292,48 +296,48 @@ const ResultTime = styled.div`
   color: white;
   display: flex;
   align-items: flex-end;
-  font-size: 2.25rem;
+  font-size: 36px;
   font-weight: 500;
-  margin-bottom: 3.125rem;
+  margin-bottom: 50px;
 `;
 
 const Icon = styled(motion.span)`
-  margin-right: 0.625rem;
+  margin-right: 10px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 16px;
 `;
 
 const ResultMinute = styled.h2`
-  font-size: 4.5rem;
+  font-size: 72px;
   font-weight: 500;
-  margin: 0 1.875rem;
+  margin: 0 30px;
 `;
 
 const ResultSecond = styled.h2`
-  font-size: 4.5rem;
+  font-size: 72px;
   font-weight: 500;
-  margin: 0 1.875rem;
+  margin: 0 30px;
 `;
 
 const ResultMilSec = styled.h2`
-  font-size: 2.25rem;
+  font-size: 36px;
   font-weight: 500;
-  margin: 0 1.875rem;
+  margin: 0 30px;
 `;
 
 const ResultList = styled.div`
-  margin-top: 3.125rem;
+  margin-top: 50px;
 `;
 
 const ResultItem = styled.div`
   color: white;
   display: flex;
   background-color: rgba(58, 58, 58, 0.5);
-  padding: 1.25rem;
-  border-radius: 0.9375rem;
-  margin-bottom: 1.25rem;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
   align-items: flex-end;
-  box-shadow: 0 0 0.9375rem 0 rgba(156, 156, 156, 0.3);
+  box-shadow: 0 0 15px 0 rgba(156, 156, 156, 0.3);
   justify-content: center;
 `;
 
@@ -346,10 +350,10 @@ const ResButton = styled(motion.button)`
   background-color: white;
   color: black;
   border: none;
-  padding: 1.25rem 3.125rem;
-  font-size: 1.125rem;
-  border-radius: 0.9375rem;
-  margin-right: 1.25rem;
+  padding: 20px 50px;
+  font-size: 18px;
+  border-radius: 15px;
+  margin-right: 20px;
   font-weight: 500;
   cursor: pointer;
 
@@ -359,27 +363,27 @@ const ResButton = styled(motion.button)`
 `;
 
 const Rank = styled.h2`
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const MinuteRes = styled.h2`
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const SecondRes = styled.h2`
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const MilSecRes = styled.h2`
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
-  margin: 0 0.9375rem;
+  margin: 0 15px;
 `;
 
 const buttonVar = {

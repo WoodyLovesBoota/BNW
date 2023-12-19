@@ -36,7 +36,17 @@ export const isFinishState = atom<STATUS>({
   default: STATUS.NOT_FINISHED,
 });
 
-export const historyState = atom({
+export const historyState = atom<{ green: string[]; yellow: string[]; gray: string[] }>({
   key: "history",
-  default: [""],
+  default: { green: [""], yellow: [""], gray: [""] },
+});
+
+export const wordleStateState = atom<number>({
+  key: "wordleCurrentStage",
+  default: 0,
+});
+
+export const wordleClickState = atom<number>({
+  key: "wordleClickState",
+  default: 0,
 });

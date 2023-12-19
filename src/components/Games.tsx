@@ -2,7 +2,12 @@ import { styled } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { faArrowRotateRight, faHouse, faCertificate, faFlag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRotateRight,
+  faHouse,
+  faCertificate,
+  faFlag,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Games = () => {
@@ -45,22 +50,40 @@ const Games = () => {
           <br />
           BY YANG
         </HeaderTitle>
-        <HeaderSubtitle>양태욱이 만든 다양한 종류의 미니게임이 당신을 기다리고있어요.</HeaderSubtitle>
+        <HeaderSubtitle>
+          양태욱이 만든 다양한 종류의 미니게임이 당신을 기다리고있어요.
+        </HeaderSubtitle>
       </Header>
       <Board>
         <GameBox onClick={onFourtyNineClick}>
           <Icon>
             <AnimatePresence mode="wait">
               <NumberRow key={"Row" + count}>
-                <NumberBox key={"four" + count + 100} variants={number3Var} animate="animate" exit={"exit"}>
+                <NumberBox
+                  key={"four" + count + 100}
+                  variants={number3Var}
+                  animate="animate"
+                  exit={"exit"}
+                >
                   3
                 </NumberBox>
-                <NumberBox key={"four" + count + 200} variants={number2Var} animate="animate" exit={"exit"}>
+                <NumberBox
+                  key={"four" + count + 200}
+                  variants={number2Var}
+                  animate="animate"
+                  exit={"exit"}
+                >
                   2
                 </NumberBox>
               </NumberRow>
               <NumberRow key={"Row" + count + 10}>
-                <NumberBox key={"four" + count} variants={number1Var} initial="initial" animate="animate" exit={"exit"}>
+                <NumberBox
+                  key={"four" + count}
+                  variants={number1Var}
+                  initial="initial"
+                  animate="animate"
+                  exit={"exit"}
+                >
                   1
                 </NumberBox>
                 <NumberBox
@@ -75,8 +98,8 @@ const Games = () => {
               </NumberRow>
             </AnimatePresence>
           </Icon>
-          <Title>49</Title>
-          <Description>1부터 49까지 가능한 빠르게 클릭해주세요.</Description>
+          <Title>25</Title>
+          <Description>1부터 25까지 가능한 빠르게 클릭해주세요.</Description>
         </GameBox>
         <GameBox onClick={onOmokClick}>
           <Icon>
@@ -85,7 +108,13 @@ const Games = () => {
                 <BoardCell>
                   <Vertical />
                   <Horizen />
-                  <White key={count + 100} variants={whiteVar} initial="initial" animate="animate" exit={"exit"} />
+                  <White
+                    key={count + 100}
+                    variants={whiteVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  />
                 </BoardCell>
                 <BoardCell>
                   <Vertical />
@@ -100,7 +129,13 @@ const Games = () => {
                 <BoardCell>
                   <Vertical />
                   <Horizen />
-                  <Black key={count + 5} variants={blackVar} initial="initial" animate="animate" exit={"exit"} />
+                  <Black
+                    key={count + 5}
+                    variants={blackVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  />
                 </BoardCell>
               </BoardRow>
             </AnimatePresence>
@@ -119,7 +154,13 @@ const Games = () => {
                   animate="boxAnimate"
                   exit={"boxExit"}
                 >
-                  <MatchNum key={count + 200} variants={matchVar} initial="initial" animate="animate" exit={"exit"}>
+                  <MatchNum
+                    key={count + 200}
+                    variants={matchVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     3
                   </MatchNum>
                 </MatchBox>
@@ -134,7 +175,13 @@ const Games = () => {
                   animate="boxAnimate"
                   exit={"boxExit"}
                 >
-                  <MatchNum key={count + 4} variants={matchSecVar} initial="initial" animate="animate" exit={"exit"}>
+                  <MatchNum
+                    key={count + 4}
+                    variants={matchSecVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     3
                   </MatchNum>
                 </MatchBox>
@@ -150,14 +197,26 @@ const Games = () => {
               <MineRow key={"numberrow2"}>
                 <MineBox>1</MineBox>
                 <MineBox>
-                  <Bomb key={count + 100} variants={whiteVar} initial="initial" animate="animate" exit={"exit"}>
+                  <Bomb
+                    key={count + 100}
+                    variants={whiteVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     <FontAwesomeIcon icon={faCertificate} />
                   </Bomb>
                 </MineBox>
               </MineRow>
               <MineRow key={"numberrow3"}>
                 <MineBox>
-                  <FlagIcon key={count + 100} variants={blackVar} initial="initial" animate="animate" exit={"exit"}>
+                  <FlagIcon
+                    key={count + 100}
+                    variants={blackVar}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     <FontAwesomeIcon icon={faFlag} />
                   </FlagIcon>
                 </MineBox>
@@ -179,7 +238,13 @@ const Games = () => {
                   animate="boxAnimate"
                   exit={"boxExit"}
                 >
-                  <MatchNum key={count + 200} variants={word1Var} initial="initial" animate="animate" exit={"exit"}>
+                  <MatchNum
+                    key={count + 200}
+                    variants={word1Var}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     B
                   </MatchNum>
                 </MatchBox>
@@ -190,7 +255,13 @@ const Games = () => {
                   animate="boxAnimate"
                   exit={"boxExit"}
                 >
-                  <MatchNum key={count + 214} variants={word2Var} initial="initial" animate="animate" exit={"exit"}>
+                  <MatchNum
+                    key={count + 214}
+                    variants={word2Var}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     N
                   </MatchNum>
                 </MatchBox>
@@ -201,7 +272,13 @@ const Games = () => {
                   animate="boxAnimate"
                   exit={"boxExit"}
                 >
-                  <MatchNum key={count + 234} variants={word3Var} initial="initial" animate="animate" exit={"exit"}>
+                  <MatchNum
+                    key={count + 234}
+                    variants={word3Var}
+                    initial="initial"
+                    animate="animate"
+                    exit={"exit"}
+                  >
                     W
                   </MatchNum>
                 </MatchBox>

@@ -2,14 +2,17 @@ import { styled } from "styled-components";
 import axios from "axios";
 import { useEffect } from "react";
 import Word from "../components/Word";
-import { answerState, isFinishState } from "../atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { answerState, isFinishState, wordleClickState, wordleStateState } from "../atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ResultPage from "../components/ResultPage";
 import Keyboard from "../components/Keyboard";
+import { useNavigate } from "react-router-dom";
 
 function Wordle() {
   const setAnswer = useSetRecoilState(answerState);
   const isFinished = useRecoilValue(isFinishState);
+  const [current, setCurrent] = useRecoilState(wordleClickState);
+  const navigate = useNavigate();
 
   const getWord = async () => {
     const { data } = await axios("https://random-word-api.herokuapp.com/word?length=5");
@@ -20,13 +23,20 @@ function Wordle() {
     getWord();
   }, []);
 
-  const words = [1, 2, 3, 4, 5, 6, 7];
+  const onHomeClick = () => {
+    navigate("/");
+  };
+
+  const words = [1, 2, 3, 4, 5, 6];
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => setCurrent((prev) => prev + 1)}>
+      <Buttons>
+        <Button onClick={onHomeClick}>Home</Button>
+      </Buttons>
       <Container>
         {words.map((element) => {
-          return <Word key={element}></Word>;
+          return <Word key={element} id={element}></Word>;
         })}
         <Keyboard />
       </Container>
@@ -37,9 +47,7 @@ function Wordle() {
 
 export default Wordle;
 
-const Wrapper = styled.div`
-  background-color: #141414;
-`;
+const Wrapper = styled.div``;
 
 const Container = styled.div`
   margin: 0 auto;
@@ -48,3 +56,9 @@ const Container = styled.div`
   align-items: center;
   padding: 4%;
 `;
+
+const Buttons = styled.div`
+  display: flex;
+`;
+
+const Button = styled.button``;

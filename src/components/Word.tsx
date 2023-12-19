@@ -1,53 +1,125 @@
-import { answerState, STATUS, isFinishState, historyState } from "../atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  answerState,
+  STATUS,
+  isFinishState,
+  historyState,
+  wordleStateState,
+  wordleClickState,
+} from "../atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Letter from "./Letter";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
-const Word = () => {
+const Word = ({ id }: { id: number }) => {
   const answer = useRecoilValue(answerState);
-  const [colors, setColors] = useState(["", "", "", "", ""]);
   const setIsFinished = useSetRecoilState(isFinishState);
-  const setHistory = useSetRecoilState(historyState);
+  const [history, setHistory] = useRecoilState(historyState);
+  const [current, setCurrent] = useRecoilState(wordleStateState);
+  const [clicked, setClicked] = useRecoilState(wordleClickState);
+  const [trial, setTrial] = useState("");
+  const [green, setGreen] = useState<number[]>([]);
+  const [yellow, setYellow] = useState<number[]>([]);
+  const [gray, setGray] = useState<number[]>([]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    checkIsAnswer(event);
+  const { register, handleSubmit, getValues } = useForm<IForm>();
+  const { ref, ...rest } = register("keyword");
+
+  const onValid = () => {
+    answer
+      .toLowerCase()
+      .split("")
+      .forEach((e, i) => {
+        if (e === trial[i]) {
+          setGreen((prev) => [...prev, i]);
+          setHistory((prev) => {
+            let greens = [...prev["green"]];
+            return { ...prev, ["green"]: [...greens, e] };
+          });
+        } else if (answer.includes(trial[i])) {
+          setYellow((prev) => [...prev, i]);
+          setHistory((prev) => {
+            let yellows = [...prev["yellow"]];
+            return { ...prev, ["yellow"]: [...yellows, trial[i]] };
+          });
+        } else {
+          setGray((prev) => [...prev, i]);
+          setHistory((prev) => {
+            let grays = [...prev["gray"]];
+            return { ...prev, ["gray"]: [...grays, trial[i]] };
+          });
+        }
+      });
+    setCurrent((prev) => prev + 1);
   };
 
-  const checkIsAnswer = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    let checkArr = [];
-    let res = [];
-    let green = 0;
-    for (let i = 0; i < 5; i++) {
-      const currentValue = (event.currentTarget[i] as HTMLInputElement).value;
-      res.push(currentValue);
-      setHistory((prev) => [...prev, currentValue]);
-      if (res[i] === answer[i]) {
-        green++;
-        checkArr[i] = "G";
-      } else if (answer.includes(res[i])) {
-        checkArr[i] = "Y";
-      } else {
-        checkArr[i] = "B";
-      }
-    }
-    setColors(checkArr);
-    green === 5 && setIsFinished(STATUS.WIN);
-    (event.currentTarget.nextSibling?.firstChild as HTMLElement)?.focus();
-    event.currentTarget.nextSibling?.nodeName === "DIV" && green !== 5 && setIsFinished(STATUS.LOSE);
+  const handleKeyDown = () => {
+    setTrial(getValues("keyword").toLowerCase());
   };
+
+  useEffect(() => {
+    if (id === current + 1) inputRef.current && inputRef.current.focus();
+    if (green.length === 5) setIsFinished(STATUS.WIN);
+    else if (current > 5) setIsFinished(STATUS.LOSE);
+  }, [current, clicked]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      {colors.map((color, index) => (
-        <Letter
-          key={index}
-          bgcolor={color === "G" ? "#539165" : color === "Y" ? "#F7C04A" : color === "B" ? "#2b2b2b" : "#535353"}
+    <Wrapper>
+      <Letters>
+        {[0, 1, 2, 3, 4].map((index) => (
+          <Letter
+            key={index}
+            text={trial[index]}
+            bgcolor={
+              green.includes(index)
+                ? "#539165"
+                : yellow.includes(index)
+                ? "#F7C04A"
+                : gray.includes(index)
+                ? "#2b2b2b"
+                : "#535353"
+            }
+          />
+        ))}
+      </Letters>
+      {history.green} {history.yellow} {history.gray}
+      <form onSubmit={handleSubmit(onValid)}>
+        <Input
+          {...rest}
+          ref={(e) => {
+            ref(e);
+            inputRef.current = e;
+          }}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyDown}
+          maxLength={5}
+          minLength={5}
+          autoComplete="off"
+          required={true}
         />
-      ))}
-      <button type="submit" style={{ display: "none" }} />
-    </form>
+        <button type="submit" style={{ display: "none" }} />
+      </form>
+    </Wrapper>
   );
 };
 
 export default Word;
+
+const Wrapper = styled.div``;
+
+const Letters = styled.div`
+  display: flex;
+`;
+
+const Input = styled.input`
+  background-color: transparent;
+  border: transparent;
+  color: transparent;
+  outline: none;
+`;
+
+interface IForm {
+  keyword: string;
+}

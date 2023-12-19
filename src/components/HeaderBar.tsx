@@ -43,8 +43,8 @@ const HeaderBar = () => {
           .concat(words)
           .concat(words)
           .concat(words)
-          .map((e) => (
-            <Block>{e}</Block>
+          .map((e, i) => (
+            <Block key={e + i}>{e}</Block>
           ))}
       </Bar>
     </Wrapper>

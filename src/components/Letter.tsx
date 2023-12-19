@@ -1,29 +1,24 @@
+import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
-const Letter = ({ bgcolor }: IColor) => {
-  const moveCursor = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      (e.currentTarget.previousSibling as HTMLElement)?.focus();
-    } else if (e.currentTarget.value.length === 1) {
-      (e.currentTarget.nextSibling as HTMLElement)?.focus();
-    }
-  };
-  return <Input maxLength={1} required={true} bgcolor={bgcolor} onKeyUp={moveCursor}></Input>;
+const Letter = ({ bgcolor, text }: IColor) => {
+  return (
+    <Wrapper variants={alphaVar} initial="initial" animate="animate" bgcolor={bgcolor} text={text}>
+      <Alpha>{text}</Alpha>
+    </Wrapper>
+  );
 };
 
 export default Letter;
 
-const Input = styled.input<IColor>`
-  width: 4.375rem;
-  height: 4.375rem;
-  border-radius: 1.125rem;
-  margin: 0.3125rem 0.1875rem;
+const Wrapper = styled(motion.div)<IColor>`
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  margin: 5px 3px;
   border: none;
   text-align: center;
   vertical-align: center;
-  font-size: 3.5rem;
-  font-weight: 600;
-  color: white;
   text-transform: uppercase;
   transition: background-color 1s ease-in-out;
   caret-color: transparent;
@@ -33,6 +28,18 @@ const Input = styled.input<IColor>`
   }
 `;
 
+const Alpha = styled(motion.h2)`
+  font-size: 56px;
+  font-weight: 600;
+  color: white;
+`;
+
+const alphaVar = {
+  initial: { scale: 1.1 },
+  animate: { scale: 1 },
+};
+
 interface IColor {
   bgcolor: string;
+  text: string;
 }

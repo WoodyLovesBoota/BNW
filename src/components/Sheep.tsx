@@ -1,21 +1,9 @@
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Lottie from "react-lottie-player";
 import animationData from "../animationData.json";
 
 const Sheep = () => {
-  const [sheepCount, setSheepCount] = useState(1);
-
-  useEffect(() => {
-    const timer2 = setInterval(() => {
-      setSheepCount(sheepCount + 1);
-    }, 20000);
-
-    return () => {
-      clearInterval(timer2);
-    };
-  });
   return (
     <SheepLoad>
       <SheepBox variants={sheepVar} initial="initial" animate="animate">

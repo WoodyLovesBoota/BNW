@@ -5,39 +5,68 @@ import { historyState } from "../atoms";
 const Keyboard = () => {
   const history = useRecoilValue(historyState);
   const firstRow = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const secondRow = ["A", "S", "D", "F", "G", "H", "I", "J", "K", "L"];
+  const secondRow = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const thirdRow = ["Z", "X", "C", "V", "B", "N", "M"];
 
-  const historySet = Array.from(new Set(history).values());
+  const historyGreenSet = [...new Set(...[history.green])];
+  const historyYellowSet = [...new Set(...[history.yellow])];
+  const historyGraySet = [...new Set(...[history.gray])];
 
   return (
     <Container>
       <Row>
         {firstRow.map((element) => (
-          <Cell key={element} bgcolor={historySet.includes(element.toLowerCase()) ? "gray" : "#c4cbdd"}>
+          <Cell
+            key={element}
+            bgcolor={
+              historyGreenSet.includes(element.toLowerCase())
+                ? "green"
+                : historyYellowSet.includes(element.toLowerCase())
+                ? "yellow"
+                : historyGraySet.includes(element.toLowerCase())
+                ? "gray"
+                : "#c4cbdd"
+            }
+          >
             {element}
           </Cell>
         ))}
       </Row>
       <Row>
         {secondRow.map((element) => (
-          <Cell key={element} bgcolor={historySet.includes(element.toLowerCase()) ? "gray" : "#c4cbdd"}>
+          <Cell
+            key={element}
+            bgcolor={
+              historyGreenSet.includes(element.toLowerCase())
+                ? "green"
+                : historyYellowSet.includes(element.toLowerCase())
+                ? "yellow"
+                : historyGraySet.includes(element.toLowerCase())
+                ? "gray"
+                : "#c4cbdd"
+            }
+          >
             {element}
           </Cell>
         ))}
       </Row>
       <Row>
-        <Cell bgcolor={"#c4cbdd"} style={{ width: "7vw" }}>
-          backspace
-        </Cell>
         {thirdRow.map((element) => (
-          <Cell key={element} bgcolor={historySet.includes(element.toLowerCase()) ? "gray" : "#c4cbdd"}>
+          <Cell
+            key={element}
+            bgcolor={
+              historyGreenSet.includes(element.toLowerCase())
+                ? "green"
+                : historyYellowSet.includes(element.toLowerCase())
+                ? "yellow"
+                : historyGraySet.includes(element.toLowerCase())
+                ? "gray"
+                : "#c4cbdd"
+            }
+          >
             {element}
           </Cell>
         ))}
-        <Cell bgcolor={"#c4cbdd"} style={{ width: "7vw" }}>
-          Enter
-        </Cell>
       </Row>
     </Container>
   );

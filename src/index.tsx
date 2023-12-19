@@ -31,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.2;
     color: #262626;
     word-break: keep-all;
-    cursor: url("/cursor.png") 20 20, auto;
 
     @media screen and (max-width: 1400px) {
       font-size: 14px;
