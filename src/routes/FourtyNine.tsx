@@ -4,13 +4,14 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { fourtynineResState } from "../atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateRight, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRotateRight, faHouse, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const FourtyNine = () => {
   const [arr, setArr] = useState<number[]>([]);
   const [current, setCurrent] = useState(1);
   const [isStart, setIsStart] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const [time, setTime] = useState(0);
   const [res, setRes] = useState(0);
   const [totalRes, setTotalRes] = useRecoilState(fourtynineResState);
@@ -23,7 +24,12 @@ const FourtyNine = () => {
   };
 
   const onStartClick = () => {
-    setIsStart(true);
+    if (isStart) {
+      window.location.reload();
+      setCurrent(1);
+      setIsStart(false);
+      setTime(0);
+    } else setIsStart(true);
   };
 
   const onRestartClick = () => {
@@ -51,260 +57,362 @@ const FourtyNine = () => {
     if (current === 26) {
       setIsStart(false);
       setRes(time);
-      setCurrent((prev) => prev + 1);
+      setTime(time);
       setTotalRes((prev) => [...prev, time].sort((a, b) => a - b));
     }
   }, [current]);
 
   useEffect(() => {
-    if (isStart) {
-      setInterval(() => {
-        setTime((prev) => prev + 1);
-      }, 10);
-    } else {
-      setTime(0);
-    }
+    setTime(0);
+
+    let interval = setInterval(() => {
+      setTime((prev) => prev + 1);
+    }, 10);
+
+    !isStart && clearInterval(interval);
   }, [isStart]);
 
   return (
-    <Wrapper>
-      {current < 26 ? (
-        <>
-          <Header>
+    <Wrapper isStart={isStart}>
+      <Container>
+        <Buttons>
+          <Button onClick={onHomeClick}>Home</Button>
+          <Start isStart={isStart} onClick={onStartClick}>
+            {isStart ? "RESTART" : "START"}
+          </Start>
+        </Buttons>
+        <Header>
+          {isStart ? (
             <Timer>
               <Minute>
                 {Math.floor(Math.floor(time / 100) / 60) < 10
                   ? "0" + Math.floor(Math.floor(time / 100) / 60)
                   : Math.floor(Math.floor(time / 100) / 60)}
               </Minute>
-              :
+              <Slash>:</Slash>
               <Second>
                 {Math.floor(time / 100) % 60 < 10
                   ? "0" + (Math.floor(time / 100) % 60)
                   : Math.floor(time / 100) % 60}
               </Second>{" "}
-              .<MilSec>{time % 100 < 10 ? "0" + (time % 100) : time % 100}</MilSec>{" "}
+              <Divider>.</Divider>
+              <MilSec>{time % 100 < 10 ? "0" + (time % 100) : time % 100}</MilSec>{" "}
             </Timer>
-            <Buttons>
-              <Button onClick={onStartClick}>Start</Button>
-              <Button onClick={onHomeClick}>Home</Button>
-            </Buttons>
-          </Header>
-          <Board>
-            {[0, 1, 2, 3, 4].map((row) => (
-              <Row key={row}>
-                <AnimatePresence>
-                  {[0, 1, 2, 3, 4].map((col) =>
-                    isStart ? (
-                      arr[row * 5 + col] < current ? (
-                        <Cover variants={coverVar} initial="initial" animate="animate" key={col} />
-                      ) : (
-                        <Cell
-                          variants={buttonVar}
-                          whileTap={"click"}
-                          animate="animate"
-                          exit={"exit"}
-                          key={col}
-                          onClick={() => {
-                            onNumberClick(arr[row * 5 + col]);
-                          }}
-                        >
-                          {arr[row * 5 + col]}
-                        </Cell>
-                      )
+          ) : (
+            <Timer>
+              <Minute>{"00"}</Minute>
+              <Slash>:</Slash>
+              <Second>{"00"}</Second> <Divider>.</Divider>
+              <MilSec>{"00"}</MilSec>{" "}
+            </Timer>
+          )}
+        </Header>
+        <Board>
+          {[0, 1, 2, 3, 4].map((row) => (
+            <Row key={row}>
+              <AnimatePresence>
+                {[0, 1, 2, 3, 4].map((col) =>
+                  isStart ? (
+                    arr[row * 5 + col] < current ? (
+                      <Cover variants={coverVar} initial="initial" animate="animate" key={col} />
                     ) : (
-                      <HardCover key={col} />
+                      <Cell
+                        variants={buttonVar}
+                        whileTap={"click"}
+                        animate="animate"
+                        exit={"exit"}
+                        key={col}
+                        onClick={() => {
+                          onNumberClick(arr[row * 5 + col]);
+                        }}
+                      >
+                        {arr[row * 5 + col]}
+                      </Cell>
                     )
-                  )}
-                </AnimatePresence>
-              </Row>
-            ))}
-          </Board>
-        </>
-      ) : (
-        <Result variants={resultVar} initial="initial" animate="animate">
-          <ResultTitle>Your Record is</ResultTitle>
-          <ResultTime>
-            <ResultMinute>
-              {Math.floor(Math.floor(res / 100) / 60) < 10
-                ? "0" + Math.floor(Math.floor(res / 100) / 60)
-                : Math.floor(Math.floor(res / 100) / 60)}
-            </ResultMinute>
-            :
-            <ResultSecond>
-              {Math.floor(res / 100) % 60 < 10
-                ? "0" + (Math.floor(res / 100) % 60)
-                : Math.floor(res / 100) % 60}
-            </ResultSecond>{" "}
-            .<ResultMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResultMilSec>{" "}
-          </ResultTime>
-          <Buttons>
-            <ResButton onClick={onRestartClick}>
-              <Icon>
-                <FontAwesomeIcon icon={faArrowRotateRight} />
-              </Icon>
-              Restart
-            </ResButton>
-            <ResButton onClick={onHomeClick}>
-              <Icon>
-                <FontAwesomeIcon icon={faHouse} />
-              </Icon>
-              Main
-            </ResButton>
-          </Buttons>
-          <ResultList>
-            {totalRes.map(
-              (res, ind) =>
-                ind < 5 && (
-                  <ResultItem>
-                    <Rank>{ind + 1}. </Rank>
-                    <MinuteRes>
-                      {Math.floor(Math.floor(res / 100) / 60) < 10
-                        ? "0" + Math.floor(Math.floor(res / 100) / 60)
-                        : Math.floor(Math.floor(res / 100) / 60)}
-                    </MinuteRes>
-                    :
-                    <SecondRes>
-                      {Math.floor(res / 100) % 60 < 10
-                        ? "0" + (Math.floor(res / 100) % 60)
-                        : Math.floor(res / 100) % 60}
-                    </SecondRes>{" "}
-                    .<MilSecRes>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</MilSecRes>{" "}
-                  </ResultItem>
-                )
-            )}
-          </ResultList>
-        </Result>
-      )}
+                  ) : (
+                    <HardCover key={col} />
+                  )
+                )}
+              </AnimatePresence>
+            </Row>
+          ))}
+        </Board>
+        {!isStart &&
+          (current > 25 ? (
+            <Result variants={resultVar} initial="initial" animate="animate">
+              <ResultTitle>Your Record is</ResultTitle>
+              <ResultTime>
+                <ResultMinute>
+                  {Math.floor(Math.floor(res / 100) / 60) < 10
+                    ? "0" + Math.floor(Math.floor(res / 100) / 60)
+                    : Math.floor(Math.floor(res / 100) / 60)}
+                </ResultMinute>
+                :
+                <ResultSecond>
+                  {Math.floor(res / 100) % 60 < 10
+                    ? "0" + (Math.floor(res / 100) % 60)
+                    : Math.floor(res / 100) % 60}
+                </ResultSecond>{" "}
+                .<ResultMilSec>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</ResultMilSec>{" "}
+              </ResultTime>
+              <ResultButtons>
+                <ResButton onClick={onRestartClick}>
+                  <Icon>
+                    <FontAwesomeIcon icon={faRotateLeft} />
+                  </Icon>
+                </ResButton>
+                <ResButton onClick={onHomeClick}>
+                  <Icon>
+                    <FontAwesomeIcon icon={faHouse} />
+                  </Icon>
+                </ResButton>
+              </ResultButtons>
+              {/* <ResultList>
+              {totalRes.map(
+                (res, ind) =>
+                  ind < 5 && (
+                    <ResultItem>
+                      <Rank>{ind + 1}. </Rank>
+                      <MinuteRes>
+                        {Math.floor(Math.floor(res / 100) / 60) < 10
+                          ? "0" + Math.floor(Math.floor(res / 100) / 60)
+                          : Math.floor(Math.floor(res / 100) / 60)}
+                      </MinuteRes>
+                      :
+                      <SecondRes>
+                        {Math.floor(res / 100) % 60 < 10
+                          ? "0" + (Math.floor(res / 100) % 60)
+                          : Math.floor(res / 100) % 60}
+                      </SecondRes>{" "}
+                      .<MilSecRes>{res % 100 < 10 ? "0" + (res % 100) : res % 100}</MilSecRes>{" "}
+                    </ResultItem>
+                  )
+              )}
+            </ResultList> */}
+            </Result>
+          ) : (
+            <Shadow />
+          ))}
+      </Container>
     </Wrapper>
   );
 };
 export default FourtyNine;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isStart: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8%;
-  background-color: #141414;
+  padding: 40px;
+`;
+
+const Shadow = styled.div`
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+
+const Container = styled.div`
+  width: 600px;
+`;
+
+const Buttons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
 `;
 
 const Header = styled.div`
-  width: 660px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
 const Timer = styled.div`
-  color: white;
   display: flex;
   align-items: flex-end;
-  font-size: 18px;
+  font-size: 48px;
   font-weight: 500;
+  font-family: "Upheaval TT (BRK)";
+  margin-bottom: 40px;
 `;
 
 const Minute = styled.h2`
-  font-size: 48px;
+  font-size: 64px;
   font-weight: 500;
-  margin: 0 15px;
+  margin-right: 15px;
+  font-family: "Upheaval TT (BRK)";
 `;
 
 const Second = styled.h2`
-  font-size: 48px;
+  font-size: 64px;
   font-weight: 500;
   margin: 0 15px;
+  font-family: "Upheaval TT (BRK)";
 `;
 
 const MilSec = styled.h2`
-  font-size: 18px;
+  font-size: 48px;
   font-weight: 500;
   margin: 0 15px;
+  font-family: "Upheaval TT (BRK)";
+`;
+
+const Slash = styled.h2`
+  font-size: 64px;
+  font-weight: 500;
+  font-family: "Upheaval TT (BRK)";
+`;
+
+const Divider = styled.h2`
+  font-size: 64px;
+  font-weight: 800;
+  font-family: "Upheaval TT (BRK)";
 `;
 
 const Button = styled.button`
+  font-family: "Upheaval TT (BRK)";
   background-color: white;
-  color: black;
   border: none;
-  padding: 20px 30px;
-  font-size: 16px;
-  border-radius: 15px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-left: 15px;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  width: 81px;
+  height: 36px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #e5e5e5;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+  &:active {
+    background-color: #00000011;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
 
-const Board = styled.div``;
+const Start = styled.button<{ isStart: boolean }>`
+  font-family: "Upheaval TT (BRK)";
+  background-color: ${(props) => (props.isStart ? "white" : "#d9ff00")};
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  margin-left: 15px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  z-index: 2;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  &:hover {
+    background-color: ${(props) => (props.isStart ? "#e5e5e5" : "#d9ff00dd")};
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+  &:active {
+    background-color: ${(props) => (props.isStart ? "#00000011" : "#d9ff00bb")};
+
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+`;
+
+const Board = styled.div`
+  width: 100%;
+`;
 
 const Row = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  height: 90px;
-  margin-bottom: 5px;
+  height: 110px;
+  margin-bottom: 13px;
+  width: 100%;
 `;
 
 const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90px;
+  width: 110px;
   height: 100%;
-  font-size: 24px;
-  font-weight: 600;
-  background-color: rgba(170, 170, 170, 0.2);
-  color: white;
-  margin-right: 5px;
-  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  &:hover {
+    background-color: #e6e6e6;
+  }
+  &:active {
+    background-color: #d9d9d9;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
+  }
 `;
 
 const Cover = styled(motion.div)`
-  width: 90px;
+  width: 110px;
   height: 100%;
-  background-color: #202020;
-  margin-right: 5px;
-  border-radius: 10px;
+  background: #bfbfbf;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 8px;
 `;
 
 const HardCover = styled(motion.div)`
-  width: 90px;
+  width: 110px;
   height: 100%;
-  background-color: #202020;
+  background-color: #e6e6e6;
   margin-right: 5px;
   border-radius: 10px;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
 `;
 
-const Result = styled(motion.div)``;
+const Result = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const ResultTitle = styled.h2`
-  font-size: 30px;
-  color: white;
+  font-size: 32px;
   text-align: center;
-  margin-bottom: 40px;
   font-weight: 500;
+  color: white;
 `;
 
 const ResultTime = styled.div`
-  color: white;
   display: flex;
   align-items: flex-end;
   font-size: 36px;
   font-weight: 500;
-  margin-bottom: 50px;
+`;
+
+const ResultButtons = styled.div`
+  display: flex;
+  margin-top: 68px;
 `;
 
 const Icon = styled(motion.span)`
-  margin-right: 10px;
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 32px;
+  color: white;
+  margin: 0 12px;
 `;
 
 const ResultMinute = styled.h2`
@@ -341,25 +449,10 @@ const ResultItem = styled.div`
   justify-content: center;
 `;
 
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const ResButton = styled(motion.button)`
-  background-color: white;
-  color: black;
   border: none;
-  padding: 20px 50px;
-  font-size: 18px;
-  border-radius: 15px;
-  margin-right: 20px;
-  font-weight: 500;
   cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
+  background-color: transparent;
 `;
 
 const Rank = styled.h2`
@@ -389,7 +482,6 @@ const MilSecRes = styled.h2`
 const buttonVar = {
   initial: { scale: 0 },
   animate: { scale: 1 },
-  click: { scale: 0.8 },
 };
 
 const coverVar = {

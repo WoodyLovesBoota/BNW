@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     vertical-align: baseline;
     font-family: Galmuri14, "Noto sans KR", sans-serif;
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1;
     color: #262626;
     word-break: keep-all;
 
