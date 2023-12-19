@@ -28,16 +28,13 @@ const GlobalStyle = createGlobalStyle`
     vertical-align: baseline;
     font-family: Galmuri14, "Noto sans KR", sans-serif;
     font-weight: 300;
-    line-height: 1.2;
+    line-height: 1.5;
     color: #262626;
     word-break: keep-all;
 
-    @media screen and (max-width: 1400px) {
-      font-size: 14px;
-    }
-
-    @media screen and (max-width: 900px) {
-      font-size: 12px;
+ 
+    @media screen and (max-width: 796px) {
+      font-size: 9.6px;
     }
 
   }

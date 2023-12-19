@@ -65,6 +65,10 @@ const SheepLoad = styled.div`
 const SheepBox = styled(motion.div)`
   position: absolute;
   z-index: 1;
+  top: 0px;
+  @media screen and (max-width: 796px) {
+    top: 5px;
+  }
 `;
 
 const sheepVar = {

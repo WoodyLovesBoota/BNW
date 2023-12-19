@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const HeaderBar = () => {
-  const words = ["미니게임천국에", "오신", "것을", "환영합니다."];
+  const words = ["미니게임천국에", "오신", "것을", "환영합니다!"];
   return (
     <Wrapper>
       <Bar>
@@ -59,8 +59,8 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 30px;
   z-index: 1;
-  @media screen and (max-width: 900px) {
-    height: 20px;
+  @media screen and (max-width: 796px) {
+    height: 24px;
   }
 `;
 
@@ -86,12 +86,12 @@ const Bar = styled.div`
 `;
 
 const Block = styled.h2`
-  margin-right: 15px;
-  font-size: 14px;
+  margin-right: 5px;
+  font-size: 12px;
   color: black;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 900px) {
-    font-size: 12px;
+  @media screen and (max-width: 796px) {
+    font-size: 10px;
   }
 `;

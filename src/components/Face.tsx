@@ -19,17 +19,6 @@ const Face = () => {
   const [count, setCount] = useState(1);
   const [counter, setCounter] = useState(1);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCount(count + 1);
-    }, 2500);
-
-    return () => {
-      clearInterval(timer);
-    };
-  });
-
-  const [currentTile, setCurrentTile] = useState([0, 0]);
   const navigate = useNavigate();
 
   const onMatchClick = () => {
@@ -53,16 +42,24 @@ const Face = () => {
   };
 
   useEffect(() => {
+    const timer = setInterval(() => {
+      setCount(count + 1);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [count]);
+
+  useEffect(() => {
     const timer3 = setInterval(() => {
       setCounter(counter + 1);
     }, 2500);
     return () => clearInterval(timer3);
-  });
+  }, [counter]);
 
   return (
     <Wrapper>
       <HeaderBar />
       <Sheep />
+
       <Games>
         <Header>
           <HeaderTitle>
@@ -75,7 +72,7 @@ const Face = () => {
           </HeaderSubtitle>
         </Header>
         <Board>
-          <GameBox onClick={onFourtyNineClick}>
+          <GameBox variants={hoverVar} whileHover={"hover"} onClick={onFourtyNineClick}>
             <Icon>
               <AnimatePresence mode="wait">
                 <NumberRow key={"Row" + count}>
@@ -84,17 +81,13 @@ const Face = () => {
                     variants={number3Var}
                     animate="animate"
                     exit={"exit"}
-                  >
-                    3
-                  </NumberBox>
+                  ></NumberBox>
                   <NumberBox
                     key={"four" + count + 200}
                     variants={number2Var}
                     animate="animate"
                     exit={"exit"}
-                  >
-                    2
-                  </NumberBox>
+                  ></NumberBox>
                 </NumberRow>
                 <NumberRow key={"Row" + count + 10}>
                   <NumberBox
@@ -103,25 +96,21 @@ const Face = () => {
                     initial="initial"
                     animate="animate"
                     exit={"exit"}
-                  >
-                    1
-                  </NumberBox>
+                  ></NumberBox>
                   <NumberBox
                     key={"four" + count + 4}
                     variants={number4Var}
                     initial="initial"
                     animate="animate"
                     exit={"exit"}
-                  >
-                    4
-                  </NumberBox>
+                  ></NumberBox>
                 </NumberRow>
               </AnimatePresence>
             </Icon>
             <Title>25</Title>
             <Description>1부터 25까지 가능한 빠르게 클릭해주세요.</Description>
           </GameBox>
-          <GameBox onClick={onOmokClick}>
+          <GameBox variants={hoverVar} whileHover={"hover"} onClick={onOmokClick}>
             <Icon>
               <AnimatePresence mode="wait">
                 <BoardRow key={"Row" + count + 11}>
@@ -163,7 +152,7 @@ const Face = () => {
             <Title>Omok</Title>
             <Description>5개의 돌을 이어서 놓으세요.</Description>
           </GameBox>
-          <GameBox onClick={onMatchClick}>
+          <GameBox variants={hoverVar} whileHover={"hover"} onClick={onMatchClick}>
             <Icon>
               <AnimatePresence>
                 <NumberRow key={"numberrow"}>
@@ -180,9 +169,7 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    >
-                      3
-                    </MatchNum>
+                    ></MatchNum>
                   </MatchBox>
                   <MatchBox></MatchBox>
                 </NumberRow>
@@ -201,9 +188,7 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    >
-                      3
-                    </MatchNum>
+                    ></MatchNum>
                   </MatchBox>
                 </NumberRow>
               </AnimatePresence>
@@ -211,7 +196,7 @@ const Face = () => {
             <Title>Card</Title>
             <Description>같은 모양의 카드를 찾아주세요.</Description>
           </GameBox>
-          <GameBox onClick={onMineClick}>
+          <GameBox variants={hoverVar} whileHover={"hover"} onClick={onMineClick}>
             <Icon>
               <AnimatePresence>
                 <MineRow key={"numberrow2"}>
@@ -247,7 +232,7 @@ const Face = () => {
             <Title>Mine Sweeper</Title>
             <Description>숨겨진 지뢰를 모두 찾아내어 승리하세요.</Description>
           </GameBox>
-          <GameBox onClick={onWordleClick}>
+          <GameBox variants={hoverVar} whileHover={"hover"} onClick={onWordleClick}>
             <Icon>
               <AnimatePresence>
                 <NumberRow key={"numberrow"}>
@@ -258,7 +243,7 @@ const Face = () => {
                     animate="boxAnimate"
                     exit={"boxExit"}
                   >
-                    <MatchNum
+                    <WordNum
                       key={count + 200}
                       variants={word1Var}
                       initial="initial"
@@ -266,7 +251,7 @@ const Face = () => {
                       exit={"exit"}
                     >
                       B
-                    </MatchNum>
+                    </WordNum>
                   </WordBox>
                   <WordBox
                     key={count + 16}
@@ -275,7 +260,7 @@ const Face = () => {
                     animate="boxAnimate"
                     exit={"boxExit"}
                   >
-                    <MatchNum
+                    <WordNum
                       key={count + 214}
                       variants={word2Var}
                       initial="initial"
@@ -283,7 +268,7 @@ const Face = () => {
                       exit={"exit"}
                     >
                       N
-                    </MatchNum>
+                    </WordNum>
                   </WordBox>
                   <WordBox
                     key={count + 26}
@@ -292,7 +277,7 @@ const Face = () => {
                     animate="boxAnimate"
                     exit={"boxExit"}
                   >
-                    <MatchNum
+                    <WordNum
                       key={count + 234}
                       variants={word3Var}
                       initial="initial"
@@ -300,7 +285,7 @@ const Face = () => {
                       exit={"exit"}
                     >
                       W
-                    </MatchNum>
+                    </WordNum>
                   </WordBox>
                 </NumberRow>
               </AnimatePresence>
@@ -313,14 +298,14 @@ const Face = () => {
       <IconSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1638">
         <AnimatePresence mode="wait">
           <motion.path
-            key={count}
+            key={counter}
             variants={path}
             initial="start"
             animate="end"
             exit="exit"
             d="M361.686 1496.92L602.235 1015.65L315.478 1135.16L551.989 893.893L-34.0172 727.926L628.568 676.629L487.028 118.878L919.994 351.663L1420.91 -352.713L1299.23 289.422L2090.1 -68.4037L1497.02 631.995L2020.92 646.655L1443.12 819.08L1800.98 1116.02L1155 829.458L1260.53 1219.35L1071.44 1002.47L898.592 1637.02L831.029 1101.91L361.686 1496.92Z 110.765 1387.53L432.472 956.265L129.125 1023.29L404.503 827.549L-143.016 560.77L518.223 627.21L477.336 53.2344L862.425 358.776L1479.79 -246.143L1246.69 364.438L2088.29 151.801L1380.92 736.54L1894.01 843.428L1294.85 911.177L1594.69 1266.61L1009.42 870.545L1044.49 1272.94L896.641 1026.1L614.52 1620.18L642.452 1081.55L110.765 1387.53Z"
             stroke="#D9FF00"
-            strokeWidth="5"
+            strokeWidth="5px"
             fill={"transparent"}
           />
         </AnimatePresence>
@@ -338,82 +323,102 @@ const Wrapper = styled.div`
 
 const IconSVG = styled(motion.svg)`
   position: absolute;
-  top: -6.25rem;
+  top: -100px;
+  @media screen and (max-width: 796px) {
+    transform: rotate(-195deg);
+    width: 150vw;
+    left: -120px;
+    top: 0;
+  }
 `;
 
 const Games = styled.div`
   width: 100vw;
   background-color: transparent;
-  padding: 270px 156px;
   position: absolute;
   z-index: 2;
-  @media screen and (max-width: 1520px) {
-    padding: 160px 80px;
-  }
-
-  @media screen and (max-width: 950px) {
-    padding: 130px 30px;
+  padding: 170px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (max-width: 796px) {
+    padding: 92px 0;
   }
 `;
 
-const Header = styled.div``;
+const Header = styled.div`
+  width: 1088px;
+  @media screen and (max-width: 1212px) {
+    width: 710px;
+  }
+  @media screen and (max-width: 796px) {
+    width: 341px;
+  }
+`;
 
 const HeaderTitle = styled.h2`
   font-family: "Upheaval TT (BRK)";
-  font-size: 6.25rem;
-  line-height: 0.8;
+  font-size: 120px;
+  line-height: 100px;
+  text-shadow: 0px 8px 0px rgba(0, 0, 0, 0.25);
+  @media screen and (max-width: 796px) {
+    font-size: 100px;
+    line-height: 64px;
+  }
   & span {
     font-family: "Upheaval TT (BRK)";
-    font-size: 6.25rem;
-  }
-  @media screen and (max-width: 900px) {
-    line-height: 0.6;
-    & span {
-      font-size: 3.125rem;
+    font-size: 120px;
+    text-shadow: 0px 8px 0px rgba(0, 0, 0, 0.25);
+
+    @media screen and (max-width: 796px) {
+      font-size: 40px;
     }
   }
 `;
 
 const HeaderSubtitle = styled.h2`
-  margin-top: 4.5rem;
-  font-size: 21px;
-  @media screen and (max-width: 900px) {
+  margin-top: 50px;
+  font-size: 20px;
+  line-height: 1.6;
+  @media screen and (max-width: 796px) {
     font-size: 16px;
+    line-height: 1.5;
+    margin-top: 30px;
   }
 `;
 
 const Board = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(377px, 1fr));
+  grid-template-columns: repeat(3, 337px);
   width: 100%;
   height: 100%;
-  margin-top: 7.5rem;
-  grid-gap: 40px;
-  @media screen and (max-width: 900px) {
-    grid-template-columns: repeat(auto-fill, minmax(327px, 1fr));
+  margin-top: 100px;
+  grid-gap: 36px;
+  @media screen and (max-width: 1212px) {
+    grid-template-columns: repeat(2, 337px);
+  }
+  @media screen and (max-width: 796px) {
+    grid-template-columns: repeat(1, 337px);
+    margin-top: 60px;
   }
 `;
 
 const GameBox = styled(motion.div)`
   background-color: white;
-  width: 100%;
-  height: 534px;
+  width: 337px;
+  height: 517px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   color: white;
   padding: 8px;
-  &:hover {
-    background-color: rgba(45, 45, 45, 0.15);
-  }
-  @media screen and (max-width: 900px) {
-    height: 500px;
-  }
+  padding-bottom: 24px;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const Icon = styled(motion.div)`
-  height: 372px;
+  height: 337px;
   width: 100%;
   border-radius: 8px;
   background-color: #d9ff00;
@@ -421,10 +426,8 @@ const Icon = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 68px;
-  @media screen and (max-width: 900px) {
-    height: 327px;
-  }
+  padding: 72px 74px;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
 `;
 
 const NumberRow = styled(motion.div)`
@@ -435,19 +438,17 @@ const NumberBox = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #262626;
-  width: 120px;
-  margin: 10px;
-  height: 120px;
-  font-weight: 700;
-  font-size: 24px;
-  border-radius: 10px;
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: white;
 `;
 
 const Title = styled.h2`
   font-weight: 400;
   font-family: "Upheaval TT (BRK)";
-  padding: 20px 26px;
+  padding: 20px 28px;
   font-size: 36px;
 `;
 
@@ -465,8 +466,8 @@ const BoardRow = styled.div`
 `;
 
 const BoardCell = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -474,36 +475,36 @@ const BoardCell = styled.div`
 `;
 
 const Vertical = styled.div`
-  width: 2px;
+  width: 5px;
   height: 100%;
   position: absolute;
   left: 50%;
   z-index: 1;
-  background-color: #262626;
+  background-color: white;
 `;
 
 const Horizen = styled.div`
   width: 100%;
-  height: 2px;
+  height: 5px;
   position: absolute;
   top: 50%;
   z-index: 1;
-  background-color: #262626;
+  background-color: white;
 `;
 
 const White = styled(motion.div)`
-  background-color: #87cefa;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  background-color: #00e0ff;
+  width: 84px;
+  height: 84px;
+  border-radius: 100px;
   z-index: 2;
 `;
 
 const Black = styled(motion.div)`
-  background-color: #f7aea6;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  background-color: #ff7b7b;
+  width: 84px;
+  height: 84px;
+  border-radius: 100px;
   z-index: 2;
 `;
 
@@ -511,35 +512,44 @@ const MatchBox = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #262626;
   margin: 5px;
-  width: 120px;
-  height: 120px;
-  border-radius: 10px;
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  background-color: white;
 `;
 
 const WordBox = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #262626;
   margin: 5px;
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
 `;
 
 const MatchNum = styled(motion.h2)`
-  font-weight: 700;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #e6e6e6;
+`;
+
+const WordNum = styled(motion.h2)`
+  font-weight: 900;
   font-size: 24px;
-  color: white;
+  border-radius: 8px;
 `;
 
 const MineRow = styled(motion.div)`
   display: flex;
-  border-left: 2px solid #262626;
+  border-left: 5px solid #ffffff;
   &:last-child {
-    border-bottom: 2px solid #262626;
+    border-bottom: 5px solid #ffffff;
   }
 `;
 
@@ -548,12 +558,13 @@ const MineBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   color: #262626;
-  border-top: 2px solid #262626;
-  border-right: 2px solid #262626;
-  height: 120px;
-  width: 120px;
-  font-size: 24px;
+  border-top: 5px solid #ffffff;
+  border-right: 5px solid #ffffff;
+  height: 110px;
+  width: 110px;
+  font-size: 36px;
   font-weight: 700;
+  font-family: "Upheaval TT (BRK)";
 `;
 
 const Bomb = styled(motion.span)`
@@ -603,21 +614,21 @@ const whiteVar = {
 };
 
 const matchVar = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.2, delay: 0.5 } },
+  initial: { opacity: 1, backgroundColor: "#ffffff" },
+  animate: { opacity: 0, backgroundColor: "#ffffff", transition: { duration: 0.2, delay: 0.5 } },
   exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
 };
 
 const matchSecVar = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.2, delay: 1 } },
+  initial: { opacity: 1, backgroundColor: "#ffffff" },
+  animate: { opacity: 0, backgroundColor: "#ffffff", transition: { duration: 0.2, delay: 1 } },
   exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
 };
 
 const matchColorVar = {
-  boxInitial: { backgroundColor: "#262626" },
-  boxAnimate: { backgroundColor: "#484848", transition: { duration: 0.2, delay: 1.5 } },
-  boxExit: { backgroundColor: "#262626;", transition: { duration: 0.2, delay: 2 } },
+  boxInitial: { backgroundColor: "#e6e6e6" },
+  boxAnimate: { backgroundColor: "#d9ff00", transition: { duration: 0.2, delay: 1.5 } },
+  boxExit: { backgroundColor: "#d9ff00", transition: { duration: 0.2, delay: 2 } },
 };
 
 const word1Var = {
@@ -637,22 +648,23 @@ const word3Var = {
   exit: { opacity: 0, transition: { duration: 0.2, delay: 2 } },
 };
 const wordColorVar = {
-  boxInitial: { backgroundColor: "#202020" },
+  boxInitial: { backgroundColor: "#ffffff" },
   boxAnimate: {
-    backgroundColor: "#F7C04A",
-    borderColor: "#F7C04A",
+    backgroundColor: "#ff7b7b",
+    borderColor: "#ff7b7b",
     transition: { duration: 0.2, delay: 2 },
   },
-  boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
+  boxExit: { backgroundColor: "#ffffff", transition: { duration: 0.2, delay: 2 } },
 };
+
 const wordGColorVar = {
-  boxInitial: { backgroundColor: "#202020" },
+  boxInitial: { backgroundColor: "#ffffff" },
   boxAnimate: {
-    backgroundColor: "#539165",
-    borderColor: "#539165",
+    backgroundColor: "#00e0ff",
+    borderColor: "#00e0ff",
     transition: { duration: 0.2, delay: 2 },
   },
-  boxExit: { backgroundColor: "#202020", transition: { duration: 0.2, delay: 2 } },
+  boxExit: { backgroundColor: "#ffffff", transition: { duration: 0.2, delay: 2 } },
 };
 
 const path = {
@@ -662,4 +674,9 @@ const path = {
     transition: { duration: 2.5 },
   },
   exit: { pathLength: 0, transition: { duration: 2.5 } },
+};
+
+const hoverVar = {
+  initial: { y: 0 },
+  hover: { y: -16 },
 };
