@@ -298,23 +298,6 @@ const Face = () => {
           />
         </AnimatePresence>
       </IconSVG>
-      <Footer>
-        <Icons>
-          <FooterIcon href="https://github.com/WoodyLovesBoota" target="_blank">
-            <FontAwesomeIcon icon={faGithub} />
-          </FooterIcon>
-          <FooterIcon href="https://www.instagram.com/tttaeook/" target="_blank">
-            <FontAwesomeIcon icon={faInstagram} />
-          </FooterIcon>
-          <FooterIcon href="https://www.linkedin.com/in/tae-wook-yang-6762092a2/" target="_blank">
-            <FontAwesomeIcon icon={faLinkedin} />
-          </FooterIcon>
-          <FooterIcon href="https://velog.io/@woodylovescoding" target="_blank">
-            <FontAwesomeIcon icon={faBlog} />
-          </FooterIcon>
-        </Icons>
-        <Info>@2023 - YANGTAEWOOK</Info>
-      </Footer>
     </Wrapper>
   );
 };
@@ -588,33 +571,6 @@ const FlagIcon = styled(motion.span)`
   background-size: cover;
   width: 48px;
   height: 48px;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  padding-top: 2000px;
-  padding-bottom: 100px;
-`;
-
-const Icons = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-`;
-
-const FooterIcon = styled.a`
-  font-size: 21px;
-  margin: 0 15px;
-  cursor: pointer;
-`;
-
-const Info = styled.div`
-  font-size: 12px;
-  font-weight: 400;
 `;
 
 const number1Var = {
