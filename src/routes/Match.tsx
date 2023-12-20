@@ -168,7 +168,7 @@ const Wrapper = styled.div`
 `;
 
 const Icons = styled.div`
-  width: 600px;
+  width: 37.5rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 54px;
@@ -200,14 +200,14 @@ const Icon = styled.h2`
 
 const Board = styled.div`
   height: 100%;
-  width: 600px;
+  width: 37.5rem;
 `;
 
 const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 165px;
+  height: 10.3125rem;
   margin-bottom: 15px;
 `;
 
@@ -215,9 +215,9 @@ const SelectedCell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   background: #d9d9d9;
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
@@ -231,9 +231,9 @@ const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 500;
   border-radius: 8px;
   background: ${(props) => props.theme.bg};
@@ -243,7 +243,7 @@ const Cell = styled(motion.div)`
 `;
 
 const Cover = styled(motion.div)`
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
   background-color: white;
   border-radius: 10px;

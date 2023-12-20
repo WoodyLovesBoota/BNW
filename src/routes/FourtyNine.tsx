@@ -192,7 +192,7 @@ const Shadow = styled.div`
 `;
 
 const Container = styled.div`
-  width: 600px;
+  width: 37.5rem;
 `;
 
 const Buttons = styled.div`
@@ -313,7 +313,6 @@ const Button = styled.button`
   padding: 8px 14px;
   height: 36px;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
-  z-index: 2;
   &:hover {
     background-color: ${(props) => props.theme.white};
   }
@@ -357,8 +356,8 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 110px;
-  margin-bottom: 13px;
+  height: 6.875rem;
+  margin-bottom: 0.8125rem;
   width: 100%;
 `;
 
@@ -366,7 +365,7 @@ const Cell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
   font-size: 20px;
   font-weight: 500;
@@ -384,7 +383,7 @@ const Cell = styled(motion.div)`
 `;
 
 const Cover = styled(motion.div)`
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
   background-color: ${(props) => props.theme.bg};
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
@@ -392,10 +391,10 @@ const Cover = styled(motion.div)`
 `;
 
 const HardCover = styled(motion.div)`
-  width: 110px;
+  width: 6.875rem;
   height: 100%;
   background-color: ${(props) => props.theme.white};
-  margin-right: 5px;
+  margin-right: 0.3125rem;
   border-radius: 10px;
   box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
 `;

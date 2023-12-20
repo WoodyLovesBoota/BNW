@@ -262,7 +262,7 @@ const Wrapper = styled.div`
 const Icons = styled.div`
   display: flex;
   align-items: center;
-  width: 585px;
+  width: 36.5625rem;
   margin-bottom: 45px;
 `;
 
@@ -302,7 +302,7 @@ const CoverTop = styled.div`
   position: absolute;
   top: 0;
   width: 100%;
-  height: 22px;
+  height: 1.375rem;
   z-index: 2;
 `;
 
@@ -311,7 +311,7 @@ const CoverBottom = styled.div`
   position: absolute;
   bottom: 0px;
   width: 100%;
-  height: 19px;
+  height: 1.1375rem;
   z-index: 2;
 `;
 
@@ -320,7 +320,7 @@ const CoverLeft = styled.div`
   position: absolute;
   left: 0;
   height: 100%;
-  width: 20px;
+  width: 1.25rem;
   z-index: 2;
 `;
 
@@ -328,13 +328,13 @@ const CoverRight = styled.div`
   background-color: #d2d2d2;
   position: absolute;
   right: 0px;
-  width: 17px;
+  width: 1.0425rem;
   height: 100%;
   z-index: 2;
 `;
 
 const Board = styled.div`
-  width: 600px;
+  width: 37.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -349,8 +349,8 @@ const Row = styled.div`
 `;
 
 const Cell = styled.div<{ loc: number[] }>`
-  width: 43px;
-  height: 43px;
+  width: 2.6875rem;
+  height: 2.6875rem;
   position: relative;
   display: flex;
   justify-content: center;
@@ -376,8 +376,8 @@ const Horizen = styled.div`
 `;
 
 const White = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 15px;
   z-index: 2;
   background: url("./stoneWhite.png");
@@ -386,8 +386,8 @@ const White = styled.div`
 `;
 
 const Black = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 15px;
   z-index: 2;
   background: url("./stoneBlack.png");

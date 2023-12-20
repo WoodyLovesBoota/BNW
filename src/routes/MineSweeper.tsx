@@ -355,21 +355,22 @@ const Wrapper = styled.div`
 `;
 
 const Board = styled.div<{ mine: number }>`
-  width: ${(props) => (props.mine === 10 ? "288px" : props.mine === 40 ? "512px" : "960px")};
+  width: ${(props) => (props.mine === 10 ? "18rem" : props.mine === 40 ? "32rem" : "60rem")};
   display: flex;
   flex-direction: column;
   padding: 40px 0;
+  overflow-x: auto;
 `;
 
 const Row = styled.div`
   width: 100%;
-  height: 32px;
+  height: 2rem;
   display: flex;
 `;
 
 const Box = styled(motion.div)`
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   font-size: 24px;
   display: flex;
   justify-content: center;
@@ -381,7 +382,7 @@ const Box = styled(motion.div)`
 `;
 
 const BombBox = styled(motion.div)`
-  width: 32px;
+  width: 2rem;
   height: 100%;
   font-size: 24px;
   display: flex;
@@ -394,7 +395,7 @@ const BombBox = styled(motion.div)`
 `;
 
 const Flag = styled(motion.div)`
-  width: 32px;
+  width: 2rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -405,7 +406,7 @@ const Flag = styled(motion.div)`
 `;
 
 const Cover = styled(motion.div)`
-  width: 32px;
+  width: 2rem;
   height: 100%;
   background-color: white;
   box-shadow: -2px -2px 0px 0px rgba(0, 0, 0, 0.25) inset;
@@ -573,16 +574,16 @@ const Bomb = styled.span`
   background-image: url("./mine.png");
   background-position: center center;
   background-size: cover;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 const FlagIcon = styled.div`
   background-image: url("./flag.png");
   background-position: center center;
   background-size: cover;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 const Information = styled.div`

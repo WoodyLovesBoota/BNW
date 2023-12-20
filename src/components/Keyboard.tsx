@@ -82,7 +82,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 900px;
+  width: 56.25rem;
 `;
 
 const Cell = styled.div<IColor>`
@@ -91,12 +91,12 @@ const Cell = styled.div<IColor>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
-  margin: 4px;
+  margin: 0.25rem;
   cursor: default;
 `;
 
