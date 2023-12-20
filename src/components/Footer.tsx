@@ -10,7 +10,7 @@ const Footer = () => {
         <Column>
           <Title>About</Title>
           <Contents>
-            <Description href="https://github.com/WoodyLovesBoota/" target="_blank">
+            <Description href="https://github.com/WoodyLovesBoota/BNW" target="_blank">
               View Code
             </Description>
           </Contents>
