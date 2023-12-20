@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, animate, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
@@ -79,9 +79,15 @@ const FourtyNine = () => {
       <Container>
         <Buttons>
           <Button onClick={onHomeClick}>Home</Button>
-          <Start isStart={isStart} onClick={onStartClick}>
-            {isStart ? "RESTART" : "START"}
-          </Start>
+          {isStart ? (
+            <StartAfter isStart={isStart} onClick={onStartClick}>
+              {isStart ? "RESTART" : "START"}
+            </StartAfter>
+          ) : (
+            <Start isStart={isStart} onClick={onStartClick}>
+              {isStart ? "RESTART" : "START"}
+            </Start>
+          )}
         </Buttons>
         <Header>
           {res === 0 ? (
@@ -322,7 +328,21 @@ const Button = styled.button`
   }
 `;
 
-const Start = styled.button<{ isStart: boolean }>`
+const shake = keyframes`
+    0%, 100% {
+    transform: translateY(0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateY(-2px);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translateY(2px);
+  }
+`;
+
+const Start = styled(motion.button)<{ isStart: boolean }>`
   font-family: "Upheaval TT (BRK)";
   background-color: ${(props) => (props.isStart ? "white" : props.theme.accent)};
   border: none;
@@ -338,6 +358,34 @@ const Start = styled.button<{ isStart: boolean }>`
   height: 36px;
   z-index: 2;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  animation: ${shake} 0.5s linear infinite;
+  &:hover {
+    background-color: ${(props) => (props.isStart ? props.theme.white : "#d9ff00dd")};
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+  &:active {
+    background-color: ${(props) => (props.isStart ? "#00000011" : "#d9ff00bb")};
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+`;
+
+const StartAfter = styled(motion.button)<{ isStart: boolean }>`
+  font-family: "Upheaval TT (BRK)";
+  background-color: ${(props) => (props.isStart ? "white" : props.theme.accent)};
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  margin-left: 15px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  z-index: 2;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+
   &:hover {
     background-color: ${(props) => (props.isStart ? props.theme.white : "#d9ff00dd")};
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
