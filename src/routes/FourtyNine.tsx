@@ -362,6 +362,7 @@ const Start = styled(motion.button)<{ isStart: boolean }>`
   &:hover {
     background-color: ${(props) => (props.isStart ? props.theme.white : "#d9ff00dd")};
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+    animation: none;
   }
   &:active {
     background-color: ${(props) => (props.isStart ? "#00000011" : "#d9ff00bb")};
