@@ -13,6 +13,5 @@ const Home = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  position: relative;
   width: 100vw;
 `;
