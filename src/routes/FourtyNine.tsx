@@ -30,6 +30,7 @@ const FourtyNine = () => {
       setCurrent(1);
       setIsStart(false);
       setTime(0);
+      setRes(0);
     } else setIsStart(true);
   };
 
@@ -37,6 +38,7 @@ const FourtyNine = () => {
     setCurrent(1);
     setIsStart(false);
     setTime(0);
+    setRes(0);
     window.location.reload();
   };
 
@@ -44,6 +46,7 @@ const FourtyNine = () => {
     setIsStart(false);
     setCurrent(1);
     setTime(0);
+    setRes(0);
     navigate("/");
   };
 
@@ -83,7 +86,7 @@ const FourtyNine = () => {
           </Start>
         </Buttons>
         <Header>
-          {isStart ? (
+          {res === 0 ? (
             <Timer>
               <Minute>
                 {Math.floor(Math.floor(time / 100) / 60) < 10

@@ -2,8 +2,15 @@ import { motion } from "framer-motion";
 import { MouseEvent, useEffect, useState } from "react";
 import { styled, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateRight, faHouse, faCertificate, faFlag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRotateRight,
+  faHouse,
+  faCertificate,
+  faFlag,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "../assets/home.svg";
+import { ReactComponent as RestartIcon } from "../assets/restart.svg";
 
 const MineSweeper = () => {
   const [row, setRow] = useState(9);
@@ -21,6 +28,7 @@ const MineSweeper = () => {
 
   const [isFinish, setIsFinish] = useState(false);
   const [isWin, setIsWin] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const [isRestart, setIsRestart] = useState(false);
 
@@ -112,6 +120,13 @@ const MineSweeper = () => {
   };
 
   const onCoverClick = (row: number, col: number) => {
+    for (let e of flag) {
+      if (!mineInfo.some((ele) => ele.row === e.row && ele.col === e.col)) {
+        setIsFinish(true);
+        setIsWin(false);
+        mineInfo.forEach((e) => setOpened((prev) => [...prev, { row: e.row, col: e.col }]));
+      }
+    }
     setOpened((prev) => [...prev, { row: row, col: col }]);
     if (mineInfo.some((e) => e.row === row && e.col === col)) {
       setIsFinish(true);
@@ -120,10 +135,6 @@ const MineSweeper = () => {
     } else {
       findBlank(row, col, [[0, 0]]);
     }
-    // if (opened.length === row * col - mine) {
-    //   setIsFinish(true);
-    //   setIsWin(true);
-    // }
   };
 
   const onCoverRightClick = (row: number, col: number, event: MouseEvent<HTMLDivElement>) => {
@@ -224,39 +235,80 @@ const MineSweeper = () => {
     <Wrapper>
       {isFinish ? (
         <Result>
-          <ResultTitle>{isWin ? "WIN" : "LOSE"}</ResultTitle>
-          <ResultIcon onClick={onRestartClick}>
-            <FontAwesomeIcon icon={faArrowRotateRight} />
-          </ResultIcon>
+          <ResultTitle>{isWin ? "You Win :)" : "You Lose :("}</ResultTitle>
+          <ResultButtons>
+            <ResButton onClick={onRestartClick}>
+              <RestartIcon width={"32px"} />
+            </ResButton>
+            <ResButtonHome onClick={onHomeClick}>
+              <HomeIcon width={"32px"} />
+            </ResButtonHome>
+          </ResultButtons>
         </Result>
       ) : null}
 
-      <Board>
+      <Board mine={mine}>
         <Header>
-          <Buttons>
-            <Button onClick={onBeginnerClick}>초급</Button>
-            <Button onClick={onInterClick}>중급</Button>
-            <Button onClick={onAdvClick}>고급</Button>
-          </Buttons>
           <Icons>
-            <Icon onClick={onHomeClick}>
-              <FontAwesomeIcon icon={faHouse} />
-            </Icon>
-            <Icon onClick={onRestartClick}>
-              <FontAwesomeIcon icon={faArrowRotateRight} />
-            </Icon>
+            <Icon onClick={onHomeClick}>HOME</Icon>
+            <IconRight>
+              <Icon onClick={onRestartClick}>RESTART</Icon>
+              <Icon
+                onMouseEnter={() => {
+                  setIsHover(true);
+                }}
+                onMouseLeave={() => {
+                  setIsHover(false);
+                }}
+              >
+                ?
+              </Icon>
+            </IconRight>
+            {isHover && (
+              <Information>
+                <InfoBox>
+                  <InfoRow>
+                    <Box />
+                    <InfoContent>Mouse Left Click</InfoContent>
+                  </InfoRow>
+                  <InfoRow>
+                    <FlagBox>
+                      <FlagIcon />
+                    </FlagBox>
+                    <InfoContent>Mouse Right Click</InfoContent>
+                  </InfoRow>
+                </InfoBox>
+              </Information>
+            )}
           </Icons>
+          <Buttons>
+            <Button isnow={mine === 10} onClick={onBeginnerClick}>
+              EASY
+            </Button>
+            <Button isnow={mine === 40} onClick={onInterClick}>
+              MEDIUM
+            </Button>
+            <Button isnow={mine === 99} onClick={onAdvClick}>
+              HARD
+            </Button>
+            <FlagInfo>
+              <FlagSvg />
+              <FlagNum>
+                <FlagCurrent>{flag.length}</FlagCurrent>
+                <Divider>/</Divider>
+                <FlagTotal>{mine}</FlagTotal>
+              </FlagNum>
+            </FlagInfo>
+          </Buttons>
         </Header>
         {rowFrame.map((row) => (
           <Row key={row}>
             {colFrame.map((col) =>
               opened.some((e) => e.row === row && e.col === col) ? (
                 mineInfo.some((e) => e.row === row && e.col === col) ? (
-                  <Box key={col + "mine"}>
-                    <Bomb>
-                      <FontAwesomeIcon icon={faCertificate} />
-                    </Bomb>
-                  </Box>
+                  <BombBox key={col + "mine"}>
+                    <Bomb></Bomb>
+                  </BombBox>
                 ) : info[row - 1][col - 1] !== 0 ? (
                   <Box
                     key={String(col) + String(row) + "number"}
@@ -276,9 +328,7 @@ const MineSweeper = () => {
                     onFlagRightClick(row, col, event);
                   }}
                 >
-                  <FlagIcon>
-                    <FontAwesomeIcon icon={faFlag} />
-                  </FlagIcon>
+                  <FlagIcon></FlagIcon>
                 </Flag>
               ) : (
                 <Cover
@@ -305,56 +355,74 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 3%;
-  height: 100vh;
-  background-color: #141414;
-  color: white;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
   user-select: none;
 `;
 
-const Board = styled.div``;
+const Board = styled.div<{ mine: number }>`
+  width: ${(props) => (props.mine === 10 ? "288px" : props.mine === 40 ? "512px" : "960px")};
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+`;
 
 const Row = styled.div`
   width: 100%;
-  height: 1.875rem;
+  height: 32px;
   display: flex;
 `;
 
 const Box = styled(motion.div)`
-  width: 1.875rem;
-  height: 100%;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
-  color: white;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #bfbfbf;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
+  font-family: "Upheaval TT (BRK)";
+`;
+
+const BombBox = styled(motion.div)`
+  width: 32px;
+  height: 100%;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ff7b7b;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  cursor: default;
+  font-family: "Upheaval TT (BRK)";
 `;
 
 const Flag = styled(motion.div)`
-  width: 1.875rem;
+  width: 32px;
   height: 100%;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #535353;
+  background-color: white;
+  box-shadow: -2px -2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
 `;
 
 const Cover = styled(motion.div)`
-  width: 1.875rem;
+  width: 32px;
   height: 100%;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
-  background-color: #535353;
+  background-color: white;
+  box-shadow: -2px -2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
   &:hover {
-    background-color: #2b2b2b;
+    background: #e6e6e6;
+  }
+  &:active {
+    background: #d9d9d9;
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
 
@@ -364,42 +432,50 @@ const Result = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5%;
+  justify-content: center;
 `;
 
 const ResultTitle = styled.h2`
   color: white;
   font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  padding-bottom: 1.875rem;
+  font-size: 32px;
+  letter-spacing: 2px;
+  padding-bottom: 30px;
+`;
+
+const ResultButtons = styled.div`
+  display: flex;
+  margin-top: 36px;
 `;
 
 const rotationAni = keyframes`
   0% {transform: rotate(0deg)};
-  100% {transform: rotate(360deg)};
+  100% {transform: rotate(-360deg)};
 `;
 
-const ResultIcon = styled.span`
-  color: white;
-  font-weight: 500;
-  font-size: 2rem;
-  letter-spacing: 0.125rem;
-  margin-bottom: 1.875rem;
+const ResButton = styled(motion.button)`
+  border: none;
   cursor: pointer;
+  background-color: transparent;
   animation: ${rotationAni} 3s linear infinite;
+  margin: 0 10px;
+`;
+
+const ResButtonHome = styled(motion.button)`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0 10px;
 `;
 
 const Header = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.25rem;
+  flex-direction: column;
   width: 100%;
 `;
 
@@ -407,45 +483,183 @@ const Icons = styled.div`
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  margin-bottom: 54px;
+  position: relative;
+`;
+
+const IconRight = styled.div`
+  margin-left: auto;
+  display: flex;
 `;
 
 const Icon = styled.span`
-  color: white;
-  font-weight: 500;
-  font-size: 1.5rem;
-  margin-right: 1.25rem;
+  font-family: "Upheaval TT (BRK)";
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 14px;
+  height: 36px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  position: relative;
+  &:last-child {
+    margin-left: 16px;
+  }
+  &:hover {
+    background-color: #e5e5e5;
+  }
+  &:active {
+    background-color: #00000011;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  }
 `;
 
 const Buttons = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
-const Button = styled.button`
-  background-color: white;
-  color: black;
+const Button = styled.button<{ isnow: boolean }>`
   border: none;
-  width: 20%;
-  padding: 0.9375rem 1.25rem;
-  font-size: 0.875rem;
-  border-radius: 0.9375rem;
+  padding: 11px 8px 7px 8px;
+  font-size: 14px;
+  border-radius: 10px;
   cursor: pointer;
-  margin-left: 0.9375rem;
-  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) => (props.isnow ? " #D9FF00" : "transparent")};
+  box-shadow: ${(props) => props.isnow && "2px 3px 0px 0px rgba(0, 0, 0, 0.25) inset"};
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: ${(props) => (props.isnow ? " #D9FF00" : "#bfbfbf")};
+    box-shadow: 2px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
 
-const Bomb = styled.span`
-  color: #ed5744;
+const FlagInfo = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 `;
 
-const FlagIcon = styled.span`
-  color: #4a6bd6;
+const FlagSvg = styled.div`
+  background-image: url("./flag.png");
+  background-position: center center;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  margin-bottom: 5px;
+`;
+
+const FlagNum = styled.div`
+  display: flex;
+`;
+
+const FlagCurrent = styled.h2`
+  font-size: 14px;
+`;
+
+const FlagTotal = styled.h2`
+  font-size: 14px;
+`;
+
+const Divider = styled.h2`
+  font-size: 14px;
+`;
+
+const Bomb = styled.span`
+  background-image: url("./mine.png");
+  background-position: center center;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+`;
+
+const FlagIcon = styled.div`
+  background-image: url("./flag.png");
+  background-position: center center;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+`;
+
+const Information = styled.div`
+  position: absolute;
+  background: #e6e6e6;
+  border-radius: 5px;
+  right: 0;
+  top: 50px;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 7px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: #e6e6e6;
+    border-top: 0;
+    margin-left: -7px;
+    margin-top: -7px;
+  }
+`;
+
+const InfoBox = styled.div`
+  padding: 16px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+`;
+
+const FlagBox = styled.div`
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InfoRow = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const ColorY = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #d9ff00;
+`;
+
+const ColorR = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #ff7b7b;
+`;
+
+const ColorG = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #999999;
+`;
+
+const InfoContent = styled.h2`
+  font-size: 14px;
+  margin-left: 12px;
 `;
