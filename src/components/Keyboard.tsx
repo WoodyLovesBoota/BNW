@@ -95,10 +95,9 @@ const Cell = styled.div<IColor>`
   height: 40px;
   border-radius: 8px;
   font-size: 16px;
-  color: #12121b;
   font-weight: 400;
   margin: 4px;
-  cursor: pointer;
+  cursor: default;
 `;
 
 interface IColor {

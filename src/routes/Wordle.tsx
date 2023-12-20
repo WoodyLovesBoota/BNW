@@ -140,7 +140,7 @@ const Button = styled.button`
     margin-left: 16px;
   }
   &:hover {
-    background-color: #e5e5e5;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #00000011;
@@ -172,7 +172,7 @@ const Heart = styled.div`
 
 const Information = styled.div`
   position: absolute;
-  background: #e6e6e6;
+  background-color: ${(props) => props.theme.white};
   border-radius: 5px;
   right: 0;
   top: 50px;
@@ -184,7 +184,7 @@ const Information = styled.div`
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-bottom-color: #e6e6e6;
+    border-bottom-color: ${(props) => props.theme.white};
     border-top: 0;
     margin-left: -7px;
     margin-top: -7px;
@@ -211,14 +211,14 @@ const ColorY = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: #d9ff00;
+  background-color: ${(props) => props.theme.accent};
 `;
 
 const ColorR = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: #ff7b7b;
+  background-color: ${(props) => props.theme.red};
 `;
 
 const ColorG = styled.div`

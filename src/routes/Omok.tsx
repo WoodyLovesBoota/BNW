@@ -289,7 +289,7 @@ const Icon = styled.h2`
   z-index: 2;
   margin: 0 10px;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #00000011;
@@ -358,7 +358,7 @@ const Cell = styled.div<{ loc: number[] }>`
 `;
 
 const Vertical = styled.div`
-  background-color: #e6e6e6;
+  background-color: ${(props) => props.theme.white};
   width: 3px;
   height: 100%;
   position: absolute;
@@ -367,7 +367,7 @@ const Vertical = styled.div`
 `;
 
 const Horizen = styled.div`
-  background-color: #e6e6e6;
+  background-color: ${(props) => props.theme.white};
   width: 100%;
   height: 3px;
   position: absolute;
@@ -410,7 +410,7 @@ const Result = styled.div`
 `;
 
 const ResultTitle = styled.h2<{ isBlue: boolean }>`
-  color: ${(props) => (!props.isBlue ? "#00E0FF" : "#D9FF00")};
+  color: ${(props) => (!props.isBlue ? props.theme.blue : props.theme.accent)};
   font-weight: 500;
   font-size: 32px;
   letter-spacing: 2px;

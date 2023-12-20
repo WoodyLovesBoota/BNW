@@ -4,8 +4,6 @@ import { styled, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IconDefinition,
-  faArrowRotateRight,
-  faHouse,
   faStar,
   faMoon,
   faHeart,
@@ -192,7 +190,7 @@ const Icon = styled.h2`
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
   z-index: 2;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #00000011;
@@ -238,7 +236,7 @@ const Cell = styled(motion.div)`
   font-size: 32px;
   font-weight: 500;
   border-radius: 8px;
-  background: #bfbfbf;
+  background: ${(props) => props.theme.bg};
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
   cursor: pointer;
   color: #4d4d4d;
@@ -251,7 +249,7 @@ const Cover = styled(motion.div)`
   border-radius: 10px;
   box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
   &:hover {
-    background-color: #e6e6e6;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #d9d9d9;

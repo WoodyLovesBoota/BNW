@@ -1,19 +1,9 @@
 import styled from "styled-components";
-import { ReactComponent as Vector } from "../assets/vector.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import HeaderBar from "./HeaderBar";
-import Lottie from "react-lottie-player";
-import animationData from "../animationData.json";
 import Sheep from "./Sheep";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRotateRight,
-  faHouse,
-  faCertificate,
-  faFlag,
-} from "@fortawesome/free-solid-svg-icons";
 
 const Face = () => {
   const [count, setCount] = useState(1);
@@ -59,7 +49,6 @@ const Face = () => {
     <Wrapper>
       <HeaderBar />
       <Sheep />
-
       <Games>
         <Header>
           <HeaderTitle>
@@ -81,13 +70,13 @@ const Face = () => {
                     variants={number3Var}
                     animate="animate"
                     exit={"exit"}
-                  ></NumberBox>
+                  />
                   <NumberBox
                     key={"four" + count + 200}
                     variants={number2Var}
                     animate="animate"
                     exit={"exit"}
-                  ></NumberBox>
+                  />
                 </NumberRow>
                 <NumberRow key={"Row" + count + 10}>
                   <NumberBox
@@ -96,14 +85,14 @@ const Face = () => {
                     initial="initial"
                     animate="animate"
                     exit={"exit"}
-                  ></NumberBox>
+                  />
                   <NumberBox
                     key={"four" + count + 4}
                     variants={number4Var}
                     initial="initial"
                     animate="animate"
                     exit={"exit"}
-                  ></NumberBox>
+                  />
                 </NumberRow>
               </AnimatePresence>
             </Icon>
@@ -169,12 +158,12 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    ></MatchNum>
+                    />
                   </MatchBox>
-                  <MatchBox></MatchBox>
+                  <MatchBox />
                 </NumberRow>
                 <NumberRow key={"numberrow1"}>
-                  <MatchBox></MatchBox>
+                  <MatchBox />
                   <MatchBox
                     key={"card" + count + 6}
                     variants={matchColorVar}
@@ -188,7 +177,7 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    ></MatchNum>
+                    />
                   </MatchBox>
                 </NumberRow>
               </AnimatePresence>
@@ -208,9 +197,7 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    >
-                      <FontAwesomeIcon icon={faCertificate} />
-                    </Bomb>
+                    />
                   </MineBox>
                 </MineRow>
                 <MineRow key={"numberrow3"}>
@@ -221,11 +208,9 @@ const Face = () => {
                       initial="initial"
                       animate="animate"
                       exit={"exit"}
-                    >
-                      <FontAwesomeIcon icon={faFlag} />
-                    </FlagIcon>
+                    />
                   </MineBox>
-                  <MineBox></MineBox>
+                  <MineBox />
                 </MineRow>
               </AnimatePresence>
             </Icon>
@@ -421,7 +406,7 @@ const Icon = styled(motion.div)`
   height: 337px;
   width: 100%;
   border-radius: 8px;
-  background-color: #d9ff00;
+  background-color: ${(props) => props.theme.accent};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -494,7 +479,7 @@ const Horizen = styled.div`
 `;
 
 const White = styled(motion.div)`
-  background-color: #00e0ff;
+  background-color: ${(props) => props.theme.blue};
   width: 84px;
   height: 84px;
   border-radius: 100px;
@@ -502,7 +487,7 @@ const White = styled(motion.div)`
 `;
 
 const Black = styled(motion.div)`
-  background-color: #ff7b7b;
+  background-color: ${(props) => props.theme.red};
   width: 84px;
   height: 84px;
   border-radius: 100px;
@@ -537,7 +522,7 @@ const MatchNum = styled(motion.h2)`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: #e6e6e6;
+  background-color: ${(props) => props.theme.white};
 `;
 
 const WordNum = styled(motion.h2)`
@@ -548,9 +533,9 @@ const WordNum = styled(motion.h2)`
 
 const MineRow = styled(motion.div)`
   display: flex;
-  border-left: 5px solid #ffffff;
+  border-left: 5px solid white;
   &:last-child {
-    border-bottom: 5px solid #ffffff;
+    border-bottom: 5px solid white;
   }
 `;
 
@@ -559,8 +544,8 @@ const MineBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   color: #262626;
-  border-top: 5px solid #ffffff;
-  border-right: 5px solid #ffffff;
+  border-top: 5px solid white;
+  border-right: 5px solid white;
   height: 110px;
   width: 110px;
   font-size: 36px;
@@ -568,14 +553,20 @@ const MineBox = styled(motion.div)`
   font-family: "Upheaval TT (BRK)";
 `;
 
-const Bomb = styled(motion.span)`
-  color: #ed5744;
-  font-size: 24px;
+const Bomb = styled(motion.div)`
+  background-image: url("./mine.png");
+  background-position: center center;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
 `;
 
 const FlagIcon = styled(motion.span)`
-  color: #4a6bd6;
-  font-size: 24px;
+  background-image: url("./flag.png");
+  background-position: center center;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
 `;
 
 const number1Var = {

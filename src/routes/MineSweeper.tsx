@@ -1,13 +1,6 @@
 import { motion } from "framer-motion";
 import { MouseEvent, useEffect, useState } from "react";
 import { styled, keyframes } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRotateRight,
-  faHouse,
-  faCertificate,
-  faFlag,
-} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../assets/home.svg";
 import { ReactComponent as RestartIcon } from "../assets/restart.svg";
@@ -381,7 +374,7 @@ const Box = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #bfbfbf;
+  background: ${(props) => props.theme.bg};
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
   font-family: "Upheaval TT (BRK)";
@@ -394,7 +387,7 @@ const BombBox = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ff7b7b;
+  background: ${(props) => props.theme.red};
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
   font-family: "Upheaval TT (BRK)";
@@ -418,7 +411,7 @@ const Cover = styled(motion.div)`
   box-shadow: -2px -2px 0px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: default;
   &:hover {
-    background: #e6e6e6;
+    background: ${(props) => props.theme.white};
   }
   &:active {
     background: #d9d9d9;
@@ -512,7 +505,7 @@ const Icon = styled.span`
     margin-left: 16px;
   }
   &:hover {
-    background-color: #e5e5e5;
+    background: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #00000011;
@@ -535,11 +528,11 @@ const Button = styled.button<{ isnow: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => (props.isnow ? " #D9FF00" : "transparent")};
+  background-color: ${(props) => (props.isnow ? props.theme.accent : "transparent")};
   box-shadow: ${(props) => props.isnow && "2px 3px 0px 0px rgba(0, 0, 0, 0.25) inset"};
 
   &:hover {
-    background-color: ${(props) => (props.isnow ? " #D9FF00" : "#bfbfbf")};
+    background-color: ${(props) => (props.isnow ? props.theme.accent : props.theme.bg)};
     box-shadow: 2px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `;
@@ -594,7 +587,7 @@ const FlagIcon = styled.div`
 
 const Information = styled.div`
   position: absolute;
-  background: #e6e6e6;
+  background: ${(props) => props.theme.white};
   border-radius: 5px;
   right: 0;
   top: 50px;
@@ -606,7 +599,7 @@ const Information = styled.div`
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-bottom-color: #e6e6e6;
+    border-bottom-color: ${(props) => props.theme.white};
     border-top: 0;
     margin-left: -7px;
     margin-top: -7px;
@@ -636,27 +629,6 @@ const InfoRow = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
-`;
-
-const ColorY = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  background-color: #d9ff00;
-`;
-
-const ColorR = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  background-color: #ff7b7b;
-`;
-
-const ColorG = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  background-color: #999999;
 `;
 
 const InfoContent = styled.h2`

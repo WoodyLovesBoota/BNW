@@ -1,8 +1,6 @@
 import { styled, keyframes } from "styled-components";
 import { IResult, STATUS, answerState } from "../atoms";
 import { useRecoilValue } from "recoil";
-import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactComponent as HomeIcon } from "../assets/home.svg";
 import { ReactComponent as RestartIcon } from "../assets/restart.svg";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +67,7 @@ const Container = styled.div<IResult>`
       padding: 15px;
       font-weight: 400;
       margin-right: 10px;
-      background-color: #d9ff00;
+      background-color: ${(props) => props.theme.accent};
       text-align: center;
       vertical-align: center;
       border-radius: 10px;
@@ -101,7 +99,3 @@ const ResButtonHome = styled(motion.button)`
   background-color: transparent;
   margin: 0 10px;
 `;
-
-const refreshPage = () => {
-  window.location.reload();
-};

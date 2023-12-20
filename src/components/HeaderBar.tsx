@@ -55,7 +55,7 @@ export default HeaderBar;
 const Wrapper = styled.div`
   position: absolute;
   top: 0;
-  background-color: #00e0ff;
+  background-color: ${(props) => props.theme.blue};
   width: 100vw;
   height: 30px;
   z-index: 1;
@@ -88,7 +88,6 @@ const Bar = styled.div`
 const Block = styled.h2`
   margin-right: 5px;
   font-size: 14px;
-  color: black;
   display: flex;
   align-items: center;
   @media screen and (max-width: 796px) {

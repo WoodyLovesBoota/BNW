@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
 import { fourtynineResState } from "../atoms";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateRight, faHouse, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../assets/home.svg";
 import { ReactComponent as RestartIcon } from "../assets/restart.svg";
@@ -259,7 +257,7 @@ const ResTimer = styled.div`
   font-weight: 500;
   font-family: "Upheaval TT (BRK)";
   margin-bottom: 40px;
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
   z-index: 5;
 `;
 
@@ -268,7 +266,7 @@ const ResMinute = styled.h2`
   font-weight: 500;
   margin-right: 15px;
   font-family: "Upheaval TT (BRK)";
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
 `;
 
 const ResSecond = styled.h2`
@@ -276,7 +274,7 @@ const ResSecond = styled.h2`
   font-weight: 500;
   margin: 0 15px;
   font-family: "Upheaval TT (BRK)";
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
 `;
 
 const ResMilSec = styled.h2`
@@ -284,21 +282,21 @@ const ResMilSec = styled.h2`
   font-weight: 500;
   margin: 0 15px;
   font-family: "Upheaval TT (BRK)";
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
 `;
 
 const ResSlash = styled.h2`
   font-size: 64px;
   font-weight: 500;
   font-family: "Upheaval TT (BRK)";
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
 `;
 
 const ResDivider = styled.h2`
   font-size: 64px;
   font-weight: 800;
   font-family: "Upheaval TT (BRK)";
-  color: #d9ff00;
+  color: ${(props) => props.theme.accent};
 `;
 
 const Button = styled.button`
@@ -317,7 +315,7 @@ const Button = styled.button`
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
   z-index: 2;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #00000011;
@@ -327,7 +325,7 @@ const Button = styled.button`
 
 const Start = styled.button<{ isStart: boolean }>`
   font-family: "Upheaval TT (BRK)";
-  background-color: ${(props) => (props.isStart ? "white" : "#d9ff00")};
+  background-color: ${(props) => (props.isStart ? "white" : props.theme.accent)};
   border: none;
   font-size: 18px;
   border-radius: 8px;
@@ -342,7 +340,7 @@ const Start = styled.button<{ isStart: boolean }>`
   z-index: 2;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
   &:hover {
-    background-color: ${(props) => (props.isStart ? "#e5e5e5" : "#d9ff00dd")};
+    background-color: ${(props) => (props.isStart ? props.theme.white : "#d9ff00dd")};
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.25) inset;
   }
   &:active {
@@ -377,7 +375,7 @@ const Cell = styled(motion.div)`
   box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   &:hover {
-    background-color: #e6e6e6;
+    background-color: ${(props) => props.theme.white};
   }
   &:active {
     background-color: #d9d9d9;
@@ -388,7 +386,7 @@ const Cell = styled(motion.div)`
 const Cover = styled(motion.div)`
   width: 110px;
   height: 100%;
-  background: #bfbfbf;
+  background-color: ${(props) => props.theme.bg};
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1) inset;
   border-radius: 8px;
 `;
@@ -396,7 +394,7 @@ const Cover = styled(motion.div)`
 const HardCover = styled(motion.div)`
   width: 110px;
   height: 100%;
-  background-color: #e6e6e6;
+  background-color: ${(props) => props.theme.white};
   margin-right: 5px;
   border-radius: 10px;
   box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.1);

@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { RecoilRoot } from "recoil";
-import "./assets/fonts/font.css";
+import { theme } from "./theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     font-size: 16px;
     vertical-align: baseline;
-    font-family: Galmuri14, "Noto sans KR", sans-serif;
+    font-family: Galmuri11,  sans-serif;
     font-weight: 300;
     line-height: 1;
     color: #262626;
@@ -104,7 +104,9 @@ const GlobalStyle = createGlobalStyle`
 
 root.render(
   <RecoilRoot>
-    <GlobalStyle />
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </RecoilRoot>
 );
