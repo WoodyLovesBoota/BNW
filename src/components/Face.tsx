@@ -235,7 +235,7 @@ const Face = () => {
                       animate="animate"
                       exit={"exit"}
                     >
-                      B
+                      J
                     </WordNum>
                   </WordBox>
                   <WordBox
@@ -252,7 +252,7 @@ const Face = () => {
                       animate="animate"
                       exit={"exit"}
                     >
-                      N
+                      O
                     </WordNum>
                   </WordBox>
                   <WordBox
@@ -269,7 +269,7 @@ const Face = () => {
                       animate="animate"
                       exit={"exit"}
                     >
-                      W
+                      Y
                     </WordNum>
                   </WordBox>
                 </NumberRow>
@@ -554,7 +554,7 @@ const MineBox = styled(motion.div)`
 `;
 
 const Bomb = styled(motion.div)`
-  background-image: url("./mine.png");
+  background-image: url("./minemain.png");
   background-position: center center;
   background-size: cover;
   width: 48px;
@@ -562,7 +562,7 @@ const Bomb = styled(motion.div)`
 `;
 
 const FlagIcon = styled(motion.span)`
-  background-image: url("./flag.png");
+  background-image: url("./flagmain.png");
   background-position: center center;
   background-size: cover;
   width: 48px;
