@@ -76,6 +76,7 @@ export default Footer;
 const Wrapper = styled.div`
   width: 100%;
   background-color: gray;
+  position: absolute;
 `;
 
 const Info = styled.div`

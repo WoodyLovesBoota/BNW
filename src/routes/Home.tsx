@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <Wrapper>
       <Face />
-      <Footer />
+      {/* <Footer /> */}
     </Wrapper>
   );
 };
