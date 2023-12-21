@@ -77,22 +77,26 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: gray;
   position: absolute;
+  top: 1900px;
+  @media screen and (max-width: 1212px) {
+    top: 2400px;
+  }
+  @media screen and (max-width: 796px) {
+    top: 3400px;
+  }
 `;
 
 const Info = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 2000px;
   padding: 100px 250px;
   @media screen and (max-width: 1212px) {
-    margin-top: 2500px;
     padding: 100px 100px;
   }
   @media screen and (max-width: 796px) {
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 3500px;
   }
 `;
 

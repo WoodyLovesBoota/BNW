@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import HeaderBar from "./HeaderBar";
 import Sheep from "./Sheep";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faBlog } from "@fortawesome/free-solid-svg-icons";
 
 const Face = () => {
   const [count, setCount] = useState(1);
