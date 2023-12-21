@@ -97,6 +97,7 @@ const Info = styled.div`
   @media screen and (max-width: 796px) {
     flex-direction: column;
     justify-content: flex-start;
+    padding: 40px;
   }
 `;
 
@@ -125,6 +126,6 @@ const Link = styled.h2`
   font-size: 14px;
   @media screen and (max-width: 796px) {
     text-align: start;
-    padding-left: 100px;
+    padding-left: 40px;
   }
 `;
