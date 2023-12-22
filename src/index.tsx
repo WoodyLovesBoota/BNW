@@ -32,8 +32,7 @@ const GlobalStyle = createGlobalStyle`
     color: #262626;
     word-break: keep-all;
 
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+
     @media screen and (max-width: 796px) {
       font-size: 9.6px;
     }
@@ -101,6 +100,8 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 10px;
     background-color: transparent;
   }
+
+
 `;
 
 root.render(

@@ -304,6 +304,7 @@ export default Face;
 const Wrapper = styled.div`
   position: relative;
   cursor: url("/cursor.png") 10 10, auto;
+  width: 100vw;
 `;
 
 const IconSVG = styled(motion.svg)`
@@ -346,6 +347,7 @@ const HeaderTitle = styled.h2`
   font-size: 120px;
   line-height: 100px;
   text-shadow: 0px 8px 0px rgba(0, 0, 0, 0.25);
+
   @media screen and (max-width: 796px) {
     font-size: 100px;
     line-height: 64px;
