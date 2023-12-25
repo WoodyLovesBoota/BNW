@@ -304,12 +304,13 @@ export default Face;
 const Wrapper = styled.div`
   position: relative;
   cursor: url("/cursor.png") 10 10, auto;
-  width: 100vw;
+  max-width: 100%;
 `;
 
 const IconSVG = styled(motion.svg)`
   position: absolute;
   top: -100px;
+  overflow-x: hidden;
   @media screen and (max-width: 796px) {
     transform: rotate(-195deg);
     width: 150vw;

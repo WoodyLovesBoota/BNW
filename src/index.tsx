@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1;
     color: #262626;
     word-break: keep-all;
-
+    max-width: 100vw;
     @media screen and (max-width: 796px) {
       font-size: 9.6px;
     }
@@ -70,13 +70,17 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     max-width: 100vw;
-    overflow-x: hidden;
     font-weight: 300;
     line-height: 1.2;
+    overflow: hidden;
+    overflow-y: auto;
+
     background-color: #d2d2d2;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
   }
   html {
-    max-width: 100vw;
+    /* max-width: 100vw; */
   }
 
   a {

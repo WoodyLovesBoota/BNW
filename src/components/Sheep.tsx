@@ -60,11 +60,12 @@ export default Sheep;
 const SheepLoad = styled.div`
   display: flex;
   position: relative;
-  /* overflow-x: hidden; */
+  width: 100%;
 `;
 
 const SheepBox = styled(motion.div)`
   position: absolute;
+  overflow: hidden;
   z-index: 1;
   top: 0px;
   @media screen and (max-width: 796px) {
@@ -73,26 +74,26 @@ const SheepBox = styled(motion.div)`
 `;
 
 const sheepVar = {
-  initial: { x: -500 },
-  animate: { x: "100vw", transition: { duration: 15, repeat: Infinity } },
+  initial: { x: -200 },
+  animate: { x: "50vw", transition: { duration: 15, repeat: Infinity } },
 };
 
 const sheep2Var = {
-  initial: { x: -500 },
-  animate: { x: "100vw", transition: { duration: 7, delay: 2, repeat: Infinity } },
+  initial: { x: -200 },
+  animate: { x: "50vw", transition: { duration: 7, delay: 2, repeat: Infinity } },
 };
 
 const sheep3Var = {
-  initial: { x: -500 },
-  animate: { x: "100vw", transition: { duration: 8, delay: 4, repeat: Infinity } },
+  initial: { x: -200 },
+  animate: { x: "50vw", transition: { duration: 8, delay: 4, repeat: Infinity } },
 };
 
 const sheep4Var = {
-  initial: { x: -500 },
-  animate: { x: "100vw", transition: { duration: 3, delay: 6, repeat: Infinity } },
+  initial: { x: -200 },
+  animate: { x: "50vw", transition: { duration: 3, delay: 6, repeat: Infinity } },
 };
 
 const sheep5Var = {
-  initial: { x: -500 },
-  animate: { x: "100vw", transition: { duration: 10, delay: 8, repeat: Infinity } },
+  initial: { x: -200 },
+  animate: { x: "50vw", transition: { duration: 10, delay: 8, repeat: Infinity } },
 };
