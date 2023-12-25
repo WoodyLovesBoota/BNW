@@ -32,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
     color: #262626;
     word-break: keep-all;
 
-
     @media screen and (max-width: 796px) {
       font-size: 9.6px;
     }
@@ -47,11 +46,7 @@ const GlobalStyle = createGlobalStyle`
   *[hidden] {
     display: none;
   }
-  body {
-    line-height: 1;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+
   menu, ol, ul {
     list-style: none;
   }
@@ -74,10 +69,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    max-width: 100vw;
+    overflow-x: hidden;
     font-weight: 300;
     line-height: 1.2;
     background-color: #d2d2d2;
-
+  }
+  html {
+    max-width: 100vw;
   }
 
   a {
@@ -94,11 +93,15 @@ const GlobalStyle = createGlobalStyle`
 
   &::-webkit-scrollbar-track {
     background-color: transparent;
+    display: none;
+
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: transparent;
+    display: none;
+
   }
 
 

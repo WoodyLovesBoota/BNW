@@ -59,16 +59,17 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 30px;
   z-index: 1;
+  overflow-x: hidden;
+
   @media screen and (max-width: 796px) {
     height: 24px;
   }
 `;
 
 const Bar = styled.div`
-  width: 300vw;
   height: 100%;
   display: flex;
-
+  text-overflow: ellipsis;
   animation-iteration-count: infinite;
   animation-duration: 30s;
   animation-timing-function: linear;

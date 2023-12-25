@@ -60,6 +60,7 @@ export default Sheep;
 const SheepLoad = styled.div`
   display: flex;
   position: relative;
+  /* overflow-x: hidden; */
 `;
 
 const SheepBox = styled(motion.div)`
