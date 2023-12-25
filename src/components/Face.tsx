@@ -280,21 +280,23 @@ const Face = () => {
           </GameBox>
         </Board>
       </Games>
-      <IconSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1638">
-        <AnimatePresence mode="wait">
-          <motion.path
-            key={counter}
-            variants={path}
-            initial="start"
-            animate="end"
-            exit="exit"
-            d="M361.686 1496.92L602.235 1015.65L315.478 1135.16L551.989 893.893L-34.0172 727.926L628.568 676.629L487.028 118.878L919.994 351.663L1420.91 -352.713L1299.23 289.422L2090.1 -68.4037L1497.02 631.995L2020.92 646.655L1443.12 819.08L1800.98 1116.02L1155 829.458L1260.53 1219.35L1071.44 1002.47L898.592 1637.02L831.029 1101.91L361.686 1496.92Z 110.765 1387.53L432.472 956.265L129.125 1023.29L404.503 827.549L-143.016 560.77L518.223 627.21L477.336 53.2344L862.425 358.776L1479.79 -246.143L1246.69 364.438L2088.29 151.801L1380.92 736.54L1894.01 843.428L1294.85 911.177L1594.69 1266.61L1009.42 870.545L1044.49 1272.94L896.641 1026.1L614.52 1620.18L642.452 1081.55L110.765 1387.53Z"
-            stroke="#D9FF00"
-            strokeWidth="5px"
-            fill={"transparent"}
-          />
-        </AnimatePresence>
-      </IconSVG>
+      <Star>
+        <IconSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1638">
+          <AnimatePresence mode="wait">
+            <motion.path
+              key={counter}
+              variants={path}
+              initial="start"
+              animate="end"
+              exit="exit"
+              d="M361.686 1496.92L602.235 1015.65L315.478 1135.16L551.989 893.893L-34.0172 727.926L628.568 676.629L487.028 118.878L919.994 351.663L1420.91 -352.713L1299.23 289.422L2090.1 -68.4037L1497.02 631.995L2020.92 646.655L1443.12 819.08L1800.98 1116.02L1155 829.458L1260.53 1219.35L1071.44 1002.47L898.592 1637.02L831.029 1101.91L361.686 1496.92Z 110.765 1387.53L432.472 956.265L129.125 1023.29L404.503 827.549L-143.016 560.77L518.223 627.21L477.336 53.2344L862.425 358.776L1479.79 -246.143L1246.69 364.438L2088.29 151.801L1380.92 736.54L1894.01 843.428L1294.85 911.177L1594.69 1266.61L1009.42 870.545L1044.49 1272.94L896.641 1026.1L614.52 1620.18L642.452 1081.55L110.765 1387.53Z"
+              stroke="#D9FF00"
+              strokeWidth="5px"
+              fill={"transparent"}
+            />
+          </AnimatePresence>
+        </IconSVG>
+      </Star>
     </Wrapper>
   );
 };
@@ -307,15 +309,22 @@ const Wrapper = styled.div`
   max-width: 100%;
 `;
 
+const Star = styled.div`
+  overflow: hidden;
+  max-width: 100%;
+`;
+
 const IconSVG = styled(motion.svg)`
   position: absolute;
   top: -100px;
-  overflow-x: hidden;
+
+  overflow: hidden;
   @media screen and (max-width: 796px) {
     transform: rotate(-195deg);
-    width: 150vw;
+    overflow: hidden;
     left: -120px;
     top: 0;
+    display: none;
   }
 `;
 

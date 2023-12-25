@@ -56,7 +56,7 @@ const Wrapper = styled.div`
   position: absolute;
   top: 0;
   background-color: ${(props) => props.theme.blue};
-  width: 100vw;
+  width: 100%;
   height: 30px;
   z-index: 1;
   overflow-x: hidden;

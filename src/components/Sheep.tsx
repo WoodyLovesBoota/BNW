@@ -75,25 +75,25 @@ const SheepBox = styled(motion.div)`
 
 const sheepVar = {
   initial: { x: -200 },
-  animate: { x: "50vw", transition: { duration: 15, repeat: Infinity } },
+  animate: { x: "100vw", transition: { duration: 15, repeat: Infinity } },
 };
 
 const sheep2Var = {
   initial: { x: -200 },
-  animate: { x: "50vw", transition: { duration: 7, delay: 2, repeat: Infinity } },
+  animate: { x: "100vw", transition: { duration: 7, delay: 2, repeat: Infinity } },
 };
 
 const sheep3Var = {
   initial: { x: -200 },
-  animate: { x: "50vw", transition: { duration: 8, delay: 4, repeat: Infinity } },
+  animate: { x: "100vw", transition: { duration: 8, delay: 4, repeat: Infinity } },
 };
 
 const sheep4Var = {
   initial: { x: -200 },
-  animate: { x: "50vw", transition: { duration: 3, delay: 6, repeat: Infinity } },
+  animate: { x: "100vw", transition: { duration: 3, delay: 6, repeat: Infinity } },
 };
 
 const sheep5Var = {
   initial: { x: -200 },
-  animate: { x: "50vw", transition: { duration: 10, delay: 8, repeat: Infinity } },
+  animate: { x: "100vw", transition: { duration: 10, delay: 8, repeat: Infinity } },
 };
