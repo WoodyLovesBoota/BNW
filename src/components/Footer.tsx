@@ -1,72 +1,43 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBlog } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { ReactComponent as Arrow } from "../assets/arrowtop.svg";
 
 const Footer = () => {
   return (
     <Wrapper>
       <Info>
         <Column>
-          <Title>About</Title>
-          <Contents>
-            <Description href="https://github.com/WoodyLovesBoota/BNW" target="_blank">
-              View Code
-            </Description>
-          </Contents>
+          <Link>@ YANGTAEWOOK 2023.</Link>
         </Column>
         <Column>
-          <Title>Get in touch</Title>
-          <Contents>
-            <Description>woodylovesboota@gmail.com</Description>
-            <Description>+82) 10-2363-7164</Description>
-          </Contents>
-        </Column>
-        <Column>
-          <Title>Work</Title>
           <Contents>
             <Description href="https://woodylovesboota.xyz/" target="_blank">
-              Portfolio
+              PORTFOLIO
             </Description>
             <Description href="https://github.com/WoodyLovesBoota" target="_blank">
-              Github
+              GITHUB
             </Description>
             <Description href="https://velog.io/@woodylovescoding" target="_blank">
-              Personal Blog
-            </Description>
-          </Contents>
-        </Column>
-        <Column>
-          <Title>Connect</Title>
-          <Contents>
-            <Description href="https://www.instagram.com/tttaeook/" target="_blank">
-              Instagram
+              BLOG
             </Description>
             <Description
               href="https://www.linkedin.com/in/tae-wook-yang-6762092a2/"
               target="_blank"
             >
-              LinkedIn
+              LINKEDIN
             </Description>
           </Contents>
         </Column>
+        <Column>
+          <Description
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            BACK TO TOP
+            <Arrow />
+          </Description>
+        </Column>
       </Info>
-      <Link>@2023 - YANGTAEWOOK</Link>
-      {/* <Icons>
-        <Icon href="https://github.com/WoodyLovesBoota" target="_blank">
-          <FontAwesomeIcon icon={faGithub} />
-        </Icon>
-        <Icon href="https://www.instagram.com/tttaeook/" target="_blank">
-          <FontAwesomeIcon icon={faInstagram} />
-        </Icon>
-        <Icon href="https://www.linkedin.com/in/tae-wook-yang-6762092a2/" target="_blank">
-          <FontAwesomeIcon icon={faLinkedin} />
-        </Icon>
-        <Icon href="https://velog.io/@woodylovescoding" target="_blank">
-          <FontAwesomeIcon icon={faBlog} />
-        </Icon>
-      </Icons>
-      <Info>@2023 - YANGTAEWOOK</Info> */}
     </Wrapper>
   );
 };
@@ -77,9 +48,13 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: gray;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 330px;
   top: 1900px;
   @media screen and (max-width: 1212px) {
     top: 2400px;
+    height: inherit;
   }
   @media screen and (max-width: 796px) {
     top: 3400px;
@@ -87,45 +62,50 @@ const Wrapper = styled.div`
 `;
 
 const Info = styled.div`
-  width: 100%;
+  width: 1080px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 100px 250px;
   @media screen and (max-width: 1212px) {
-    padding: 100px 100px;
-  }
-  @media screen and (max-width: 796px) {
+    width: 100%;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+    padding-bottom: 50px;
   }
 `;
 
-const Column = styled.div``;
-
-const Title = styled.h2`
-  color: black;
-  line-height: 2;
-  font-size: 14px;
+const Column = styled.div`
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 1212px) {
+    margin-bottom: 50px;
+  }
 `;
 
 const Contents = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  @media screen and (max-width: 796px) {
+    flex-direction: column;
+  }
 `;
 
 const Description = styled.a`
-  color: white;
   font-size: 14px;
-  line-height: 2;
+  font-weight: 400;
+  margin: 0 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 796px) {
+    margin: 20px 0;
+    justify-content: center;
+  }
 `;
 
 const Link = styled.h2`
   text-align: center;
-  padding-bottom: 100px;
   font-size: 14px;
-  @media screen and (max-width: 796px) {
-    text-align: start;
-    padding-left: 40px;
-  }
 `;

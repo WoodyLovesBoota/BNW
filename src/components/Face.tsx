@@ -304,9 +304,9 @@ const Face = () => {
 export default Face;
 
 const Wrapper = styled.div`
-  position: relative;
   cursor: url("/cursor.png") 10 10, auto;
-  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
 `;
 
 const Star = styled.div`
@@ -318,12 +318,7 @@ const IconSVG = styled(motion.svg)`
   position: absolute;
   top: -100px;
 
-  overflow: hidden;
   @media screen and (max-width: 796px) {
-    transform: rotate(-195deg);
-    overflow: hidden;
-    left: -120px;
-    top: 0;
     display: none;
   }
 `;

@@ -59,15 +59,15 @@ export default Sheep;
 
 const SheepLoad = styled.div`
   display: flex;
-  position: relative;
   width: 100%;
+  overflow-x: hidden;
 `;
 
 const SheepBox = styled(motion.div)`
   position: absolute;
-  overflow: hidden;
   z-index: 1;
-  top: 0px;
+  top: 0;
+  left: 0;
   @media screen and (max-width: 796px) {
     top: 5px;
   }
