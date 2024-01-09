@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+# Mini Games
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Project ScreenShot0](https://firebasestorage.googleapis.com/v0/b/travelgo-6fa6a.appspot.com/o/Minigames%2FMinigame0.webp?alt=media&token=ef916d11-0883-45ae-9ddf-e5d294116630)
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## Mini Games는?
 
-### `npm start`
+다양한 미니 게임을 제공하는 애플리케이션입니다. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 배포 링크
 
-### `npm test`
+[https://main--magenta-unicorn-80ac8f.netlify.app/](https://main--magenta-unicorn-80ac8f.netlify.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+## 기술 스택
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `Typescript`, `React`
+- `Framer`, `Lottie Player`, `Animation`
+- `Prettier`, `Netlify`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 개발 기간
 
-### `npm run eject`
+- 2023년 11월
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 프로젝트 상세
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 구현
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Typecript와 React의 state를 사용하여 각 게임의 매커니즘(게임 진행, 종료조건)을 구현하였습니다.
+- Framer, Styled Component Keyframes와 Lottie Player를 이용하여 다양한 애니메이션 효과를 구현하였습니다.
+  
+<br>
 
-## Learn More
+### 핵심 기능
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **다양한 게임**: 지뢰찾기, Wordle, 오목 등 클라이언트사이드에서 만들어진 다양한 게임을 즐길 수 있습니다..
+  
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**지뢰찾기**
+![Project ScreenShot1](https://firebasestorage.googleapis.com/v0/b/travelgo-6fa6a.appspot.com/o/Minigames%2FMinigame5.webp?alt=media&token=3f3cfb75-5ca2-4587-ba9e-ea459e4b0908)
+
+<br>
+
+**Wordle**
+![Project ScreenShot2](https://firebasestorage.googleapis.com/v0/b/travelgo-6fa6a.appspot.com/o/Minigames%2FMinigame6.webp?alt=media&token=43568cfa-ed38-4151-afa9-2d49b322ad69)
+
+<br>
+
+**오목**
+![Project ScreenShot3](https://firebasestorage.googleapis.com/v0/b/travelgo-6fa6a.appspot.com/o/Minigames%2FMinigame3.webp?alt=media&token=84080dee-641f-43cf-bff2-402d0b373795)
+
