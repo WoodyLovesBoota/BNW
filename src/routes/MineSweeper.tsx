@@ -27,7 +27,7 @@ const MineSweeper = () => {
 
   const navigate = useNavigate();
 
-  const findBlank = async (rowA: number, colA: number, his: number[][]) => {
+  const findBlank = (rowA: number, colA: number, his: number[][]) => {
     let temp = [
       [rowA + 1, colA + 1],
       [rowA + 1, colA - 1],
